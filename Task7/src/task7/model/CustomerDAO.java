@@ -13,6 +13,5 @@ public class CustomerDAO {
         session.save(customer);
         
         session.getTransaction().commit();
-        HibernateUtil.shutdown();
 	}
 }

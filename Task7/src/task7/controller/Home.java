@@ -6,9 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import task7.model.Model;
 
-public class HomeAction extends Action {
+public class Home extends Action {
 
-	public HomeAction(Model model) {
+	public Home(Model model) {
 	}
 
 	public String getName() { return "home.do"; }

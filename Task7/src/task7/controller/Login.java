@@ -18,9 +18,9 @@ import task7.model.CustomerDAO;
 import task7.model.FundDAO;
 import task7.model.Model;
 
-public class LoginAction extends Action {
+public class Login extends Action {
 
-	public LoginAction(Model model) {
+	public Login(Model model) {
 	}
 
 	public String getName() { return "login.do"; }

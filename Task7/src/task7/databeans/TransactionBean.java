@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,10 +17,12 @@ public class TransactionBean {
 	@Id @GeneratedValue
 	private int transactionId;
 	
-	@JoinColumn(name="CUSTOMERID")
+	@ManyToOne
+	@JoinColumn(referencedColumnName="CUSTOMERID")
 	private CustomerBean customerBean;
 	
-	@JoinColumn(name="FUNDID")
+	@ManyToOne
+	@JoinColumn(referencedColumnName="FUNDID")
 	private FundBean fundBean;
 	
 	@Column(nullable=false)
