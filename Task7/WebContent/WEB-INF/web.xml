@@ -8,14 +8,6 @@
       <servlet>
         <servlet-name>    task7-controller        </servlet-name>
         <servlet-class>   task7.controller.Controller   </servlet-class>
-        <init-param>
-          <param-name>    jdbcDriverName          </param-name> 
-	      <param-value>   com.mysql.jdbc.Driver   </param-value>
-        </init-param>
-        <init-param>
-          <param-name>    jdbcURL                 </param-name> 
-	      <param-value>   jdbc:mysql:///webapp    </param-value>
-        </init-param>
     </servlet>
     
     <servlet>
