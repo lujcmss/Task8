@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * Action Class
- * 
+ * updated Jan.16
  */
 
 public abstract class Action {
