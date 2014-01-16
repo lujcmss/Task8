@@ -1,8 +1,10 @@
 <jsp:include page="header.jsp" />
 
+ 
+ 
     <div class="container">
     
-      <div class="page-header">
+     <div class="page-header">
         <h1>Transition Day</h1>
       </div>
        <form class="form-signin">
@@ -49,6 +51,7 @@
       </table>
       <input type="text" class="form-control" placeholder="New Transition Date" required>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+           
         </form>
 
     </div> <!-- /container -->
@@ -57,7 +60,13 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    
+    <script type="text/javascript" src="jquery.js"></script>
+
+<script type="text/javascript" src="_js/bootstrap.js"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="/Task7/js/bootstrap.min.js"></script>
+ 
+    
   </body>
 </html>

@@ -9,7 +9,7 @@
     <div class="search-bar">
     <form class="navbar-form navbar-center" role="search">
 		<div class="form-group">
-    		<input type="text" class="form-control" placeholder="Search">
+    		<input type="text" class="form-control" placeholder="Customer Id">
   		</div>
   		<button type="submit" class="btn btn-default">Submit</button>
 	</form>

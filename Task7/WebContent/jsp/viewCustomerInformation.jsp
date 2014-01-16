@@ -22,10 +22,120 @@
       </ul>
       <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade in active" id="account">
-          <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+        <h1>ICU's Information</h1>
+          <table class="table table-striped">
+		<h3>Basic Information</h3>
+		<div style="text-align:right">
+			<a>Change Password</a>
+		</div>
+        <colgroup>
+          <col class="col-xs-2">
+          <col class="col-xs-5">
+          <col class="col-xs-1">
+        </colgroup>
+        <tbody>
+          <tr>
+            <th>First Name</th>
+            <td>I</td>
+            <td><a>Edit</a></td>
+          </tr>
+          <tr>            
+          	<th>Last Name</th>
+            <td>CU</td>
+            <td><a>Edit</a></td>
+          </tr>
+          <tr>
+            <th>Address</th>
+            <td>CMU, 15213</td>
+            <td><a>Edit</a></td>
+          </tr>
+          <tr>
+            <th>Last Trading Day</th>
+            <td>Jan 1, 2014</td>
+            <td></td>
+          </tr>
+          <tr>
+            <th>Cash Balance</th>
+            <td>$100</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      
+	<table class="table table-striped">
+		<h3>Funds Information</h3>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Fund Name</th>
+            <th>Fund Price</th>
+            <th>Share</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Apple</td>
+            <td>100</td>
+            <td>10</td>
+            <td>1000</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Google</td>
+            <td>800</td>
+            <td>20</td>
+            <td>16000</td>
+          </tr>
+        </tbody>
+      </table>
         </div>
         <div class="tab-pane fade" id="transaction">
-          <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+          <table class="table table-striped">
+		<h1>ICU's Information</h1>
+		
+		<colgroup>
+          <col class="col-xs-1">
+          <col class="col-xs-2">
+          <col class="col-xs-3">
+          <col class="col-xs-2">
+          <col class="col-xs-1">
+          <col class="col-xs-1">
+          <col class="col-xs-2">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Transaction Date</th>
+            <th>Fund Name</th>
+            <th>Operation</th>
+            <th>Share Price</th>
+            <th>Shares</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Jan 10, 2014</td>
+            <td>APPL</td>
+            <td>Buy</td>
+            <td>100</td>
+            <td>10</td>
+            <td>1000</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Jan 08, 2014</td>
+            <td>GOOG</td>
+            <td>Sell (Pending)</td>
+            <td>800</td>
+            <td>20</td>
+            <td>16000</td>
+          </tr>
+        </tbody>
+      </table>
         </div>
       </div>
     </div><!-- /example -->

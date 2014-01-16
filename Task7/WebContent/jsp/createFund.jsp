@@ -12,6 +12,40 @@
         <p></p>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
       </form>
+      
+      <table class="table table-striped">
+		<h3>Existing Funds</h3>
+		
+		<colgroup>
+          <col class="col-xs-1">
+          <col class="col-xs-2">
+          <col class="col-xs-3">
+     
+        </colgroup>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Fund Name</th>
+            <th>Share Price</th>
+
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>APPL</td>
+            <td>123</td>
+
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>GOOG</td>
+            <td>131</td>
+
+          </tr>
+        </tbody>
+      </table>
 
     </div> <!-- /container -->
 
