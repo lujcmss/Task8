@@ -13,7 +13,9 @@ import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
 import task7.databeans.CustomerBean;
+import task7.databeans.FundBean;
 import task7.model.CustomerDAO;
+import task7.model.FundDAO;
 import task7.model.Model;
 
 public class LoginAction extends Action {
@@ -29,11 +31,11 @@ public class LoginAction extends Action {
         request.setAttribute("errors", errors);
         HttpSession session = request.getSession(true);
 		try {
-			CustomerBean customer = new CustomerBean();
-			customer.setUsername("first11");
-			customer.setPassword("asdf");
-			CustomerDAO customerDAO = new CustomerDAO();
-			customerDAO.insert(customer);
+			FundBean fundBean = new FundBean();
+			fundBean.setName("Apple");
+			fundBean.setSymbol("APPL");
+			FundDAO fundDAO = new FundDAO();
+			fundDAO.insert(fundBean);
 			
 			// check for errors
 			return "login.jsp";
