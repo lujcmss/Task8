@@ -1,5 +1,7 @@
 <jsp:include page="header.jsp" />
-
+ 
+    
+ 
  
  
     <div class="container">
@@ -62,11 +64,13 @@
     <!-- Placed at the end of the document so the pages load faster -->
     
     <script type="text/javascript" src="jquery.js"></script>
-
+<script type="text/javascript" src="_js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="_js/bootstrap.js"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="/Task7/js/bootstrap.min.js"></script>
- 
+   <script>    $('#sandbox-container .input-append.date').datepicker({
+    format: 22
+    });</script>
     
   </body>
 </html>
