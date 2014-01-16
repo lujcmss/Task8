@@ -1,8 +1,14 @@
 package task7.controller;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+
+/**
+ * Action Class
+ * 
+ */
 
 public abstract class Action {
 	// Returns the name of the action, used to match the request in the hash
