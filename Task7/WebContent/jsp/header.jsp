@@ -49,7 +49,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="home.do">Home</a></li>
             
-            <!-- customer 
+            <!-- customer -->
             <li class="dropdown" class="active">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Funds<b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -60,9 +60,8 @@
             </li>
             <li><a href="requestCheck.do">Request Check</a></li>
             <li><a href="transactionHistory.do">Transaction History</a></li>
-            -->
             
-            <!-- employee-->
+            <!-- employee
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage Accounts<b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -78,6 +77,7 @@
             <li><a href="depositCheck.do">Deposit Check</a></li>
             <li><a href="createFund.do">Create Fund</a></li>
             <li><a href="transactionDay.do">Transaction Day</a></li>
+            -->
             
           </ul>
           
