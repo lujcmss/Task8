@@ -1,5 +1,7 @@
 package task7.formbeans;
 
-public class EmployeeForm {
+import org.mybeans.form.FormBean;
+
+public class EmployeeForm extends FormBean{
 
 }

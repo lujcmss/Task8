@@ -1,5 +1,7 @@
 package task7.formbeans;
 
-public class TransactionDayForm {
+import org.mybeans.form.FormBean;
+
+public class TransactionDayForm extends FormBean{
 
 }

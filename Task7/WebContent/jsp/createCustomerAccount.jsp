@@ -7,8 +7,9 @@
       </div>
       
       <form class="form-signin">
-        <input type="text" class="form-control" placeholder="Username" required autofocus>
+        <input type="text" class="form-control" placeholder="Email" required autofocus>
         <input type="password" class="form-control" placeholder="Password" required>
+         <input type="password" class="form-control" placeholder="Confirm Password" required>
         <input type="text" class="form-control" placeholder="First Name" required>
         <input type="text" class="form-control" placeholder="Last Name" required>
         <input type="text" class="form-control" placeholder="Address1" required>

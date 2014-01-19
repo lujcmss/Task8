@@ -1,5 +1,7 @@
 package task7.formbeans;
 
-public class SellFundForm {
+import org.mybeans.form.FormBean;
+
+public class SellFundForm extends FormBean{
 
 }
