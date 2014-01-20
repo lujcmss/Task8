@@ -35,8 +35,22 @@
         <input type="text" class="form-control" placeholder="Username" required autofocus>
         <input type="password" class="form-control" placeholder="Password" required>
         <label class="checkbox">
-          <input type="checkbox" value="remember-me"> Remember me
+          <input type="checkbox" name = "rembember" value="remember-me"> Remember me
         </label>
+        <div class="row">
+
+  <div class="col-lg-6">
+    <div class="input-group">
+      <span class="input-group-addon">
+        Login as Employee <input type="radio" name="userType" value ="Employee">
+     
+     
+        Login as Client <input type="radio" name="userType" value ="Client">
+      </span>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+        
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
 

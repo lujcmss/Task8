@@ -31,6 +31,7 @@ public class Login extends Action {
         request.setAttribute("errors", errors);
         HttpSession session = request.getSession(true);
 		try {
+			//This test was made by Trey to test the create dao of a fund when page loads
 			FundBean fundBean = new FundBean();
 			fundBean.setName("Apple");
 			fundBean.setSymbol("APPL");
