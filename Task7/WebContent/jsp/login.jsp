@@ -1,4 +1,7 @@
+
+
 <!DOCTYPE html>
+<jsp:include page="error-list.jsp" />
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -30,10 +33,10 @@
 
     <div class="container">
 
-      <form class="form-signin">
+      <form class="form-signin" method = "post" action="login.do">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="text" class="form-control" placeholder="Username" required autofocus>
-        <input type="password" class="form-control" placeholder="Password" required>
+        <input type="text" class="form-control" placeholder="Username" required autofocus name="email">
+        <input type="password" class="form-control" placeholder="Password" required name="psw">
         <label class="checkbox">
           <input type="checkbox" name = "rembember" value="remember-me"> Remember me
         </label>

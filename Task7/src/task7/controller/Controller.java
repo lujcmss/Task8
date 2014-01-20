@@ -55,8 +55,13 @@ public class Controller extends HttpServlet {
         String action = getActionName(servletPath);
         
         //System.out.println("servletPath="+servletPath+" requestURI="+request.getRequestURI()+"  user="+user);
-        
+        System.out.println("pass");
       	// Let the logged in user run his chosen action
+        if ( action.equals("login.do")) {
+       	 
+			return Action.perform(action,request);
+        }
+        
 		return Action.perform(action, request);
     }
 
