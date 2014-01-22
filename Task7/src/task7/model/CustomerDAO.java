@@ -8,10 +8,21 @@ public class CustomerDAO {
 	public void insert(CustomerBean customer) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 
-        session.beginTransaction();
-        
-        session.save(customer);
-        
-        session.getTransaction().commit();
+		session.beginTransaction();
+
+		session.save(customer);
+
+		session.getTransaction().commit();
 	}
+
+	public void update(CustomerBean customer) {
+
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		session.beginTransaction();
+		session.merge(customer);
+		session.beginTransaction().commit();
+
+	}
+
 }
