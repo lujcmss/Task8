@@ -23,13 +23,14 @@ public class DepositCheck extends Action {
         // Set up the errors list
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors", errors);
-        
+      
 		try {
 DepositForm form = formBeanFactory.create(request);
 			
-			if (!form.isPresent()) {
-	            return "depositCheck.jsp";
-	        }
+		//	if (!form.isPresent()) {
+				
+	      //      return "depositCheck.jsp";
+	       // }
 			
 			errors.addAll(form.getValidationErrors());
 		        if (errors.size() != 0) {

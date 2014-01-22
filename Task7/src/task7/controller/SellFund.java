@@ -5,9 +5,14 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.mybeans.form.FormBeanFactory;
+
+import task7.formbeans.CustomerLoginForm;
+import task7.formbeans.SellFundForm;
 import task7.model.Model;
 
 public class SellFund extends Action {
+	private FormBeanFactory<SellFundForm> formBeanFactory = FormBeanFactory.getInstance(SellFundForm.class);
 
 	public SellFund(Model model) {
 	}
@@ -20,6 +25,23 @@ public class SellFund extends Action {
         request.setAttribute("errors", errors);
         
 		try {
+			
+			SellFundForm form = formBeanFactory.create(request);
+			
+			if (!form.isPresent()) {
+	            return "sellFund.jsp";
+	        }
+			
+			errors.addAll(form.getValidationErrors());
+		        if (errors.size() != 0) {
+		            return "sellFund.jsp";
+		        }
+			
+			
+			
+			
+			
+			
 	        return "sellFund.jsp";
         } catch (Exception e) {
         	errors.add(e.getMessage());

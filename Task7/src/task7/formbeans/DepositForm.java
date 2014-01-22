@@ -9,17 +9,15 @@ public class DepositForm extends FormBean{
 	private String usr;
 	private int depositAmount;
 	
-	public int getdepositAmount() {
+	
+	public int getDepositAmount() {
 		return depositAmount;
 	}
 
-	public void setDepositAmount(int x) {
-		this.depositAmount = x;
+	public void setDepositAmount(int depositAmount) {
+		this.depositAmount = depositAmount;
 	}
-	
-	
-	
-	
+
 	public String getUsr() {
 		return usr;
 	}
@@ -31,8 +29,8 @@ public class DepositForm extends FormBean{
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
 
-		if (depositAmount>1) {
-			errors.add("Amount to deposit must be 3");
+		if (depositAmount<1) {
+			errors.add("Amount to deposit must be greater or equal to  1");
 		}
 
 	

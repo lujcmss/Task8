@@ -21,6 +21,10 @@ public class ResearchFund extends Action {
         request.setAttribute("errors", errors);
         HttpSession session = request.getSession(true);
 		try {
+			
+			
+			
+			
 			// check for errors
 			return "researchFund.jsp";
         } catch (Exception e) {

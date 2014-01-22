@@ -8,16 +8,18 @@
       <jsp:include page="error-list.jsp" />
       <div class="search-bar">
    		<form class="navbar-form navbar-center" role="search">
-			<div class="form-group">
+			<div class="form-group" method="post" name="sellFund.do">
     			<input type="text" class="form-control" placeholder="Fund Name or Ticker">
   			</div>
   			<button type="submit" class="btn btn-default">Search</button>
 		</form>
 	  </div>
+	<form class="navbar-form navbar-center" method="post" action="sellFund.do">
 	<table class="table table-striped">
 		<h3>Funds Information</h3>
 		<div style="text-align:right">
-			<a>Sell</a>
+			  			<button type="submit" class="btn btn-default">Sell</button>
+
 		</div>
 		
 		<colgroup>
@@ -45,7 +47,7 @@
             <td>APPL</td>
             <td>100</td>
             <td>10</td>
-            <th><input type="text" placeholder="0" size="1"/></th>
+            <th><input type="text" placeholder="0" size="1" name="shares"/></th>
           </tr>
           <tr>
             <td>2</td>
@@ -53,10 +55,11 @@
             <td>GOOG</td>
             <td>800</td>
             <td>20</td>
-            <th><input type="text" placeholder="0" size="1"/></th>
+            <th><input type="text" placeholder="0" size="1" name="shares"/></th>
           </tr>
         </tbody>
       </table>
+      </form>
 
     </div> <!-- /container -->
 
