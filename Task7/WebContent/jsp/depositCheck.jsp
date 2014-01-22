@@ -1,22 +1,22 @@
 <jsp:include page="header.jsp" />
-<jsp:include page="error-list.jsp" />
+
     <div class="container">
     
       <div class="page-header">
-        <h1>Deposit Check</h1>
+        <h1>Deposit ChecK</h1>
       </div>
-      
+      <jsp:include page="error-list.jsp" />
     <div class="search-bar">
     <form class="navbar-form navbar-center" role="search">
 		<div class="form-group">
-    		<input type="text" class="form-control" placeholder="Customer Id">
+    		<input type="text" class="form-control" placeholder="Customer Id" name="usr">
   		</div>
   		<button type="submit" class="btn btn-default">Submit</button>
 	</form>
 	</div>
 	
-      <form class="form-signin">
-        <input type="text" class="form-control" placeholder="Deposit Amount" required autofocus>
+      <form class="form-signin" method="post" action="depositCheck.do">
+        <input type="text" class="form-control" placeholder="Deposit Amount" required autofocus name="depositAmount">
         <p></p>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Deposit</button>
       </form>

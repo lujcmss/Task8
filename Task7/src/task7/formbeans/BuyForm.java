@@ -27,13 +27,13 @@ public class BuyForm extends FormBean {
 	
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
-
-		if (fund == null || fund.length() == 0) {
+		System.out.println("Enters buyform");
+		if (fund == null || fund.length() == 1) {
 			errors.add("fund is required");
 		}
 
 		if (amount == null || amount.length() == 0) {
-			errors.add("Password is required");
+			errors.add("Amount  is required");
 		}
 		if (errors.size() > 0)
 		return errors;

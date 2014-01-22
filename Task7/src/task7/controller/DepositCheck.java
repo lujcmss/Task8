@@ -5,9 +5,14 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.mybeans.form.FormBeanFactory;
+
+import task7.formbeans.CustomerLoginForm;
+import task7.formbeans.DepositForm;
 import task7.model.Model;
 
 public class DepositCheck extends Action {
+	private FormBeanFactory<DepositForm> formBeanFactory = FormBeanFactory.getInstance(DepositForm.class);
 
 	public DepositCheck(Model model) {
 	}
@@ -20,10 +25,23 @@ public class DepositCheck extends Action {
         request.setAttribute("errors", errors);
         
 		try {
+DepositForm form = formBeanFactory.create(request);
+			
+			if (!form.isPresent()) {
+	            return "depositCheck.jsp";
+	        }
+			
+			errors.addAll(form.getValidationErrors());
+		        if (errors.size() != 0) {
+		            return "depositCheck.jsp";
+		        }
+			
+			
+			
 	        return "depositCheck.jsp";
         } catch (Exception e) {
         	errors.add(e.getMessage());
-        	return "error.jsp";
+        	return "depositCheck.jsp";
         }
     }
 }

@@ -1,21 +1,22 @@
 <jsp:include page="header.jsp" />
-<jsp:include page="error-list.jsp" />
+
     <div class="container">
     
       <div class="page-header">
         <h1>Buy Fund</h1>
       </div>
-      
+      <jsp:include page="error-list.jsp" />
     <div class="search-bar">
     <form class="navbar-form navbar-center" role="search">
 		<div class="form-group">
-    		<input type="text" class="form-control" placeholder="Fund Name or Ticker">
+    		<input type="text" class="form-control" placeholder="Fund Name or Ticker" name="search">
   		</div>
   		<button type="submit" class="btn btn-default">Search</button>
 	</form>
 	
-	  <form class="form-signin">
-        <input type="text" class="form-control" placeholder="Purchase Amount" required autofocus>
+	  <form class="form-signin" method="post" action="buyFund.do">
+	  <input type="text" class="form-control" placeholder="Fund Name or Ticker" name="fund">
+        <input type="text" class="form-control" placeholder="Purchase Amount" required autofocus name="amount">
         <p></p>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Buy</button>
       </form>

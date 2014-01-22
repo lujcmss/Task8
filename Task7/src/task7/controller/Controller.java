@@ -57,10 +57,11 @@ public class Controller extends HttpServlet {
         //System.out.println("servletPath="+servletPath+" requestURI="+request.getRequestURI()+"  user="+user);
         System.out.println("pass");
       	// Let the logged in user run his chosen action
-        if ( action.equals("login.do")) {
+       //we need to add logic here when user is in session or not and to what actions he has access too
+        // if ( action.equals("login.do")) {
        	 
-			return Action.perform(action,request);
-        }
+		//	return Action.perform(action,request);
+        //}
         
 		return Action.perform(action, request);
     }

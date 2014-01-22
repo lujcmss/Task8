@@ -48,18 +48,18 @@ public class Login extends Action {
 			//This test was made by Trey to test the create dao of a fund when page loads
 			
 			
-			FundBean fundBean = new FundBean();
-			fundBean.setName("Apple");
-			fundBean.setSymbol("APPL");
-			FundDAO fundDAO = new FundDAO();
-			fundDAO.insert(fundBean);
+			//FundBean fundBean = new FundBean();
+			//fundBean.setName("Apple");
+			//fundBean.setSymbol("APPL");
+			//FundDAO fundDAO = new FundDAO();
+			//fundDAO.insert(fundBean);
 			
 			// check for errors
 			return "login.jsp";
         } catch (Exception e) {
-        	errors.add(e.getMessage());
+        	errors.add("Please reload website");
         	System.out.println(errors);
-        	return "error.jsp";
+        	return "login.jsp";
         }
     }
 }

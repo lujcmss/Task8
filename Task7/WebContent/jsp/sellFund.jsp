@@ -1,11 +1,11 @@
 <jsp:include page="header.jsp" />
-<jsp:include page="error-list.jsp" />
+
     <div class="container">
     
       <div class="page-header">
         <h1>Sell Fund</h1>
       </div>
-      
+      <jsp:include page="error-list.jsp" />
       <div class="search-bar">
    		<form class="navbar-form navbar-center" role="search">
 			<div class="form-group">
