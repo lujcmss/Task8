@@ -1,10 +1,10 @@
 package task7.model;
 
-	
+
 	import org.hibernate.Session;
 
 
-import task7.databeans.CustomerBean;
+
 import task7.databeans.EmployeeBean;
 
 	public class EmployeeDAO {
