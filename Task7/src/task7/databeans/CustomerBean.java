@@ -15,7 +15,7 @@ public class CustomerBean {
 	
 	// @Temporal(TemporalType.DATE)
 	@Column(nullable=false)
-	private String username;
+	private String email;
 	
 	@Column(nullable=false)
 	private String password;
@@ -49,11 +49,11 @@ public class CustomerBean {
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
 	}
-	public String getUsername() {
-		return username;
+	public String getEmail() {
+		return email;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getPassword() {
 		return password;

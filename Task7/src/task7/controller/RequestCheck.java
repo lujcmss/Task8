@@ -6,10 +6,21 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.mybeans.form.FormBeanFactory;
+
+import task7.databeans.CustomerBean;
+import task7.databeans.TransactionBean;
+import task7.formbeans.DepositForm;
+import task7.model.CustomerDAO;
 import task7.model.Model;
+import task7.model.TransactionDAO;
 
 public class RequestCheck extends Action {
-
+	private FormBeanFactory<RequestForm> formBeanFactory = FormBeanFactory.getInstance(RequestForm.class);
+	
+	private TransactionDAO transactionDAO;
+	private CustomerDAO customerDAO;
+	
 	public RequestCheck(Model model) {
 	}
 
@@ -21,6 +32,27 @@ public class RequestCheck extends Action {
         request.setAttribute("errors", errors);
         HttpSession session = request.getSession(true);
 		try {
+			RequestForm form = formBeanFactory.create(request);
+			CustomerBean customerBean = customerDAO.getCustomer(session.getAttribute("email"));
+			if (!form.isPresent()) {
+	            return "requestCheck.jsp";
+	        }
+			
+			errors.addAll(form.getValidationErrors());
+			
+			if (form.getRequestAmount() * 100 > customerBean.getCash()) {
+				errors.add("No enough Money");
+			}
+			
+		    if (errors.size() != 0) {
+		        return "requestCheck.jsp";
+		    }
+		    
+		    TransactionBean transactionBean = new TransactionBean();
+		    transactionBean.setAmount((long)(form.getRequestAmount() * 100));
+		    transactionBean.setCustomerBean(customerBean);
+		    transactionBean.setTransactionType("request");
+		    transactionDAO.insert(transactionBean);
 			// check for errors
 			return "requestCheck.jsp";
         } catch (Exception e) {

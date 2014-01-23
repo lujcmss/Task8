@@ -25,7 +25,6 @@ public class SellFund extends Action {
         request.setAttribute("errors", errors);
         
 		try {
-			
 			SellFundForm form = formBeanFactory.create(request);
 			
 			if (!form.isPresent()) {
@@ -33,15 +32,12 @@ public class SellFund extends Action {
 	        }
 			
 			errors.addAll(form.getValidationErrors());
-		        if (errors.size() != 0) {
-		            return "sellFund.jsp";
-		        }
 			
-			
-			
-			
-			
-			
+			if ()
+		    if (errors.size() != 0) {
+		    	return "sellFund.jsp";
+		    }
+
 	        return "sellFund.jsp";
         } catch (Exception e) {
         	errors.add(e.getMessage());

@@ -1,7 +1,6 @@
-
-
 <!DOCTYPE html>
 <jsp:include page="error-list.jsp" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -35,7 +34,14 @@
 
       <form class="form-signin" method = "post" action="login.do">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="text" class="form-control" placeholder="Username" required autofocus name="email">
+                <c:choose>
+        			<c:when test="${ form == null || form.email == null }">
+        				<input type="text" class="form-control" placeholder="Username" required autofocus name="email">
+        			</c:when>
+        			<c:otherwise>
+        				<input type="text" class="form-control" placeholder="Username" value="${ form.email }" required autofocus name="email">
+        			</c:otherwise>
+        		</c:choose>
         <input type="password" class="form-control" placeholder="Password" required name="psw">
         <label class="checkbox">
           <input type="checkbox" name = "rembember" value="remember-me"> Remember me
@@ -45,10 +51,20 @@
   <div class="col-lg-6">
     <div class="input-group">
       <span class="input-group-addon">
-        Login as Employee <input type="radio" name="userType" value ="Employee">
-     
-     
-        Login as Client <input type="radio" name="userType" value ="Client">
+      	    <c:choose>
+      			<c:when test="${ form == null || form.userType == null }">
+        			Login as Employee <input type="radio" name="userType" value ="Employee">
+       				 Login as Client <input type="radio" name="userType" value ="Client">
+       			</c:when>
+       			<c:when test="${ form.userType } == 'Employee' ">
+        			Login as Employee <input type="radio" name="userType" value ="Employee" checked="checked">
+       				Login as Client <input type="radio" name="userType" value ="Client">
+       			</c:when>
+   			<c:otherwise>
+        			Login as Employee <input type="radio" name="userType" value ="Employee">
+       				Login as Client <input type="radio" name="userType" value ="Client" checked="checked">
+        	</c:otherwise>
+       	</c:choose>
       </span>
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->

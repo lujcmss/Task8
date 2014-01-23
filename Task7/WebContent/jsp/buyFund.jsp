@@ -1,5 +1,5 @@
 <jsp:include page="header.jsp" />
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <div class="container">
     
       <div class="page-header">
@@ -7,18 +7,17 @@
       </div>
       <jsp:include page="error-list.jsp" />
     <div class="search-bar">
-    <form class="navbar-form navbar-center" role="search">
+    <form class="navbar-form navbar-center" method="post"  action="buyFund.do">
 		<div class="form-group">
-    		<input type="text" class="form-control" placeholder="Fund Name or Ticker" name="search">
+    		<input type="text" class="form-control" placeholder="Fund Name or Ticker" name="fund">
   		</div>
-  		<button type="submit" class="btn btn-default">Search</button>
+  		<button type="submit" class="btn btn-default" name="search">Search</button>
 	</form>
 	
 	  <form class="form-signin" method="post" action="buyFund.do">
-	  <input type="text" class="form-control" placeholder="Fund Name or Ticker" name="fund">
         <input type="text" class="form-control" placeholder="Purchase Amount" required autofocus name="amount">
         <p></p>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Buy</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="buy">Buy</button>
       </form>
 	</div>
 

@@ -25,13 +25,10 @@ public class TransactionBean {
 	@JoinColumn(referencedColumnName="FUNDID")
 	private FundBean fundBean;
 	
-	@Column(nullable=false)
 	private Date executeDate;
 
-	@Column(nullable=false)
 	private long shares;
 
-	@Column(nullable=false)
 	private long amount;
 
 	@Column(nullable=false)

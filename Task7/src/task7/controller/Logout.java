@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import task7.model.Model;
 
@@ -19,12 +20,11 @@ public class Logout extends Action {
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors", errors);
         
-		try {
-	        return "login.do";
-        } catch (Exception e) {
-        	errors.add(e.getMessage());
-        	return "error.jsp";
-        }
+        HttpSession session = request.getSession(false);
+        session.setAttribute("userType", null);
+
+		request.setAttribute("message", "You are now logged out");
+	    return "login.do";
     }
 }
 

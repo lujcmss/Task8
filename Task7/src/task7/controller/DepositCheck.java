@@ -7,13 +7,19 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.mybeans.form.FormBeanFactory;
 
+import task7.databeans.TransactionBean;
 import task7.formbeans.CustomerLoginForm;
 import task7.formbeans.DepositForm;
+import task7.model.CustomerDAO;
 import task7.model.Model;
+import task7.model.TransactionDAO;
 
 public class DepositCheck extends Action {
 	private FormBeanFactory<DepositForm> formBeanFactory = FormBeanFactory.getInstance(DepositForm.class);
-
+	
+	private TransactionDAO transactionDAO;
+	private CustomerDAO customerDAO;
+	
 	public DepositCheck(Model model) {
 	}
 
@@ -25,20 +31,23 @@ public class DepositCheck extends Action {
         request.setAttribute("errors", errors);
       
 		try {
-DepositForm form = formBeanFactory.create(request);
+			DepositForm form = formBeanFactory.create(request);
 			
-		//	if (!form.isPresent()) {
-				
-	      //      return "depositCheck.jsp";
-	       // }
+			if (!form.isPresent()) {
+	            return "depositCheck.jsp";
+	        }
 			
 			errors.addAll(form.getValidationErrors());
-		        if (errors.size() != 0) {
-		            return "depositCheck.jsp";
-		        }
-			
-			
-			
+		    if (errors.size() != 0) {
+		        return "depositCheck.jsp";
+		    }
+		    
+		    TransactionBean transactionBean = new TransactionBean();
+		    transactionBean.setAmount((long)(form.getDepositAmount() * 100));
+		    transactionBean.setCustomerBean(customerDAO.getCustomer(form.getUsr()));
+		    transactionBean.setTransactionType("deposit");
+		    transactionDAO.insert(transactionBean);
+		    
 	        return "depositCheck.jsp";
         } catch (Exception e) {
         	errors.add(e.getMessage());

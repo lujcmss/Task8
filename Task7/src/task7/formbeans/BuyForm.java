@@ -7,8 +7,17 @@ import org.mybeans.form.FormBean;
 
 public class BuyForm extends FormBean {
 	private String fund;
-	//not sure to store string or int amount, may be we
 	private String amount;
+	private String button;
+	
+	public String getButton() {
+		return button;
+	}
+
+	public void setButton(String button) {
+		this.button = button;
+	}
+
 	public String getFund() {
 		return fund;
 	}

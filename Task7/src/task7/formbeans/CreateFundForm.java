@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.mybeans.form.FormBean;
 
-public class CreateFundFrom extends FormBean{
+public class CreateFundForm extends FormBean{
 	private String fund;
 	private String ticker;
 	public String getFund() {
