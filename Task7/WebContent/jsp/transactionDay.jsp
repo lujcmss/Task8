@@ -48,6 +48,19 @@
             <td><input type="text" style="min-width:120px;" class="form-control" placeholder="New Price" required></td>
        
           </tr>
+          <c:if test="${sessionScope.allTransactionList!=null}">
+		<c:forEach items="${sessionScope.allTransactionList}"  var="oneTransaction">
+		<tr>
+            <td>${oneTransaction.t}</td>
+            <td>${oneTransaction.fundBean.fundname}</td>
+           <td>${oneTransaction.transactionType}</td>  
+            <td>${oneTransaction.fundBean.price}</td> <%---//we need the amount of share this customer can sell --%>
+             <td>${oneFund.value}</td>  <%--- should be price* share  l --%>
+            <th><input type="text" placeholder="0" size="1" name="shares"/></th>
+          </tr>
+          </c:forEach>
+	</c:if>
+        
         </tbody>
         
       </table>
