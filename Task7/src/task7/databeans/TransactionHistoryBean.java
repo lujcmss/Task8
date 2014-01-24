@@ -18,7 +18,14 @@ public class TransactionHistoryBean {
 	private double amount;
 	private String transactionType;
 	private double sharePrice;
+	private boolean pending;
 	
+	public boolean isPending() {
+		return pending;
+	}
+	public void setPending(boolean pending) {
+		this.pending = pending;
+	}
 	public int getTransactionId() {
 		return transactionId;
 	}

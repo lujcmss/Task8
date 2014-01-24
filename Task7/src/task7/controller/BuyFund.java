@@ -113,7 +113,8 @@ public class BuyFund extends Action{
 		    	transactionBean.setAmount((long)(form.getAmount() * 100));
 		    	transactionBean.setCustomerBean(customerBean);
 		    	transactionBean.setFundBean(fundDAO.getFundByName(form.getFundName()));
-		    	transactionBean.setTransactionType("Buy (pending)");
+		    	transactionBean.setTransactionType("Buy");
+		    	transactionBean.setPending(true);
 		    	transactionDAO.insert(transactionBean);    	
 		    }
 

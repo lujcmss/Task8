@@ -50,5 +50,15 @@ public class TransactionDAO {
 	  
 		TransactionBean[] transactionBeans = list.toArray(new TransactionBean[list.size()]);
 		return transactionBeans;
+	}
+	
+	public TransactionBean[] getPendings(boolean pending) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Query query = session.createQuery("from TransactionBean where pending = :pending");
+		query.setParameter("pending", pending);
+		List<?> list = (List<?>) query.list();
+	  
+		TransactionBean[] transactionBeans = list.toArray(new TransactionBean[list.size()]);
+		return transactionBeans;
 	}	
 }

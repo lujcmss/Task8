@@ -87,7 +87,7 @@
             </li>
             <li><a href="depositCheck.do">Deposit Check</a></li>
             <li><a href="createFund.do">Create Fund</a></li>
-            <li><a href="transactionDay.do">Transaction Day</a></li>
+            <li><a href="transitionDay.do">Transition Day</a></li>
              </ul>
 	          <ul class="nav navbar-nav navbar-right">
 	            <li><a>Hi, ${sessionScope.user.firstName}.</a></li>

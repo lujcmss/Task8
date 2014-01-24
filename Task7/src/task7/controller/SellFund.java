@@ -112,7 +112,8 @@ public class SellFund extends Action {
 		    	transactionBean.setAmount((long)(form.getShare() * 1000));
 		    	transactionBean.setCustomerBean(customerBean);
 		    	transactionBean.setFundBean(fundDAO.getFundByName(form.getFundName()));
-		    	transactionBean.setTransactionType("Sell (pending)");
+		    	transactionBean.setTransactionType("Sell");
+		    	transactionBean.setPending(true);
 		    	transactionDAO.insert(transactionBean);
 		    	errors.clear();
 		    }

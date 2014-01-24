@@ -93,11 +93,9 @@
           </tr>
         </thead>
         <tbody>
- 			<c:set var="count" value="0" />
 			<c:forEach var="fundInfo" items="${ fundInfo }">
-				<c:set var="count" value="${ count+1 }" />
 				<tr>
-           			<td>${count}</td>
+           			<td>${fundInfo.fundId}</td>
            			<c:set var="share" value="${fundInfo.share}"/>
             		<td><c:out value="${fundInfo.name}"/></td>
             		<td><c:out value="${fundInfo.symbol}"/></td>

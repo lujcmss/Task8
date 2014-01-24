@@ -49,11 +49,12 @@ public class TransactionHistory extends Action {
 				transactionHistoryBeans[i].setTransactionType(transactionBeans[i].getTransactionType());
 				
 				String type = transactionHistoryBeans[i].getTransactionType();
-				if (type.startsWith("D") || type.startsWith("R") || type.equals("Buy (pending)")) {
+				boolean pending = transactionHistoryBeans[i].isPending();
+				if (type.startsWith("D") || type.startsWith("R") || (type.equals("Buy") && pending)) {
 					transactionHistoryBeans[i].setAmount(transactionBeans[i].getAmount() / 100.0);
 					transactionHistoryBeans[i].setShares(-1);
 					transactionHistoryBeans[i].setSharePrice(-1);
-				} else if (type.equals("Sell (pending)")) {
+				} else if (type.equals("Sell") && pending) {
 					transactionHistoryBeans[i].setShares(transactionBeans[i].getAmount() / 1000.0);
 					transactionHistoryBeans[i].setAmount(-1);
 					transactionHistoryBeans[i].setSharePrice(-1);

@@ -1,4 +1,6 @@
 <jsp:include page="header.jsp" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <div class="container">
     
       <div class="page-header">
@@ -7,9 +9,9 @@
     <jsp:include page="error-list.jsp" />
       
     <div class="search-bar">
-    <form class="navbar-form navbar-center" method="POST" action="viewCustomerinformation.do">
+    <form class="navbar-form navbar-center" method="POST" action="viewCustomerInformation.do">
 		<div class="form-group">
-    		<input type="text" class="form-control" placeholder="Search user email here">
+    		<input type="text" class="form-control" placeholder="Search user email here" autofocus name="customerEmail">
   		</div>
   		<button type="submit" class="btn btn-default" name="button" value="search">Search</button>
 	</form>
@@ -21,50 +23,49 @@
         <li><a href="#transaction" data-toggle="tab">Transaction History</a></li>
       </ul>
       
+      <c:if test="${userInfo != null}">
       <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade in active" id="account">
-        <h1> ${sessionScope.customer.firstName} &nbsp; ${sessionScope.customer.lastName} 's Information</h1>
           <table class="table table-striped">
-		<h3>Basic Information</h3>
+		<h3><c:out value="${userInfo.firstName}" /> <c:out value="${userInfo.lastName}" />'s Basic Information</h3>
 		<div style="text-align:right">
-			<a>Change Password</a>
+			<a href="resetPassword.do">Reset Password</a>
 		</div>
         <colgroup>
-          <col class="col-xs-2">
+          <col class="col-xs-3">
           <col class="col-xs-5">
-          <col class="col-xs-1">
         </colgroup>
         <tbody>
           <tr>
             <th>First Name</th>
-            <td>${sessionScope.customer.firstName} </td>
-            <td><a>Edit</a></td>
+            <td><c:out value="${userInfo.firstName}" /></td>
           </tr>
           <tr>            
           	<th>Last Name</th>
-            <td> ${sessionScope.customer.lastName}</td>
-            <td><a>Edit</a></td>
+            <td><c:out value="${userInfo.lastName}" /></td>
           </tr>
           <tr>
             <th>Address</th>
-            <td> ${sessionScope.customer.addr1} &nbsp; ${sessionScope.customer.addr2},${sessionScope.customer.zip}</td>
-            <td><a>Edit</a></td>
+            <td><c:out value="${userInfo.addr1}" />,&nbsp;<c:out value="${userInfo.addr2}" /></td>
           </tr>
           <tr>
             <th>Last Trading Day</th>
-            <td>Jan 1, 2014</td>
-            <td></td>
-          </tr>
-          <tr>
-            <th>Cash Balance</th>
-            <td>${sessionScope.customer.cash}</td>
-            <td></td>
+            <td>
+            	<c:choose>
+            		<c:when test="${userInfo.lastTradingDay == null}">
+            			<c:out value="-" />
+            		</c:when>
+            		<c:otherwise>
+            			<c:out value="${userInfo.lastTradingDay}" />
+            		</c:otherwise>
+            	</c:choose>
+            </td>
           </tr>
         </tbody>
       </table>
       
 	<table class="table table-striped">
-		<h3>Customer's Funds Information</h3>
+		<h3><c:out value="${userInfo.firstName}" /> <c:out value="${userInfo.lastName}" />'s Funds Information</h3>
         <thead>
           <tr>
             <th>#</th>
@@ -75,39 +76,27 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Apple</td>
-            <td>100</td>
-            <td>10</td>
-            <td>1000</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Google</td>
-            <td>800</td>
-            <td>20</td>
-            <td>16000</td>
-          </tr>
-              <c:if test="${sessionScope.userFundList!=null}">
-		<c:forEach items="${sessionScope.userFundList}"  var="oneFund">
-		<tr>
-            <td>${oneFund.fundId}</td>
-            <td>${oneFund.name}</td>
-           <td>${oneFund.fundPrice}</td>  <%-- --//we need find price, but it's not in fund bean( it was stored in another table with 1 to N relation to fund N)--%>
-            <td>${oneFund.share}</td> <%--//we need the amount of share this customer can sell--%>
-             <td>${oneFund.value}</td>  <%--- should be price* share  --%>
-            <th><input type="text" placeholder="0" size="1" name="shares"/></th>
-          </tr>
-          </c:forEach>
-	</c:if>
+			<c:forEach var="fundInfo" items="${ fundInfo }">
+				<tr>
+           			<td>${fundInfo.fundId}</td>
+           			<c:set var="share" value="${fundInfo.share}"/>
+           			<c:set var="price" value="${fundInfo.fundPrice}"/>
+            		<td><c:out value="${fundInfo.name}"/></td>
+            		<td><c:out value="${fundInfo.symbol}"/></td>
+            		<td><c:out value=""/><fmt:formatNumber type="number" 
+            			maxFractionDigits="2" minFractionDigits="2" value="${price}" /></td>
+            		<td><c:out value=""/><fmt:formatNumber type="number" 
+            			maxFractionDigits="3" minFractionDigits="3" value="${share}" /></td>
+            		<td><c:out value=""/><fmt:formatNumber type="number" 
+            			maxFractionDigits="2" minFractionDigits="2" value="${share * price}" /></td>
+            		<td></td>
+	        	</tr>
+			</c:forEach>
         </tbody>
       </table>
         </div>
         <div class="tab-pane fade" id="transaction">
           <table class="table table-striped">
-		<h1>${sessionScope.customer.firstName} &nbsp; ${sessionScope.customer.lastName} 's's Information</h1>
-		
 		<colgroup>
           <col class="col-xs-1">
           <col class="col-xs-2">
@@ -129,40 +118,26 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Jan 10, 2014</td>
-            <td>APPL</td>
-            <td>Buy</td>
-            <td>100</td>
-            <td>10</td>
-            <td>1000</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Jan 08, 2014</td>
-            <td>GOOG</td>
-            <td>Sell (Pending)</td>
-            <td>800</td>
-            <td>20</td>
-            <td>16000</td>
-          </tr>
-              <c:if test="${sessionScope.userTransactionList!=null}">
-		<c:forEach items="${sessionScope.userTransactionList}"  var="oneTransaction">
-		<tr>
-            <td>${oneTransaction.transactionId}</td>
-            <td>${oneTransaction.fundBean.fundname}</td>
-           <td>${oneTransaction.transactionType}</td>  
-            <td>${oneTransaction.fundBean.price}</td> <%---//we need the amount of share this customer can sell --%>
-             <td>${oneFund.value}</td>  <%--- should be price* share  l --%>
-            <th><input type="text" placeholder="0" size="1" name="shares"/></th>
-          </tr>
-          </c:forEach>
-	</c:if>
+			<c:forEach var="historyInfo" items="${ historyInfo }">
+				<tr>
+           			<td><c:out value="${historyInfo.transactionId}"/></td>
+            		<td><c:out value="${historyInfo.executeDate}"/></td>
+            		<td><c:out value="${historyInfo.fundName}"/></td>
+            		<td><c:out value="${historyInfo.transactionType}"/></td>
+            		<td><c:out value=""/><fmt:formatNumber type="number" 
+            			maxFractionDigits="2" minFractionDigits="2" value="${historyInfo.sharePrice}" /></td>
+            		<td><c:out value=""/><fmt:formatNumber type="number" 
+            			maxFractionDigits="3" minFractionDigits="3" value="${historyInfo.shares}" /></td>
+            		<td><c:out value=""/><fmt:formatNumber type="number" 
+            			maxFractionDigits="2" minFractionDigits="2" value="${historyInfo.amount}" /></td>
+            		<td></td>
+	        	</tr>
+			</c:forEach>
         </tbody>
       </table>
         </div>
       </div>
+      </c:if>
     </div><!-- /example -->
 
     </div> <!-- /container -->

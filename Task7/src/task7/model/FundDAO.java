@@ -32,6 +32,18 @@ public class FundDAO {
 		session.delete(fund);
 		session.getTransaction().commit();
 	}
+
+	public FundBean getFundById(int fundId) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Query query = session.createQuery("from FundBean where fundId = :fundId ");
+		query.setParameter("fundId", fundId);
+		List<?> list = (List<?>) query.list();
+	  
+		if (list.size() == 0) return null;
+		
+		FundBean fundBean = (FundBean) list.get(0);
+		return fundBean;
+	}
 	
 	public FundBean getFundByName(String fundName) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -81,7 +93,9 @@ public class FundDAO {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Query query = session.createQuery("from FundBean");
 		List<?> list = (List<?>) query.list();
-	  
+		
+		if (list.size() == 0) return null;
+		
 		FundBean[] fundBeans = list.toArray(new FundBean[list.size()]);
 		return fundBeans;
 	}

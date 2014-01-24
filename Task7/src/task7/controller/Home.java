@@ -53,7 +53,8 @@ public class Home extends Action {
 				for (int i = 0; i < positionBeans.length; i++) {
 	
 					fundInfoBeans[i] = new FundInfoBean();
-					fundInfoBeans[i].setShare(positionBeans[i].getShares() / 100.0);
+					fundInfoBeans[i].setShare(positionBeans[i].getShares() / 1000.0);
+					fundInfoBeans[i].setFundId(positionBeans[i].getFundBean().getFundId());
 					
 					int fundId = positionBeans[i].getFundBean().getFundId();
 					for (int j = 0; j < fundBeans.length; j++) {

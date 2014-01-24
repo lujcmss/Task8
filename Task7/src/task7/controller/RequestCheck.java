@@ -57,7 +57,8 @@ public class RequestCheck extends Action {
 		    TransactionBean transactionBean = new TransactionBean();
 		    transactionBean.setAmount((long)(form.getRequestAmount() * 100));
 		    transactionBean.setCustomerBean(customerBean);
-		    transactionBean.setTransactionType("Request (pending)");
+		    transactionBean.setTransactionType("Request");
+		    transactionBean.setPending(true);
 		    transactionDAO.insert(transactionBean);
 			// check for errors
 			return "requestCheck.jsp";

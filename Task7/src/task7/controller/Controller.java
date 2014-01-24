@@ -25,12 +25,12 @@ public class Controller extends HttpServlet {
 
         Action.add(new Home(model));
         Action.add(new Login(model));
-        Action.add(new ViewCustomerInfomation(model));
+        Action.add(new ViewCustomerInformation(model));
         Action.add(new CreateCustomerAccount(model));
         Action.add(new CreateEmployeeAccount(model));
         Action.add(new DepositCheck(model));
         Action.add(new CreateFund(model));
-        Action.add(new TransactionDay(model));
+        Action.add(new TransitionDay(model));
         Action.add(new ResearchFund(model));
         Action.add(new BuyFund(model));
         Action.add(new SellFund(model));
@@ -38,6 +38,7 @@ public class Controller extends HttpServlet {
         Action.add(new TransactionHistory(model));
         Action.add(new Logout(model));
         Action.add(new ChangePassword(model));
+        Action.add(new ResetPassword(model));
         Action.add(new EditInfo(model));
         
         CustomerDAO customerDAO = model.getCustomerDAO();

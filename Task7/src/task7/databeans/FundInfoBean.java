@@ -8,11 +8,19 @@ import javax.persistence.Table;
 
 public class FundInfoBean {
 	
+	private int fundId;
 	private String name;
 	private String symbol;
 	private double fundPrice;
 	private double share;
 	
+	
+	public int getFundId() {
+		return fundId;
+	}
+	public void setFundId(int fundId) {
+		this.fundId = fundId;
+	}
 	public String getName() {
 		return name;
 	}
