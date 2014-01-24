@@ -56,7 +56,7 @@ public class CreateCustomerAccount extends Action {
 		    customerBean.setAddr2(form.getAddr2());
 		    customerBean.setCash(0);
 		    customerBean.setCity(form.getCity());
-		    customerBean.setEmail(form.getEmail());
+		    customerBean.setCustomerEmail(form.getEmail());
 		    customerBean.setFirstName(form.getFirstName());
 		    customerBean.setLastName(form.getLastName());
 		    customerBean.setPassword(md5(form.getPsw()));

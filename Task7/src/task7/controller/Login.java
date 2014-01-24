@@ -62,7 +62,7 @@ public class Login extends Action {
 		    }
 		    
 		    if (form.getUserType() == "Employee") {
-		    	EmployeeBean employeeBean = employeeDAO.getEmployee(form.getEmail());
+		    	EmployeeBean employeeBean = employeeDAO.getEmployeeByemail(form.getEmail());
 		    	if (employeeBean == null) {
 		    		errors.add("No such Employee");
 		    		return "login.jsp";
@@ -72,7 +72,7 @@ public class Login extends Action {
 		            return "login.jsp";
 		        }
 		    } else {
-		    	CustomerBean customerBean = customerDAO.getCustomer(form.getEmail());
+		    	CustomerBean customerBean = customerDAO.getCustomerByemail(form.getEmail());
 		    	if (customerBean == null) {
 		    		errors.add("No such Customer");
 		    		return "login.jsp";

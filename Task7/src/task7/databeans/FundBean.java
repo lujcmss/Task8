@@ -12,7 +12,8 @@ public class FundBean {
 	
 	@Id @GeneratedValue
 	private int fundId;
-
+ 
+ 
 	@Column(nullable=false)
 	private String name;
 	

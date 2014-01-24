@@ -22,7 +22,7 @@
       </ul>
       <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade in active" id="account">
-        <h1>ICU's Information</h1>
+        <h1> ${sessionScope.customer.firstName} &nbsp; ${sessionScope.customer.lastName} 's Information</h1>
           <table class="table table-striped">
 		<h3>Basic Information</h3>
 		<div style="text-align:right">
@@ -36,17 +36,17 @@
         <tbody>
           <tr>
             <th>First Name</th>
-            <td>I</td>
+            <td>${sessionScope.customer.firstName} </td>
             <td><a>Edit</a></td>
           </tr>
           <tr>            
           	<th>Last Name</th>
-            <td>CU</td>
+            <td> ${sessionScope.customer.lastName}</td>
             <td><a>Edit</a></td>
           </tr>
           <tr>
             <th>Address</th>
-            <td>CMU, 15213</td>
+            <td> ${sessionScope.customer.addr1} &nbsp; ${sessionScope.customer.addr2},${sessionScope.customer.zip}</td>
             <td><a>Edit</a></td>
           </tr>
           <tr>
@@ -56,7 +56,7 @@
           </tr>
           <tr>
             <th>Cash Balance</th>
-            <td>$100</td>
+            <td>${sessionScope.customer.cash}</td>
             <td></td>
           </tr>
         </tbody>
