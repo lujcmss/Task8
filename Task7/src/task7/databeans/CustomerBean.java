@@ -52,7 +52,7 @@ public class CustomerBean {
 	public String getEmail() {
 		return email;
 	}
-	public void setEmail(String email) {
+	public void setCustomerEmail(String email) {
 		this.email = email;
 	}
 	public String getPassword() {
