@@ -8,6 +8,7 @@ import org.mybeans.form.FormBean;
 public class ChangePasswordForm extends FormBean {
 	private String oldpsw;
 	private String newpsw;
+	private String confirmpsw;
 
 	public String getOldpsw() {
 		return oldpsw;
@@ -28,6 +29,14 @@ public class ChangePasswordForm extends FormBean {
 		this.newpsw = trimAndConvert(newpsw, "<>>\"]");
 	}
 
+	public String getConfirmpsw() {
+		return confirmpsw;
+	}
+
+
+	public void setConfirmpsw(String confirmpsw) {
+		this.confirmpsw= trimAndConvert(confirmpsw, "<>>\"]");
+	}
 
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
@@ -45,6 +54,9 @@ public class ChangePasswordForm extends FormBean {
 
 		if (newpsw.matches(".*[<>\"].*"))
 			errors.add("Password may not contain angle brackets or quotes");
+		
+		if (!newpsw.equals(confirmpsw))
+			errors.add("New password must be same with confirm password");
 
 		return errors;
 	}

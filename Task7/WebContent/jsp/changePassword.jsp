@@ -9,6 +9,7 @@
       <form class="form-signin" method="post" action="changePassword.do">
         <input type="password" class="form-control" placeholder="Old Password" required name="oldpsw">
         <input type="password" class="form-control" placeholder="New Password" required name="newpsw">
+           <input type="password" class="form-control" placeholder="Confirm New Password" required name="newpsw">
         <p></p>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Change Password</button>
       </form>
