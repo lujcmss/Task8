@@ -24,6 +24,7 @@ public class CreateEmployeeAccount extends Action {
 	private EmployeeDAO employeeDAO;
 	
 	public CreateEmployeeAccount(Model model) {
+		employeeDAO = model.getEmployeeDAO();
 	}
 
 	public String getName() { return "createEmployeeAccount.do"; }
@@ -54,7 +55,7 @@ public class CreateEmployeeAccount extends Action {
 		    employeeBean.setEmail(form.getEmail());
 		    employeeBean.setFirstName(form.getFirstName());
 		    employeeBean.setLastName(form.getLastName());
-		    employeeBean.setPassword(md5(form.getPsw()));
+		    employeeBean.setPassword(form.getPsw());
 		    employeeDAO.insert(employeeBean);
 		    
 			// check for errors
@@ -64,17 +65,4 @@ public class CreateEmployeeAccount extends Action {
         	return "error.jsp";
         }
     }
-	
-	private String md5(String org) {
-	    MessageDigest md;
-		try {
-			md = MessageDigest.getInstance("MD5");
-		    md.update(org.getBytes(), 0, org.length());
-		    String re = new BigInteger(1, md.digest()).toString(16);
-		    return re;
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-	    return null;
-	}
 }

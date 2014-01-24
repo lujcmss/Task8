@@ -21,6 +21,8 @@ public class DepositCheck extends Action {
 	private CustomerDAO customerDAO;
 	
 	public DepositCheck(Model model) {
+		transactionDAO = model.getTransactionDAO();
+		customerDAO = model.getCustomerDAO();
 	}
 
 	public String getName() { return "depositCheck.do"; }
@@ -44,7 +46,7 @@ public class DepositCheck extends Action {
 		    
 		    TransactionBean transactionBean = new TransactionBean();
 		    transactionBean.setAmount((long)(form.getDepositAmount() * 100));
-		    transactionBean.setCustomerBean(customerDAO.getCustomer(form.getUsr()));
+		    transactionBean.setCustomerBean(customerDAO.getCustomerByEmail((String)form.getUsr()));
 		    transactionBean.setTransactionType("deposit");
 		    transactionDAO.insert(transactionBean);
 		    

@@ -1,5 +1,8 @@
 package task7.model;
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import task7.databeans.CustomerBean;
@@ -9,10 +12,8 @@ public class FundDAO {
 	public void insert(FundBean fund) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 
-        session.beginTransaction();
-        
-        session.save(fund);
-        
+        session.beginTransaction(); 
+        session.save(fund);       
         session.getTransaction().commit();
 	}
 	public void update(FundBean fund) {
@@ -22,7 +23,6 @@ public class FundDAO {
 		session.beginTransaction();
 		session.merge(fund);
 		session.beginTransaction().commit();
-
 	}
 	public void delete(FundBean fund)
 	{
@@ -31,9 +31,58 @@ public class FundDAO {
 		session.beginTransaction();
 		session.delete(fund);
 		session.beginTransaction().commit();
-
-
 	}
-
-
+	
+	public FundBean getFundByName(String fundName) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Query query = session.createQuery("from FundBean where name = :name ");
+		query.setParameter("name", fundName);
+		List<?> list = (List<?>) query.list();
+	  
+		if (list.size() == 0) return null;
+		
+		FundBean fundBean = (FundBean) list.get(0);
+		return fundBean;
+	}
+	
+	public FundBean getFundByTicker(String ticker) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Query query = session.createQuery("from FundBean where ticker = :ticker ");
+		query.setParameter("ticker", ticker);
+		List<?> list = (List<?>) query.list();
+	  
+		if (list.size() == 0) return null;
+		
+		FundBean fundBean = (FundBean) list.get(0);
+		return fundBean;
+	}
+	
+	public boolean hasFund(String fundName) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Query query = session.createQuery("from FundBean where name = :name ");
+		query.setParameter("name", fundName);
+		List<?> list = (List<?>) query.list();
+	  
+		if (list.size() == 0) return false;
+		return true;
+	}
+	
+	public boolean hasTicker(String ticker) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Query query = session.createQuery("from FundBean where ticker = :ticker ");
+		query.setParameter("ticker", ticker);
+		List<?> list = (List<?>) query.list();
+	  
+		if (list.size() == 0) return false;
+		return true;
+	}
+	
+	public FundBean[] getAllFunds() {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Query query = session.createQuery("from FundBean");
+		List<?> list = (List<?>) query.list();
+	  
+		FundBean[] fundBeans = list.toArray(new FundBean[list.size()]);
+		return fundBeans;
+	}
 }

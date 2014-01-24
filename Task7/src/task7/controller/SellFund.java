@@ -33,7 +33,6 @@ public class SellFund extends Action {
 			
 			errors.addAll(form.getValidationErrors());
 			
-			if ()
 		    if (errors.size() != 0) {
 		    	return "sellFund.jsp";
 		    }

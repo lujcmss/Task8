@@ -21,6 +21,7 @@ public class CreateFund extends Action {
 	private FundDAO fundDAO;
 	
 	public CreateFund(Model model) {
+		fundDAO = model.getFundDAO();
 	}
 
 	public String getName() { return "createFund.do"; }
@@ -39,7 +40,7 @@ public class CreateFund extends Action {
 			
 			errors.addAll(form.getValidationErrors());
 
-		    if (fundDAO.hasFund(form.getFund()) == true || fundDAO.hasTicker(form.getTicker()) == true) {
+		    if (fundDAO.hasFund((String)form.getFund()) == true || fundDAO.hasTicker((String)form.getTicker()) == true) {
 		    	errors.add("Fund already exist.");
 		    }
 		    

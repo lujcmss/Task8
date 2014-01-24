@@ -22,6 +22,7 @@ public class Logout extends Action {
         
         HttpSession session = request.getSession(false);
         session.setAttribute("userType", null);
+        session.setAttribute("email", null);
 
 		request.setAttribute("message", "You are now logged out");
 	    return "login.do";

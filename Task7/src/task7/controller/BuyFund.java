@@ -30,6 +30,10 @@ public class BuyFund extends Action{
 	private TransactionDAO transactionDAO;
 	
 	public BuyFund(Model model) {
+		fundDAO = model.getFundDAO();
+		customerDAO = model.getCustomerDAO();
+		positionDAO = model.getPositionDAO();
+		transactionDAO = model.getTransactionDAO();
 	}
 
 	public String getName() { return "buyFund.do"; }
@@ -66,8 +70,8 @@ public class BuyFund extends Action{
 		    	session.setAttribute("fund", fundBean);
 		    } else if (form.getButton() == "buy") {
 		    	// input: user email
-		    	CustomerBean customerBean = customerDAO.getCustomer(session.getAttribute("user"));
-		    	if (customerBean.getCash() / 100.0 < form.getAmount()) {
+		    	CustomerBean customerBean = customerDAO.getCustomerByEmail((String)session.getAttribute("user"));
+		    	if (customerBean.getCash() < form.getAmount() * 100) {
 		    		errors.add("Not enough Money");
 		    		return "buyFund.jsp";
 		    	}
@@ -75,7 +79,7 @@ public class BuyFund extends Action{
 		    	customerDAO.update(customerBean);
 		    	
 		    	TransactionBean transactionBean = new TransactionBean();
-		    	transactionBean.setAmount((long)(form.getAmount() * 100.0));
+		    	transactionBean.setAmount(form.getAmount() * 100);
 		    	transactionBean.setCustomerBean(customerBean);
 		    	transactionBean.setFundBean((FundBean)session.getAttribute("fund"));
 		    	transactionBean.setTransactionType("buying");

@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import sun.rmi.log.LogOutputStream;
+import task7.databeans.CustomerBean;
+import task7.databeans.EmployeeBean;
+import task7.model.CustomerDAO;
+import task7.model.EmployeeDAO;
 import task7.model.Model;
 
 @SuppressWarnings("serial")
@@ -32,6 +35,28 @@ public class Controller extends HttpServlet {
         Action.add(new RequestCheck(model));
         Action.add(new TransactionHistory(model));
         Action.add(new Logout(model));
+        
+        CustomerDAO customerDAO = model.getCustomerDAO();
+        CustomerBean customerBean = new CustomerBean();
+        customerBean.setAddr1("penn Ave");
+        customerBean.setAddr2("Apt1");
+        customerBean.setCash(0);
+        customerBean.setCity("Pitt");
+        customerBean.setCustomerEmail("c@gmail.com");
+        customerBean.setFirstName("customer");
+        customerBean.setLastName("CMU");
+        customerBean.setPassword("test");
+        customerBean.setState("PA");
+        customerBean.setZip("15213");
+        customerDAO.insert(customerBean);
+        
+        EmployeeDAO employeeDAO = model.getEmployeeDAO();
+        EmployeeBean employeeBean = new EmployeeBean();
+        employeeBean.setEmail("e@gmail.com");
+        employeeBean.setFirstName("employee");
+        employeeBean.setLastName("CMU");
+        employeeBean.setPassword("test");
+        employeeDAO.insert(employeeBean);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -52,17 +77,21 @@ public class Controller extends HttpServlet {
     private String performTheAction(HttpServletRequest request) {
         HttpSession session = request.getSession(true);
         String servletPath = request.getServletPath();
+        String email = (String) session.getAttribute("email");
         String action = getActionName(servletPath);
         
         //System.out.println("servletPath="+servletPath+" requestURI="+request.getRequestURI()+"  user="+user);
-        System.out.println("pass");
-      	// Let the logged in user run his chosen action
-       //we need to add logic here when user is in session or not and to what actions he has access too
-        // if ( action.equals("login.do")) {
-       	 
-		//	return Action.perform(action,request);
-        //}
+        if (action.equals("login.do")) {
+        	// Allow these actions without logging in
+			return Action.perform(action, request);
+        }
         
+        if (email == null) {
+        	// If the user hasn't logged in, direct him to the login page
+			return Action.perform("login.do", request);
+        }
+        
+      	// Let the logged in user run his chosen action
 		return Action.perform(action, request);
     }
 

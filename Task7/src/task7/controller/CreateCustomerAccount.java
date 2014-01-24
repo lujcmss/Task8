@@ -24,6 +24,7 @@ public class CreateCustomerAccount extends Action {
 	private CustomerDAO customerDAO;
 	
 	public CreateCustomerAccount(Model model) {
+		customerDAO = model.getCustomerDAO();
 	}
 
 	public String getName() { return "createCustomerAccount.do"; }
@@ -43,7 +44,7 @@ public class CreateCustomerAccount extends Action {
 			
 			errors.addAll(form.getValidationErrors());
 			
-		    if (customerDAO.hasCustomer(form.getEmail()) == true) {
+		    if (customerDAO.hasCustomer((String)form.getEmail()) == true) {
 		    	errors.add("Email already been used.");
 		    }
 		    
@@ -59,7 +60,7 @@ public class CreateCustomerAccount extends Action {
 		    customerBean.setCustomerEmail(form.getEmail());
 		    customerBean.setFirstName(form.getFirstName());
 		    customerBean.setLastName(form.getLastName());
-		    customerBean.setPassword(md5(form.getPsw()));
+		    customerBean.setPassword(form.getPsw());
 		    customerBean.setState(form.getState());
 		    customerBean.setZip(form.getZipCode());
 		    customerDAO.insert(customerBean);
@@ -71,17 +72,4 @@ public class CreateCustomerAccount extends Action {
         	return "error.jsp";
         }
     }
-	
-	private String md5(String org) {
-	    MessageDigest md;
-		try {
-			md = MessageDigest.getInstance("MD5");
-		    md.update(org.getBytes(), 0, org.length());
-		    String re = new BigInteger(1, md.digest()).toString(16);
-		    return re;
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-	    return null;
-	}
 }

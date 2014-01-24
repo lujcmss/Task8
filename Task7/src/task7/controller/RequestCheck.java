@@ -11,6 +11,7 @@ import org.mybeans.form.FormBeanFactory;
 import task7.databeans.CustomerBean;
 import task7.databeans.TransactionBean;
 import task7.formbeans.DepositForm;
+import task7.formbeans.RequestForm;
 import task7.model.CustomerDAO;
 import task7.model.Model;
 import task7.model.TransactionDAO;
@@ -22,6 +23,8 @@ public class RequestCheck extends Action {
 	private CustomerDAO customerDAO;
 	
 	public RequestCheck(Model model) {
+		transactionDAO = model.getTransactionDAO();
+		customerDAO = model.getCustomerDAO();
 	}
 
 	public String getName() { return "requestCheck.do"; }
@@ -33,7 +36,7 @@ public class RequestCheck extends Action {
         HttpSession session = request.getSession(true);
 		try {
 			RequestForm form = formBeanFactory.create(request);
-			CustomerBean customerBean = customerDAO.getCustomer(session.getAttribute("email"));
+			CustomerBean customerBean = customerDAO.getCustomerByEmail((String)session.getAttribute("email"));
 			if (!form.isPresent()) {
 	            return "requestCheck.jsp";
 	        }

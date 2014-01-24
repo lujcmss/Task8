@@ -22,8 +22,8 @@ public class BuyForm extends FormBean {
 		return fund;
 	}
 
-	public String getAmount() {
-		return amount;
+	public long getAmount() {
+		return Long.parseLong(amount);
 	}
 	
 	public void setFund(String s) {

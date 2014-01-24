@@ -33,6 +33,8 @@ public class Login extends Action {
 	private CustomerDAO customerDAO;
 	
 	public Login(Model model) {
+		employeeDAO = model.getEmployeeDAO();
+		customerDAO = model.getCustomerDAO();
 	}
 
 	public String getName() { return "login.do"; }
@@ -46,6 +48,7 @@ public class Login extends Action {
 		try {
 			//Testing login form bean, by Patrick
 			CustomerLoginForm form = formBeanFactory.create(request);
+			session.setAttribute("form", form);
 			
 			if (!form.isPresent()) {
 	            return "login.jsp";
@@ -56,28 +59,28 @@ public class Login extends Action {
 		            return "login.jsp";
 		        }
 		    
-		    if (form.getUserType() == "") {
+		    if (form.getUserType().equals("")) {
 		    	errors.add("Please select user type.");
 		    	return "login.jsp";
 		    }
-		    
-		    if (form.getUserType() == "Employee") {
-		    	EmployeeBean employeeBean = employeeDAO.getEmployeeByemail(form.getEmail());
+
+		    if (form.getUserType().equals("Employee")) {
+		    	EmployeeBean employeeBean = employeeDAO.getEmployeeByEmail(form.getEmail());
 		    	if (employeeBean == null) {
 		    		errors.add("No such Employee");
 		    		return "login.jsp";
 		    	}
-		        if (!employeeBean.getPassword().equals(md5(form.getPsw()))) {
+		        if (!employeeBean.getPassword().equals(form.getPsw())) {
 		            errors.add("Incorrect password");
 		            return "login.jsp";
 		        }
 		    } else {
-		    	CustomerBean customerBean = customerDAO.getCustomerByemail(form.getEmail());
+		    	CustomerBean customerBean = customerDAO.getCustomerByEmail((String)form.getEmail());
 		    	if (customerBean == null) {
 		    		errors.add("No such Customer");
 		    		return "login.jsp";
 		    	}
-		        if (!customerBean.getPassword().equals(md5(form.getPsw()))) {
+		        if (!customerBean.getPassword().equals(form.getPsw())) {
 		            errors.add("Incorrect password");
 		            return "login.jsp";
 		        }	    	
@@ -94,17 +97,4 @@ public class Login extends Action {
         	return "login.jsp";
         }
     }
-	
-	private String md5(String org) {
-	    MessageDigest md;
-		try {
-			md = MessageDigest.getInstance("MD5");
-		    md.update(org.getBytes(), 0, org.length());
-		    String re = new BigInteger(1, md.digest()).toString(16);
-		    return re;
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-	    return null;
-	}
 }

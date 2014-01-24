@@ -18,6 +18,8 @@ public class ResearchFund extends Action {
 	private FundPriceHistoryDAO fundPriceHistoryDAO;
 	
 	public ResearchFund(Model model) {
+		fundDAO = model.getFundDAO();
+		fundPriceHistoryDAO = model.getFundPriceHistoryDAO();
 	}
 
 	public String getName() { return "researchFund.do"; }
@@ -28,8 +30,8 @@ public class ResearchFund extends Action {
         request.setAttribute("errors", errors);
         HttpSession session = request.getSession(true);
 		try {
-			FundBean fundBean = fundDAO.getAllFunds();
-			FundPriceHistoryBean fundPriceHistoryBean = fundPriceHistoryDAO.getAllHistory();
+			FundBean[] fundBean = fundDAO.getAllFunds();
+			FundPriceHistoryBean[] fundPriceHistoryBean = fundPriceHistoryDAO.getAllHistory();
 			
 			// check for errors
 			return "researchFund.jsp";

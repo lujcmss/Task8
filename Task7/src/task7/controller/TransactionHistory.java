@@ -13,10 +13,11 @@ import task7.model.TransactionDAO;
 //akshata test 15 jan 530pm
 //pato was here back test
 public class TransactionHistory extends Action {
-	private TransactionDAO transactionDAO = new TransactionDAO();
+	private TransactionDAO transactionDAO;
 	private TransactionBean[] transaction ;
+	
 	public TransactionHistory(Model model) {
-		//transactionDAO  = model.getTransactionDAO();
+		transactionDAO  = model.getTransactionDAO();
 	}
 	
 	public String getName() { return "transactionHistory.do"; }

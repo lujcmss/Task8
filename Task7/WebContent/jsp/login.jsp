@@ -52,19 +52,19 @@
     <div class="input-group">
       <span class="input-group-addon">
       	    <c:choose>
-      			<c:when test="${ form == null || form.userType == null }">
-        			Login as Employee <input type="radio" name="userType" value ="Employee">
-       				 Login as Client <input type="radio" name="userType" value ="Client">
+      			<c:when test=" ${ form == null || form.userType == null }">
+        			Login as Employee <input type="radio" name="userType" value="Employee">
+       				Login as Customer <input type="radio" name="userType" value="Customer">
        			</c:when>
-       			<c:when test="${ form.userType } == 'Employee' ">
-        			Login as Employee <input type="radio" name="userType" value ="Employee" checked="checked">
-       				Login as Client <input type="radio" name="userType" value ="Client">
+       			<c:when test=" ${ form.userType == 'Employee' } ">
+        			Login as Employee <input type="radio" name="userType" value="Employee" checked="checked">
+       				Login as Customer <input type="radio" name="userType" value="Customer">
        			</c:when>
-   			<c:otherwise>
-        			Login as Employee <input type="radio" name="userType" value ="Employee">
-       				Login as Client <input type="radio" name="userType" value ="Client" checked="checked">
-        	</c:otherwise>
-       	</c:choose>
+   				<c:otherwise>
+        			Login as Employee <input type="radio" name="userType" value="Employee">
+       				Login as Customer <input type="radio" name="userType" value="Customer" checked="checked">
+        		</c:otherwise>
+       		</c:choose>
       </span>
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->

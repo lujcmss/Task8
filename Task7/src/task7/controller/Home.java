@@ -17,6 +17,8 @@ public class Home extends Action {
 	private FundDAO fundDAO;
 	
 	public Home(Model model) {
+		customerDAO = model.getCustomerDAO();
+		fundDAO = model.getFundDAO();
 	}
 
 	public String getName() { return "home.do"; }
@@ -34,6 +36,7 @@ public class Home extends Action {
 			
 	        return "home.jsp";
         } catch (Exception e) {
+        	System.out.println(e);
         	errors.add(e.getMessage());
         	return "error.jsp";
         }
