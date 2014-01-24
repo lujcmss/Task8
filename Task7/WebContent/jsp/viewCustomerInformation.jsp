@@ -63,7 +63,7 @@
       </table>
       
 	<table class="table table-striped">
-		<h3>Funds Information</h3>
+		<h3>Customer's Funds Information</h3>
         <thead>
           <tr>
             <th>#</th>
@@ -88,12 +88,24 @@
             <td>20</td>
             <td>16000</td>
           </tr>
+              <c:if test="${sessionScope.userFundList!=null}">
+		<c:forEach items="${sessionScope.userFundList}"  var="oneFund">
+		<tr>
+            <td>${oneFund.fundId}</td>
+            <td>${oneFund.name}</td>
+           <td>${oneFund.fundPrice}</td>  --//we need find price, but it's not in fund bean( it was stored in another table with 1 to N relation to fund N)-->
+            <td>${oneFund.share}</td>--//we need the amount of share this customer can sell -->
+             <td>${oneFund.value}</td> -- should be price* share  -->
+            <th><input type="text" placeholder="0" size="1" name="shares"/></th>
+          </tr>
+          </c:forEach>
+	</c:if>
         </tbody>
       </table>
         </div>
         <div class="tab-pane fade" id="transaction">
           <table class="table table-striped">
-		<h1>ICU's Information</h1>
+		<h1>${sessionScope.customer.firstName} &nbsp; ${sessionScope.customer.lastName} 's's Information</h1>
 		
 		<colgroup>
           <col class="col-xs-1">
@@ -134,6 +146,18 @@
             <td>20</td>
             <td>16000</td>
           </tr>
+              <c:if test="${sessionScope.userTransactionList!=null}">
+		<c:forEach items="${sessionScope.userTransactionList}"  var="oneTransaction">
+		<tr>
+            <td>${oneTransaction.transactionId}</td>
+            <td>${oneTransaction.fundBean.fundname}</td>
+           <td>${oneTransaction.transactionType}</td>  
+            <td>${oneTransaction.fundBean.price}</td>--//we need the amount of share this customer can sell -->
+             <td>${oneFund.value}</td> -- should be price* share  -->
+            <th><input type="text" placeholder="0" size="1" name="shares"/></th>
+          </tr>
+          </c:forEach>
+	</c:if>
         </tbody>
       </table>
         </div>
