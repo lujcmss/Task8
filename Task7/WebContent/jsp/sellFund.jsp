@@ -1,7 +1,9 @@
 <jsp:include page="header.jsp" />
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <div class="container">
-    
+     <c:choose>
+     <c:when test="${requestScope.user!=null}">
+   
       <div class="page-header">
         <h1>Sell Fund</h1>
       </div>
@@ -57,6 +59,19 @@
             <td>20</td>
             <th><input type="text" placeholder="0" size="1" name="shares"/></th>
           </tr>
+         <c:if test="${requestScope.userFundList!=null}">
+		<c:forEach items="${requestScope.userFundList}"  var="oneFund">
+		<tr>
+            <td>${oneFund.fundId}</td>
+            <td>${oneFund.name}</td>
+            <td>${oneFund.symbol}</td>
+            <td>${oneFund.fundPrice}</td>  --//we need find price, but it's not in fund bean( it was stored in another table with 1 to N relation to fund N)-->
+            <td>${oneFund.sellAmount}</td> --//we need the amount of share this customer can sell
+            <th><input type="text" placeholder="0" size="1" name="shares"/></th>
+          </tr>
+          </c:forEach>
+	</c:if>
+
         </tbody>
       </table>
       </form>
@@ -69,5 +84,17 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="/Task7/js/bootstrap.min.js"></script>
+    </c:when>
+    	<c:otherwise>
+        			<div>
+        			<br>
+        			<br>
+        			<br>
+        			You must login first!<br>
+        			Should have a link to login page
+        			</div>
+      </c:otherwise>
+      </c:choose>
+    
   </body>
 </html>
