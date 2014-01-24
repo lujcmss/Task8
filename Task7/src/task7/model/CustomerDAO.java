@@ -25,7 +25,7 @@ public class CustomerDAO {
 		 try {
 			 tx = session.getTransaction();
 			 tx.begin();
-			 Query query = session.createQuery("from User where userId='"+email+"'");
+			 Query query = session.createQuery("from CustomerBean where customerEmail='"+email+"'");
 			customer = (CustomerBean)query.uniqueResult();
 			 tx.commit();
 		 } catch (Exception e) {
@@ -46,7 +46,7 @@ public class CustomerDAO {
 		 try {
 			 tx = session.getTransaction();
 			 tx.begin();
-			 list = session.createQuery("from getCustomer").list();					
+			 list = session.createQuery("from getCustomer").list();		
 			 tx.commit();
 		 } catch (Exception e) {
 			 if (tx != null) {
@@ -59,4 +59,4 @@ public class CustomerDAO {
 		 return list;
 	}
 	
-	}
+}

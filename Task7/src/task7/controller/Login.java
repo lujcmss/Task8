@@ -62,7 +62,7 @@ public class Login extends Action {
 		    }
 		    
 		    if (form.getUserType() == "Employee") {
-		    	EmployeeBean employeeBean = employeeDAO.getEmployee(form.getEmail());
+		    	EmployeeBean employeeBean = employeeDAO.getEmployeeByemail(form.getEmail());
 		    	if (employeeBean == null) {
 		    		errors.add("No such Employee");
 		    		return "login.jsp";
