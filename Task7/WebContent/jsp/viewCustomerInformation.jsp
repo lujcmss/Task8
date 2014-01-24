@@ -94,9 +94,9 @@
 		<tr>
             <td>${oneFund.fundId}</td>
             <td>${oneFund.name}</td>
-           <td>${oneFund.fundPrice}</td>  --//we need find price, but it's not in fund bean( it was stored in another table with 1 to N relation to fund N)-->
-            <td>${oneFund.share}</td>--//we need the amount of share this customer can sell -->
-             <td>${oneFund.value}</td> -- should be price* share  -->
+           <td>${oneFund.fundPrice}</td>  <%-- --//we need find price, but it's not in fund bean( it was stored in another table with 1 to N relation to fund N)--%>
+            <td>${oneFund.share}</td> <%--//we need the amount of share this customer can sell--%>
+             <td>${oneFund.value}</td>  <%--- should be price* share  --%>
             <th><input type="text" placeholder="0" size="1" name="shares"/></th>
           </tr>
           </c:forEach>
@@ -153,8 +153,8 @@
             <td>${oneTransaction.transactionId}</td>
             <td>${oneTransaction.fundBean.fundname}</td>
            <td>${oneTransaction.transactionType}</td>  
-            <td>${oneTransaction.fundBean.price}</td>--//we need the amount of share this customer can sell -->
-             <td>${oneFund.value}</td> -- should be price* share  -->
+            <td>${oneTransaction.fundBean.price}</td> <%---//we need the amount of share this customer can sell --%>
+             <td>${oneFund.value}</td>  <%--- should be price* share  l --%>
             <th><input type="text" placeholder="0" size="1" name="shares"/></th>
           </tr>
           </c:forEach>
