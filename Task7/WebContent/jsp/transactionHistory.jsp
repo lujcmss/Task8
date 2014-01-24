@@ -1,5 +1,6 @@
 <jsp:include page="header.jsp" />
-<jsp:include page="error-list.jsp" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <div class="container">
     
       <div class="page-header">
@@ -8,7 +9,7 @@
       
 	<table class="table table-striped">
 		<h3>Transaction Information</h3>
-		
+		<jsp:include page="error-list.jsp" />	
 		<colgroup>
           <col class="col-xs-1">
           <col class="col-xs-2">
@@ -30,24 +31,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Jan 10, 2014</td>
-            <td>APPL</td>
-            <td>Buy</td>
-            <td>100</td>
-            <td>10</td>
-            <td>1000</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Jan 08, 2014</td>
-            <td>GOOG</td>
-            <td>Sell (Pending)</td>
-            <td>800</td>
-            <td>20</td>
-            <td>16000</td>
-          </tr>
+			<c:forEach var="historyInfo" items="${ historyInfo }">
+				<tr>
+           			<td><c:out value="${historyInfo.transactionId}"/></td>
+            		<td><c:out value="${historyInfo.executeDate}"/></td>
+            		<td><c:out value="${historyInfo.fundName}"/></td>
+            		<td><c:out value="${historyInfo.transactionType}"/></td>
+            		<td><c:out value=""/><fmt:formatNumber type="number" 
+            			maxFractionDigits="2" minFractionDigits="2" value="${historyInfo.sharePrice}" /></td>
+            		<td><c:out value=""/><fmt:formatNumber type="number" 
+            			maxFractionDigits="3" minFractionDigits="3" value="${historyInfo.shares}" /></td>
+            		<td><c:out value=""/><fmt:formatNumber type="number" 
+            			maxFractionDigits="2" minFractionDigits="2" value="${historyInfo.amount}" /></td>
+            		<td></td>
+	        	</tr>
+			</c:forEach>
         </tbody>
       </table>
 

@@ -42,8 +42,7 @@ public class Home extends Action {
 		try {
 			String userType = (String) session.getAttribute("userType");
 			if (userType.equals("Employee")) {
-				EmployeeBean employeeBean = (EmployeeBean)session.getAttribute("user");
-				
+				// to something
 			} else {
 				CustomerBean customerBean = (CustomerBean)session.getAttribute("user");
 				FundBean[] fundBeans = fundDAO.getAllFunds();

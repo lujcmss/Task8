@@ -67,10 +67,10 @@ public class FundDAO {
 		return true;
 	}
 	
-	public boolean hasTicker(String ticker) {
+	public boolean hasTicker(String symbol) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		Query query = session.createQuery("from FundBean where ticker = :ticker ");
-		query.setParameter("ticker", ticker);
+		Query query = session.createQuery("from FundBean where symbol = :symbol ");
+		query.setParameter("symbol", symbol);
 		List<?> list = (List<?>) query.list();
 	  
 		if (list.size() == 0) return false;

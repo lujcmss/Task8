@@ -11,6 +11,7 @@ import org.hibernate.mapping.Array;
 
 import task7.databeans.CustomerBean;
 import task7.databeans.FundBean;
+import task7.databeans.PositionBean;
 import task7.databeans.TransactionBean;
 
 public class TransactionDAO {
@@ -18,16 +19,12 @@ public class TransactionDAO {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 
 		session.beginTransaction();
-
 		session.save(transaction);
-
 		session.getTransaction().commit();
 
+	}
 	
-	
-}
 	public void update(TransactionBean transaction) {
-
 		Session session = HibernateUtil.getSessionFactory().openSession();
 
 		session.beginTransaction();
@@ -35,6 +32,7 @@ public class TransactionDAO {
 		session.getTransaction().commit();
 
 	}
+	
 	public void delete(TransactionBean transaction)
 	{
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -42,81 +40,15 @@ public class TransactionDAO {
 		session.beginTransaction();
 		session.delete(transaction);
 		session.getTransaction().commit();
-
-
 	}
 	
-	
-	public TransactionBean[] getTransactionsPerUser(String email) {
-		 System.out.println("Amount"+ email);
+	public TransactionBean[] getTransactionsByCustomerId(int customerId) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		 System.out.println("Amount"+ email);
-		 Transaction tx = null;
-		 TransactionBean[] user = null;
-		 Integer id2 = getId(email);
-		 try {
-			 tx = session.getTransaction();
-			 tx.begin();
-			 Session session2 = HibernateUtil.getSessionFactory().openSession();
-				Query query = session2.createQuery("from TransactionBean where customerBean_customerId =  :id ");
-				query.setParameter("id", id2);
-				List<TransactionBean> personList = query.list();
-				 
-				 TransactionBean[] a = new TransactionBean[personList.size()];
-				 personList.toArray(a);
-				 
-				System.out.println("Data"+personList);
-				
-     	  
-				user  = a;
-				
-			 tx.commit();
-		 } catch (Exception e) {
-			 if (tx != null) {
-				 tx.rollback();
-			 }
-			 e.printStackTrace();
-		 } finally {
-			 session.close();
-		 }
-		 return user;
-	}
-	private int getId(String id) {
-		 System.out.println(id);
-		 int i = 0;
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		 Transaction tx = null;
-		
-		 try {
-			 tx = session.getTransaction();
-			 tx.begin();
-			 Session session2 = HibernateUtil.getSessionFactory().openSession();
-				Query query = session2.createQuery("from CustomerBean where email=  :id ");
-				query.setParameter("id", id);
-				List <?>list = query.list();
-				System.out.println("Data"+list);
-				
-     	  
-				CustomerBean x = (CustomerBean)list.get(0);
-				 i = x.getCustomerId();
-				 System.out.println(x.getCustomerId());
-			 tx.commit();
-		 } catch (Exception e) {
-			 if (tx != null) {
-				 tx.rollback();
-			 }
-			 e.printStackTrace();
-		 } finally {
-			 session.close();
-		 }
-		
-		 return i;
-		
-		
-	}
-	
-	
-	
-	
-	
+		Query query = session.createQuery("from TransactionBean where customerBean_customerId = :customerId");
+		query.setParameter("customerId", customerId);
+		List<?> list = (List<?>) query.list();
+	  
+		TransactionBean[] transactionBeans = list.toArray(new TransactionBean[list.size()]);
+		return transactionBeans;
+	}	
 }

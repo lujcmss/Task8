@@ -81,19 +81,6 @@ public class EditInfoForm extends FormBean {
 			errors.add("Lastname is required");
 		}
 
-		if (addr1 == null || addr1.length() == 0) {
-			errors.add("Address is required");
-		}
-		if (city == null || city.length() == 0) {
-			errors.add("City is required");
-		}
-		if (zipCode == null || zipCode.length() == 0) {
-			errors.add("Zip code is required");
-		}
-		if (state == null || state.length() == 0) {
-			errors.add("State is required");
-		}
-
 		if (errors.size() > 0)
 			return errors;
 

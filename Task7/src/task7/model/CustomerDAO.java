@@ -46,4 +46,15 @@ public class CustomerDAO {
 		if (list.size() == 0) return false;
 		return true;
 	}
+	
+	public CustomerBean[] getAllCustomers() {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Query query = session.createQuery("from CustomerBean");
+		List<?> list = (List<?>) query.list();
+	  
+		if (list.size() == 0) return null;
+		
+		CustomerBean[] customerBeans = list.toArray(new CustomerBean[list.size()]);
+		return customerBeans;
+	}
 }

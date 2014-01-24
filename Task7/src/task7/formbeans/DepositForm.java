@@ -6,39 +6,32 @@ import java.util.List;
 import org.mybeans.form.FormBean;
 
 public class DepositForm extends FormBean{
-	private String usr;
-	private int depositAmount;
+	private String depositAmount;
+	private String button;
+	private String customerEmail;
 	
-	
-	public int getDepositAmount() {
-		return depositAmount;
+	public double getDepositAmount() {
+		return Double.parseDouble(depositAmount);
 	}
-
-	public void setDepositAmount(int depositAmount) {
+	public void setDepositAmount(String depositAmount) {
 		this.depositAmount = depositAmount;
 	}
-
-	public String getUsr() {
-		return usr;
+	public String getButton() {
+		return button;
 	}
-
-	public void setUsr(String s) {
-		this.usr= trimAndConvert(s,"<>>\"]");
+	public void setButton(String button) {
+		this.button = button;
+	}
+	public String getCustomerEmail() {
+		return customerEmail;
+	}
+	public void setCustomerEmail(String customerEmail) {
+		this.customerEmail = customerEmail;
 	}
 
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
-
-		if (depositAmount<1) {
-			errors.add("Amount to deposit must be greater or equal to  1");
-		}
-
 	
-		if (errors.size() > 0)
-		return errors;
-		
-		if (usr.matches(".*[<>\"].*")) errors.add("Ticker or Fund name may not contain angle brackets or quotes");
-		
 		return errors;
 	}
 

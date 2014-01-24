@@ -83,7 +83,7 @@ public class SellFund extends Action {
 						fundInfoBeans[0].setShare(positionBeans[j].getShares() / 100.0);
 					}
 					
-					session.setAttribute("fundInfo", fundInfoBeans);
+					session.setAttribute("sellFundInfo", fundInfoBeans);
 		    	} else {
 			    	FundInfoBean[] fundInfoBeans = new FundInfoBean[positionBeans.length];
 					for (int i = 0; i < positionBeans.length; i++) {
@@ -93,7 +93,7 @@ public class SellFund extends Action {
 						fundInfoBeans[i].setShare(positionBeans[i].getShares() / 100.0);
 					}
 					
-					session.setAttribute("fundInfo", fundInfoBeans);
+					session.setAttribute("sellFundInfo", fundInfoBeans);
 				}
 		    } else if (form.getButton().equals("sell")) {
 		    	PositionBean positionBean = new PositionBean();
@@ -109,7 +109,7 @@ public class SellFund extends Action {
 		    	}
 		    	
 		    	TransactionBean transactionBean = new TransactionBean();
-		    	transactionBean.setAmount((long)(form.getShare() * 100));
+		    	transactionBean.setAmount((long)(form.getShare() * 1000));
 		    	transactionBean.setCustomerBean(customerBean);
 		    	transactionBean.setFundBean(fundDAO.getFundByName(form.getFundName()));
 		    	transactionBean.setTransactionType("Sell (pending)");

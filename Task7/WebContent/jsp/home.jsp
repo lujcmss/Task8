@@ -7,6 +7,28 @@
 	  <div class="page-header">
         <h1>Welcome, <c:out value="${user.firstName}" /> <c:out value="${user.lastName}" /></h1>
       </div>
+      	<table class="table table-striped">
+		<h3>Basic Information</h3>
+		<div style="text-align:right">
+			<a href="changePassword.do">Change Password</a>
+			<a>&nbsp;&nbsp;&nbsp;&nbsp;</a>
+			<a href="editInfo.do">Edit Information</a>
+		</div>
+        <colgroup>
+          <col class="col-xs-3">
+          <col class="col-xs-5">
+        </colgroup>
+        <tbody>
+          <tr>
+            <th>First Name</th>
+            <td><c:out value="${user.firstName}" /></td>
+          </tr>
+          <tr>            
+          	<th>Last Name</th>
+            <td><c:out value="${user.lastName}" /></td>
+          </tr>
+        </tbody>
+      </table>
 	</c:when>
 	<c:otherwise>
       <div class="page-header">

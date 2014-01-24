@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.hibernate.Session;
 import org.mybeans.form.FormBeanFactory;
 
 import task7.databeans.FundBean;
@@ -30,6 +32,8 @@ public class CreateFund extends Action {
         // Set up the errors list
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors", errors);
+        HttpSession session = request.getSession();
+        session.setAttribute("funds", fundDAO.getAllFunds());
         
 		try {
 			CreateFundForm form = formBeanFactory.create(request);
@@ -40,7 +44,7 @@ public class CreateFund extends Action {
 			
 			errors.addAll(form.getValidationErrors());
 
-		    if (fundDAO.hasFund((String)form.getFund()) == true || fundDAO.hasTicker((String)form.getTicker()) == true) {
+		    if (fundDAO.hasFund(form.getFund()) == true || fundDAO.hasTicker(form.getTicker()) == true) {
 		    	errors.add("Fund already exist.");
 		    }
 		    
@@ -53,10 +57,11 @@ public class CreateFund extends Action {
 		    fundBean.setSymbol(form.getTicker());
 		    fundDAO.insert(fundBean);
 		    
-	        return "home.jsp";
+		    session.setAttribute("funds", fundDAO.getAllFunds());
+	        return "createFund.jsp";
         } catch (Exception e) {
         	errors.add(e.getMessage());
-        	return "error.jsp";
+        	return "createFund.jsp";
         }
     }
 }

@@ -47,7 +47,7 @@ public class BuyFund extends Action{
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors", errors);
         HttpSession session = request.getSession();
-
+        
 		try {
 			BuyForm form = formBeanFactory.create(request);
 
@@ -85,8 +85,7 @@ public class BuyFund extends Action{
 						fundInfoBeans[0].setShare(positionBeans[j].getShares() / 100.0);
 					}
 					
-					session.setAttribute("fundNum", 1);
-					session.setAttribute("fundInfo", fundInfoBeans);
+					session.setAttribute("buyFundInfo", fundInfoBeans);
 		    	} else {
 			    	FundInfoBean[] fundInfoBeans = new FundInfoBean[fundBeans.length];
 					for (int i = 0; i < fundBeans.length; i++) {
@@ -100,8 +99,7 @@ public class BuyFund extends Action{
 						}
 					}
 					
-					session.setAttribute("fundNum", fundBeans.length);
-					session.setAttribute("fundInfo", fundInfoBeans);
+					session.setAttribute("buyFundInfo", fundInfoBeans);
 				}
 		    } else if (form.getButton().equals("buy")) {
 		    	if (customerBean.getCash() < form.getAmount() * 100) {

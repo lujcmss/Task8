@@ -1,25 +1,26 @@
 <jsp:include page="header.jsp" />
-<jsp:include page="error-list.jsp" />
     <div class="container">
     
       <div class="page-header">
         <h1>Customer Information</h1>
       </div>
+    <jsp:include page="error-list.jsp" />
       
     <div class="search-bar">
-    <form class="navbar-form navbar-center" role="search">
+    <form class="navbar-form navbar-center" method="POST" action="viewCustomerinformation.do">
 		<div class="form-group">
-    		<input type="text" class="form-control" placeholder="Search">
+    		<input type="text" class="form-control" placeholder="Search user email here">
   		</div>
-  		<button type="submit" class="btn btn-default">Submit</button>
+  		<button type="submit" class="btn btn-default" name="button" value="search">Search</button>
 	</form>
 	</div>
-
+	
     <div class="bs-example bs-example-tabs">
       <ul id="myTab" class="nav nav-tabs">
         <li class="active"><a href="#account" data-toggle="tab">Account</a></li>
         <li><a href="#transaction" data-toggle="tab">Transaction History</a></li>
       </ul>
+      
       <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade in active" id="account">
         <h1> ${sessionScope.customer.firstName} &nbsp; ${sessionScope.customer.lastName} 's Information</h1>

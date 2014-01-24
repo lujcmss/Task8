@@ -21,9 +21,11 @@ public class ChangePassword extends Action {
 	private FormBeanFactory<ChangePasswordForm> formBeanFactory = FormBeanFactory.getInstance(ChangePasswordForm.class);
 	
 	private CustomerDAO customerDAO;
+	private EmployeeDAO employeeDAO;
 	
 	public ChangePassword(Model model) {
 		customerDAO = model.getCustomerDAO();
+		employeeDAO = model.getEmployeeDAO();
 	}
 
 	public String getName() { return "changePassword.do"; }
@@ -46,18 +48,27 @@ public class ChangePassword extends Action {
 		        return "changePassword.jsp";
 		    }
 		    
-		    CustomerBean customerBean = customerDAO.getCustomerByEmail((String)session.getAttribute("email"));
-		    if (!customerBean.getPassword().equals(form.getOldpsw())) {
-		    	errors.add("Wrong password!");
-		    	return "changePassword.jsp";
-		    }
-		    
-		    customerBean.setPassword(form.getNewpsw());
-		    customerDAO.update(customerBean);
-		    
+		    String userType = (String) session.getAttribute("userType");
+			if (userType.equals("Employee")) {
+				EmployeeBean employeeBean = employeeDAO.getEmployeeByEmail((String)session.getAttribute("email"));
+				if (!employeeBean.getPassword().equals(form.getOldpsw())) {
+					errors.add("Wrong Password!");
+				}
+				
+				employeeBean.setPassword(form.getNewpsw());
+				employeeDAO.update(employeeBean);
+			} else {
+			    CustomerBean customerBean = customerDAO.getCustomerByEmail((String)session.getAttribute("email"));
+			    if (!customerBean.getPassword().equals(form.getOldpsw())) {
+			    	errors.add("Wrong password!");
+			    	return "changePassword.jsp";
+			    }
+			    
+			    customerBean.setPassword(form.getNewpsw());
+			    customerDAO.update(customerBean);
+			}
 			return "home.do";
         } catch (Exception e) {
-        	errors.add("Please reload website");
         	System.out.println(e);
         	return "changePassword.jsp";
         }

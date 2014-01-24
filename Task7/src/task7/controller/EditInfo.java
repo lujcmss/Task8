@@ -22,9 +22,11 @@ public class EditInfo extends Action {
 	private FormBeanFactory<EditInfoForm> formBeanFactory = FormBeanFactory.getInstance(EditInfoForm.class);
 	
 	private CustomerDAO customerDAO;
+	private EmployeeDAO employeeDAO;
 	
 	public EditInfo(Model model) {
 		customerDAO = model.getCustomerDAO();
+		employeeDAO = model.getEmployeeDAO();
 	}
 
 	public String getName() { return "editInfo.do"; }
@@ -47,18 +49,27 @@ public class EditInfo extends Action {
 		        return "editInfo.jsp";
 		    }
 		    
-		    CustomerBean customerBean = (CustomerBean)session.getAttribute("user");
-		    
-		    customerBean.setAddr1(form.getAddr1());
-		    customerBean.setAddr2(form.getAddr2());
-		    customerBean.setCity(form.getCity());
-		    customerBean.setFirstName(form.getFirstName());
-		    customerBean.setLastName(form.getLastName());
-		    customerBean.setState(form.getState());
-		    customerBean.setZip(form.getZipCode());
-
-		    customerDAO.update(customerBean);
-
+		    String userType = (String) session.getAttribute("userType");
+			if (userType.equals("Employee")) {
+				EmployeeBean employeeBean = (EmployeeBean)session.getAttribute("user");
+				
+				employeeBean.setFirstName(form.getFirstName());
+				employeeBean.setLastName(form.getLastName());
+				
+				employeeDAO.update(employeeBean);
+			} else {
+			    CustomerBean customerBean = (CustomerBean)session.getAttribute("user");
+			    
+			    customerBean.setAddr1(form.getAddr1());
+			    customerBean.setAddr2(form.getAddr2());
+			    customerBean.setCity(form.getCity());
+			    customerBean.setFirstName(form.getFirstName());
+			    customerBean.setLastName(form.getLastName());
+			    customerBean.setState(form.getState());
+			    customerBean.setZip(form.getZipCode());
+	
+			    customerDAO.update(customerBean);
+			}
 			return "home.do";
         } catch (Exception e) {
         	errors.add("Please reload website");

@@ -10,7 +10,7 @@
 		<div class="form-group">
     		<input type="text" class="form-control" placeholder="Fund Name or Ticker" name="fund">
   		</div>
-  		<button type="submit" class="btn btn-default" name="search">Search</button>
+  		<button type="submit" class="btn btn-default" name="button" value="search">Search</button>
 	</form>
 	
 	<table class="table table-striped">
@@ -35,7 +35,7 @@
         </thead>
         <tbody>
  			<c:set var="count" value="0" />
-			<c:forEach var="fundInfo" items="${ fundInfo }">
+			<c:forEach var="fundInfo" items="${ sellFundInfo }">
 				<c:set var="count" value="${ count+1 }" />
 				<tr>
 				<form class="form-signin" method="post" action="sellFund.do">
@@ -48,7 +48,7 @@
             		<td>
     						<input type="text" class="form-control" placeholder="0" required name="share">
         			</td>
-            		<td><button class="btn btn-primary" type="submit" name="sell">Sell</button></td>
+            		<td><button class="btn btn-primary" type="submit" name="button" value="sell">Sell</button></td>
             	</form>
 	        	</tr>
 			</c:forEach>
