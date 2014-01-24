@@ -7,8 +7,8 @@
       </div>
 	
       <form class="form-signin">
-        <input type="text" class="form-control" placeholder="Fund Name" required autofocus>
-        <input type="text" class="form-control" placeholder="Ticker" required>
+        <input type="text" class="form-control" placeholder="Fund Name" required autofocus name="fund">
+        <input type="text" class="form-control" placeholder="Ticker" required name="ticker">
         <p></p>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
       </form>
