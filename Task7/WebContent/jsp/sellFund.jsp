@@ -91,7 +91,7 @@
         			<br>
         			<br>
         			You must login first!<br>
-        			Should have a link to login page
+        			<a href="login.jsp">LOGIN</a>
         			</div>
       </c:otherwise>
       </c:choose>

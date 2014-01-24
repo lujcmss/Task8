@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -43,13 +44,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="#">Mutual Fund</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="home.do">Home</a></li>
             
             <!-- customer -->
+             <c:choose>
+             <c:when test="${sessionScope.userType=='Customer'}">
             <li class="dropdown" class="active">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Funds<b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -60,8 +63,12 @@
             </li>
             <li><a href="requestCheck.do">Request Check</a></li>
             <li><a href="transactionHistory.do">Transaction History</a></li>
+            </c:when>
+            </c:choose>
             
-            <!-- employee
+            <!-- employee-->
+              <c:choose>
+             <c:when test="${sessionScope.userType=='Employee'}">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage Accounts<b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -77,12 +84,12 @@
             <li><a href="depositCheck.do">Deposit Check</a></li>
             <li><a href="createFund.do">Create Fund</a></li>
             <li><a href="transactionDay.do">Transaction Day</a></li>
-            -->
-            
-          </ul>
+              </ul>
+               </c:when>
+            </c:choose>
           
           <ul class="nav navbar-nav navbar-right">
-            <li><a>Hi, ICU.  Cash: $100</a></li>
+            <li><a>Hi, ${sessionScope.user.firstName}.  Cash: ${sessionScope.user.cash}</a></li>
             <li><a href="logout.do">Logout</a></li>
           </ul>
         </div><!--/.nav-collapse -->
