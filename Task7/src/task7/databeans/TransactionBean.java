@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="TASK7_TRANSCATION")
+@Table(name="TASK7_TRANSACTION")
 public class TransactionBean {
 	
 	@Id @GeneratedValue
