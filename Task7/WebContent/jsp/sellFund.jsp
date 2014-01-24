@@ -59,8 +59,8 @@
             <td>20</td>
             <th><input type="text" placeholder="0" size="1" name="shares"/></th>
           </tr>
-         <c:if test="${requestScope.userFundList!=null}">
-		<c:forEach items="${requestScope.userFundList}"  var="oneFund">
+         <c:if test="${sessionScope.userFundList!=null}">
+		<c:forEach items="${sessionScope.userFundList}"  var="oneFund">
 		<tr>
             <td>${oneFund.fundId}</td>
             <td>${oneFund.name}</td>
