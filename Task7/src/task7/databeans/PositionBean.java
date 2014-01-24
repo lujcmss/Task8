@@ -26,7 +26,7 @@ public class PositionBean implements Serializable{
 	
 	@Column(nullable=false)
 	private long shares;
-	
+
 	public CustomerBean getCustomerBean() {
 		return customerBean;
 	}

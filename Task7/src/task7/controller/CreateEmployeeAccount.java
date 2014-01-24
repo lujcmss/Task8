@@ -36,7 +36,7 @@ public class CreateEmployeeAccount extends Action {
         HttpSession session = request.getSession(true);
 		try {
 			CreateEmployeeForm form = formBeanFactory.create(request);
-			
+			session.setAttribute("form", form);
 			if (!form.isPresent()) {
 	            return "createEmployeeAccount.jsp";
 	        }

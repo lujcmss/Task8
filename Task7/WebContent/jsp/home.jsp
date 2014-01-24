@@ -1,46 +1,59 @@
 <jsp:include page="header.jsp" />
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <div class="container">
-
+	<c:choose>
+	<c:when test="${userType=='Employee'}">
+	  <div class="page-header">
+        <h1>Welcome, <c:out value="${user.firstName}" /> <c:out value="${user.lastName}" /></h1>
+      </div>
+	</c:when>
+	<c:otherwise>
       <div class="page-header">
-        <h1>ICU's Information</h1>
+        <h1><c:out value="${user.firstName}" /> <c:out value="${user.lastName}" />'s Information</h1>
       </div>
 
 	<table class="table table-striped">
 		<h3>Basic Information</h3>
 		<div style="text-align:right">
-			<a>Change Password</a>
+			<a href="changePassword.do">Change Password</a>
+			<a>&nbsp;&nbsp;&nbsp;&nbsp;</a>
+			<a href="editInfo.do">Edit Information</a>
 		</div>
         <colgroup>
-          <col class="col-xs-2">
+          <col class="col-xs-3">
           <col class="col-xs-5">
-          <col class="col-xs-1">
         </colgroup>
         <tbody>
           <tr>
             <th>First Name</th>
-            <td>I</td>
-            <td><a>Edit</a></td>
+            <td><c:out value="${user.firstName}" /></td>
           </tr>
           <tr>            
           	<th>Last Name</th>
-            <td>CU</td>
-            <td><a>Edit</a></td>
+            <td><c:out value="${user.lastName}" /></td>
           </tr>
           <tr>
             <th>Address</th>
-            <td>CMU, 15213</td>
-            <td><a>Edit</a></td>
+            <td><c:out value="${user.addr1}" />,&nbsp;<c:out value="${user.addr2}" /></td>
           </tr>
           <tr>
             <th>Last Trading Day</th>
-            <td>Jan 1, 2014</td>
-            <td></td>
+            <td>
+            	<c:choose>
+            		<c:when test="${user.lastTradingDay == null}">
+            			<c:out value="-" />
+            		</c:when>
+            		<c:otherwise>
+            			<c:out value="${user.lastTradingDay }" />
+            		</c:otherwise>
+            	</c:choose>
+            </td>
           </tr>
           <tr>
             <th>Cash Balance</th>
-            <td>$100</td>
-            <td></td>
+            <td>$<fmt:formatNumber type="number" 
+            			maxFractionDigits="2" minFractionDigits="2" value="${user.cash}" /></td>
           </tr>
         </tbody>
       </table>
@@ -51,29 +64,30 @@
           <tr>
             <th>#</th>
             <th>Fund Name</th>
+            <th>Fund Ticker</th>
             <th>Fund Price</th>
             <th>Share</th>
             <th>Value</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Apple</td>
-            <td>100</td>
-            <td>10</td>
-            <td>1000</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Google</td>
-            <td>800</td>
-            <td>20</td>
-            <td>16000</td>
-          </tr>
+ 			<c:set var="count" value="0" />
+			<c:forEach var="fundInfo" items="${ fundInfo }">
+				<c:set var="count" value="${ count+1 }" />
+				<tr>
+           			<td>${count}</td>
+           			<c:set var="share" value="${fundInfo.share}"/>
+            		<td><c:out value="${fundInfo.name}"/></td>
+            		<td><c:out value="${fundInfo.symbol}"/></td>
+            		<td><c:out value=""/><fmt:formatNumber type="number" 
+            			maxFractionDigits="2" minFractionDigits="2" value="${share}" /></td>
+            		<td></td>
+	        	</tr>
+			</c:forEach>
         </tbody>
       </table>
-
+    </c:otherwise>
+	</c:choose>
     </div> <!-- /container -->
 
 

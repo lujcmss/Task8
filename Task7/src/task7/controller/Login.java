@@ -20,14 +20,14 @@ import org.mybeans.form.FormBeanFactory;
 import task7.databeans.CustomerBean;
 import task7.databeans.EmployeeBean;
 import task7.databeans.FundBean;
-import task7.formbeans.CustomerLoginForm;
+import task7.formbeans.LoginForm;
 import task7.model.CustomerDAO;
 import task7.model.EmployeeDAO;
 import task7.model.FundDAO;
 import task7.model.Model;
 
 public class Login extends Action {
-	private FormBeanFactory<CustomerLoginForm> formBeanFactory = FormBeanFactory.getInstance(CustomerLoginForm.class);
+	private FormBeanFactory<LoginForm> formBeanFactory = FormBeanFactory.getInstance(LoginForm.class);
 	
 	private EmployeeDAO employeeDAO;
 	private CustomerDAO customerDAO;
@@ -47,7 +47,7 @@ public class Login extends Action {
         
 		try {
 			//Testing login form bean, by Patrick
-			CustomerLoginForm form = formBeanFactory.create(request);
+			LoginForm form = formBeanFactory.create(request);
 			session.setAttribute("form", form);
 			
 			if (!form.isPresent()) {
@@ -74,8 +74,9 @@ public class Login extends Action {
 		            errors.add("Incorrect password");
 		            return "login.jsp";
 		        }
+		        session.setAttribute("user", employeeBean);
 		    } else {
-		    	CustomerBean customerBean = customerDAO.getCustomerByEmail((String)form.getEmail());
+		    	CustomerBean customerBean = customerDAO.getCustomerByEmail(form.getEmail());
 		    	if (customerBean == null) {
 		    		errors.add("No such Customer");
 		    		return "login.jsp";
@@ -83,17 +84,17 @@ public class Login extends Action {
 		        if (!customerBean.getPassword().equals(form.getPsw())) {
 		            errors.add("Incorrect password");
 		            return "login.jsp";
-		        }	    	
+		        }
+		        session.setAttribute("user", customerBean);
 		    }
 		    
 	        session.setAttribute("userType", form.getUserType());
 	        session.setAttribute("email", form.getEmail());
-	        session.setAttribute("date", new Date(100000000));
+	        session.setAttribute("date", Date.valueOf("2014-01-23"));
 		    
 			return "home.do";
         } catch (Exception e) {
         	errors.add("Please reload website");
-        	System.out.println(errors);
         	return "login.jsp";
         }
     }

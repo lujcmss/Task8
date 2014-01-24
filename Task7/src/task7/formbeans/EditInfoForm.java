@@ -5,25 +5,14 @@ import java.util.List;
 
 import org.mybeans.form.FormBean;
 
-public class CreateCustomerForm extends FormBean {
-	private String email;
-	private String psw;
+public class EditInfoForm extends FormBean {
 	private String firstName;
 	private String lastName;
 	private String addr1;
 	private String addr2;
 	private String city;
 	private String zipCode;
-	private String confirm;
 	private String state;
-
-	public String getConfirm() {
-		return confirm;
-	}
-
-	public void setConfirm(String confirm) {
-		this.confirm = trimAndConvert(confirm, "<>>\"]");
-	}
 
 	public String getState() {
 		return state;
@@ -31,22 +20,6 @@ public class CreateCustomerForm extends FormBean {
 
 	public void setState(String state) {
 		this.state = trimAndConvert(state, "<>>\"]");
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = trimAndConvert(email, "<>>\"]");
-	}
-
-	public String getPsw() {
-		return psw;
-	}
-
-	public void setPsw(String psw) {
-		this.psw = trimAndConvert(psw, "<>>\"]");
 	}
 
 	public String getFirstName() {
@@ -108,18 +81,6 @@ public class CreateCustomerForm extends FormBean {
 			errors.add("Lastname is required");
 		}
 
-		if (confirm == null || confirm.length() == 0) {
-			errors.add("Confirm Password is required");
-		}
-
-		if (email == null || email.length() == 0) {
-			errors.add("Email is required");
-		}
-
-		if (psw == null || psw.length() == 0) {
-			errors.add("Password is required");
-		}
-
 		if (addr1 == null || addr1.length() == 0) {
 			errors.add("Address is required");
 		}
@@ -135,13 +96,6 @@ public class CreateCustomerForm extends FormBean {
 
 		if (errors.size() > 0)
 			return errors;
-
-		if (email.matches(".*[<>\"].*"))
-			errors.add("email may not contain angle brackets or quotes");
-		if (psw.matches(".*[<>\"].*"))
-			errors.add("Password may not contain angle brackets or quotes");
-		if (!confirm.equals(psw))
-			errors.add("Password doesn't match password confirmation");
 
 		return errors;
 	}

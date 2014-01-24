@@ -24,7 +24,7 @@ public class EmployeeDAO {
 
 		session.beginTransaction();
 		session.merge(employeeBean);
-		session.beginTransaction().commit();
+		session.getTransaction().commit();
 	}
 	public EmployeeBean getEmployeeByEmail(String email) {
 		Session session = HibernateUtil.getSessionFactory().openSession();

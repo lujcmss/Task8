@@ -6,36 +6,48 @@ import java.util.List;
 import org.mybeans.form.FormBean;
 
 public class SellFundForm extends FormBean{
-	private String shares;
-	public String getShares() {
-		return shares;
+	private String fund;
+	private String share;
+	private String button;
+	private String fundName;
+	
+	public String getFundName() {
+		return fundName;
 	}
 
-	public void setShares(String s) {
-		this.shares= trimAndConvert(s,"<>>\"]");
+	public void setFundName(String fundName) {
+		this.fundName = fundName;
 	}
 
+	public String getButton() {
+		return button;
+	}
+
+	public void setButton(String button) {
+		this.button = button;
+	}
+
+	public String getFund() {
+		return fund;
+	}
+
+	public double getShare() {
+		return Double.parseDouble(share);
+	}
+	
+	public void setFund(String s) {
+		this.fund = trimAndConvert(s,"<>>\"]");
+	}
+	
+	public void setShare(String a) {
+		this.share = trimAndConvert(a,"<>>\"]");
+	}
+	
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
 		
-		try {
-			int x = Integer.parseInt(shares);
-		} catch (NumberFormatException e) {
-			errors.add("Share amount data should be whole numbers");
-			
-		}
-		
-		
-
-	
-		if (errors.size() > 0)
-		{return errors;}
-		
-		
-		
+		if (fund != null && fund.matches(".*[<>\"].*")) errors.add("fund may not contain angle brackets or quotes");
+		if (share != null && (!share.matches("^[1-9]d*$")||share.matches(".*[<>\"].*"))) errors.add("Illegal Amount");
 		return errors;
 	}
-	
-	
-	
 }

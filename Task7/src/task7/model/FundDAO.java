@@ -22,7 +22,7 @@ public class FundDAO {
 
 		session.beginTransaction();
 		session.merge(fund);
-		session.beginTransaction().commit();
+		session.getTransaction().commit();
 	}
 	public void delete(FundBean fund)
 	{
@@ -30,7 +30,7 @@ public class FundDAO {
 
 		session.beginTransaction();
 		session.delete(fund);
-		session.beginTransaction().commit();
+		session.getTransaction().commit();
 	}
 	
 	public FundBean getFundByName(String fundName) {
@@ -45,10 +45,10 @@ public class FundDAO {
 		return fundBean;
 	}
 	
-	public FundBean getFundByTicker(String ticker) {
+	public FundBean getFundByTicker(String symbol) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		Query query = session.createQuery("from FundBean where ticker = :ticker ");
-		query.setParameter("ticker", ticker);
+		Query query = session.createQuery("from FundBean where symbol = :symbol ");
+		query.setParameter("symbol", symbol);
 		List<?> list = (List<?>) query.list();
 	  
 		if (list.size() == 0) return null;

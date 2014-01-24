@@ -18,12 +18,11 @@ public class CustomerDAO {
         session.getTransaction().commit();
 	}
 	public void update(CustomerBean customerBean) {
-
 		Session session = HibernateUtil.getSessionFactory().openSession();
 
 		session.beginTransaction();
 		session.merge(customerBean);
-		session.beginTransaction().commit();
+		session.getTransaction().commit();
 	}
 	
 	public CustomerBean getCustomerByEmail(String email) {

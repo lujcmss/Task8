@@ -32,7 +32,7 @@ public class TransactionDAO {
 
 		session.beginTransaction();
 		session.merge(transaction);
-		session.beginTransaction().commit();
+		session.getTransaction().commit();
 
 	}
 	public void delete(TransactionBean transaction)
@@ -41,7 +41,7 @@ public class TransactionDAO {
 
 		session.beginTransaction();
 		session.delete(transaction);
-		session.beginTransaction().commit();
+		session.getTransaction().commit();
 
 
 	}

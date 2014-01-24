@@ -11,8 +11,10 @@ import javax.servlet.http.HttpSession;
 
 import task7.databeans.CustomerBean;
 import task7.databeans.EmployeeBean;
+import task7.databeans.FundBean;
 import task7.model.CustomerDAO;
 import task7.model.EmployeeDAO;
+import task7.model.FundDAO;
 import task7.model.Model;
 
 @SuppressWarnings("serial")
@@ -35,6 +37,8 @@ public class Controller extends HttpServlet {
         Action.add(new RequestCheck(model));
         Action.add(new TransactionHistory(model));
         Action.add(new Logout(model));
+        Action.add(new ChangePassword(model));
+        Action.add(new EditInfo(model));
         
         CustomerDAO customerDAO = model.getCustomerDAO();
         CustomerBean customerBean = new CustomerBean();
@@ -42,21 +46,30 @@ public class Controller extends HttpServlet {
         customerBean.setAddr2("Apt1");
         customerBean.setCash(0);
         customerBean.setCity("Pitt");
-        customerBean.setCustomerEmail("c@gmail.com");
+        customerBean.setCustomerEmail("c");
         customerBean.setFirstName("customer");
         customerBean.setLastName("CMU");
-        customerBean.setPassword("test");
+        customerBean.setPassword("c");
         customerBean.setState("PA");
         customerBean.setZip("15213");
         customerDAO.insert(customerBean);
         
         EmployeeDAO employeeDAO = model.getEmployeeDAO();
         EmployeeBean employeeBean = new EmployeeBean();
-        employeeBean.setEmail("e@gmail.com");
+        employeeBean.setEmail("e");
         employeeBean.setFirstName("employee");
         employeeBean.setLastName("CMU");
-        employeeBean.setPassword("test");
+        employeeBean.setPassword("e");
         employeeDAO.insert(employeeBean);
+        
+        FundDAO fundDAO = model.getFundDAO();
+        FundBean fundBean = new FundBean();
+        fundBean.setName("Apple");
+        fundBean.setSymbol("APPL");
+        fundDAO.insert(fundBean);
+        fundBean.setName("Google");
+        fundBean.setSymbol("GOOG");
+        fundDAO.insert(fundBean);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -77,7 +90,7 @@ public class Controller extends HttpServlet {
     private String performTheAction(HttpServletRequest request) {
         HttpSession session = request.getSession(true);
         String servletPath = request.getServletPath();
-        String email = (String) session.getAttribute("email");
+        Object user = (Object) session.getAttribute("user");
         String action = getActionName(servletPath);
         
         //System.out.println("servletPath="+servletPath+" requestURI="+request.getRequestURI()+"  user="+user);
@@ -86,7 +99,7 @@ public class Controller extends HttpServlet {
 			return Action.perform(action, request);
         }
         
-        if (email == null) {
+        if (user == null) {
         	// If the user hasn't logged in, direct him to the login page
 			return Action.perform("login.do", request);
         }

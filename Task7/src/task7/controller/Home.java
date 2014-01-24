@@ -1,24 +1,34 @@
 package task7.controller;
 
+import java.sql.Date;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import task7.databeans.CustomerBean;
+import task7.databeans.EmployeeBean;
 import task7.databeans.FundBean;
+import task7.databeans.FundInfoBean;
+import task7.databeans.PositionBean;
 import task7.model.CustomerDAO;
 import task7.model.FundDAO;
+import task7.model.FundPriceHistoryDAO;
 import task7.model.Model;
+import task7.model.PositionDAO;
 
 public class Home extends Action {
 	
 	private CustomerDAO customerDAO;
 	private FundDAO fundDAO;
+	private FundPriceHistoryDAO fundPriceHistoryDAO;
+	private PositionDAO positionDAO;
 	
 	public Home(Model model) {
 		customerDAO = model.getCustomerDAO();
 		fundDAO = model.getFundDAO();
+		fundPriceHistoryDAO = model.getFundPriceHistoryDAO();
+		positionDAO = model.getPositionDAO();
 	}
 
 	public String getName() { return "home.do"; }
@@ -30,10 +40,36 @@ public class Home extends Action {
         HttpSession session = request.getSession();
         
 		try {
-			FundBean[] fundBeans = fundDAO.getAllFunds();
-			
-			session.setAttribute("allFunds", fundBeans);
-			
+			String userType = (String) session.getAttribute("userType");
+			if (userType.equals("Employee")) {
+				EmployeeBean employeeBean = (EmployeeBean)session.getAttribute("user");
+				
+			} else {
+				CustomerBean customerBean = (CustomerBean)session.getAttribute("user");
+				FundBean[] fundBeans = fundDAO.getAllFunds();
+	
+				PositionBean[] positionBeans = positionDAO.getByCustomerId(customerBean.getCustomerId());
+				FundInfoBean[] fundInfoBeans = new FundInfoBean[positionBeans.length];
+				
+				for (int i = 0; i < positionBeans.length; i++) {
+	
+					fundInfoBeans[i] = new FundInfoBean();
+					fundInfoBeans[i].setShare(positionBeans[i].getShares() / 100.0);
+					
+					int fundId = positionBeans[i].getFundBean().getFundId();
+					for (int j = 0; j < fundBeans.length; j++) {
+						if (fundBeans[j].getFundId() == fundId) {
+							long nowPrice = fundPriceHistoryDAO.getPriceByFundAndDate(
+									fundId, (Date)session.getAttribute("date"));
+							fundInfoBeans[i].setFundPrice(nowPrice / 100.0);
+	
+							fundInfoBeans[i].setName(fundBeans[j].getName());
+							fundInfoBeans[i].setSymbol(fundBeans[j].getSymbol());
+						}
+					}
+				}
+				session.setAttribute("fundInfo", fundInfoBeans);
+			}
 	        return "home.jsp";
         } catch (Exception e) {
         	System.out.println(e);

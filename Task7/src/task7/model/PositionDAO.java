@@ -1,8 +1,12 @@
 package task7.model;
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import task7.databeans.FundBean;
+import task7.databeans.FundPriceHistoryBean;
 import task7.databeans.PositionBean;
 
 public class PositionDAO {
@@ -23,7 +27,7 @@ public class PositionDAO {
 
 		session.beginTransaction();
 		session.merge(position);
-		session.beginTransaction().commit();
+		session.getTransaction().commit();
 
 	}
 
@@ -32,7 +36,17 @@ public class PositionDAO {
 
 		session.beginTransaction();
 		session.delete(position);
-		session.beginTransaction().commit();
+		session.getTransaction().commit();
 
+	}
+	
+	public PositionBean[] getByCustomerId(int id) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Query query = session.createQuery("from PositionBean where customerBean_customerId = :customerId");
+		query.setParameter("customerId", id);
+		List<?> list = (List<?>) query.list();
+	  
+		PositionBean[] positionBeans = list.toArray(new PositionBean[list.size()]);
+		return positionBeans;
 	}
 }

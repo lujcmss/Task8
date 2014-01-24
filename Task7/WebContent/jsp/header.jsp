@@ -11,7 +11,7 @@
 
     <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
 
-    <title>Non-responsive Template for Bootstrap</title>
+    <title>Carnegie Financial Services</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/Task7/css/bootstrap.css" rel="stylesheet" type="text/css">
@@ -47,12 +47,12 @@
           <a class="navbar-brand" href="#">Mutual Fund</a>
         </div>
         <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="home.do">Home</a></li>
-            
+         
             <!-- customer -->
              <c:choose>
              <c:when test="${sessionScope.userType=='Customer'}">
+            <ul class="nav navbar-nav">
+            <li class="active"><a href="home.do">Home</a></li>
             <li class="dropdown" class="active">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Funds<b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -63,12 +63,16 @@
             </li>
             <li><a href="requestCheck.do">Request Check</a></li>
             <li><a href="transactionHistory.do">Transaction History</a></li>
+            </ul>
+	          <ul class="nav navbar-nav navbar-right">
+	            <li><a>Hi, ${sessionScope.user.firstName}.  Cash: ${sessionScope.user.cash}</a></li>
+	            <li><a href="logout.do">Logout</a></li>
+	          </ul>
             </c:when>
-            </c:choose>
             
-            <!-- employee-->
-              <c:choose>
-             <c:when test="${sessionScope.userType=='Employee'}">
+            <c:when test="${sessionScope.userType=='Employee'}">
+            <ul class="nav navbar-nav">
+            <li class="active"><a href="home.do">Home</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage Accounts<b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -77,21 +81,20 @@
                 <li class="divider"></li>
                 <li class="dropdown-header">Customer</li>
                 <li><a href="createCustomerAccount.do">Create Customer Account</a></li>
-                <li><a href="viewCustomerInformation.do">Reset Customer Account</a></li>
+                <li><a href="viewCustomerInformation.do">Reset Customer Password</a></li>
                 <li><a href="viewCustomerInformation.do">View Customer Information</a></li>
               </ul>
             </li>
             <li><a href="depositCheck.do">Deposit Check</a></li>
             <li><a href="createFund.do">Create Fund</a></li>
             <li><a href="transactionDay.do">Transaction Day</a></li>
-              </ul>
-               </c:when>
+             </ul>
+	          <ul class="nav navbar-nav navbar-right">
+	            <li><a>Hi, ${sessionScope.user.firstName}.</a></li>
+	            <li><a href="logout.do">Logout</a></li>
+	          </ul>
+            </c:when>
             </c:choose>
-          
-          <ul class="nav navbar-nav navbar-right">
-            <li><a>Hi, ${sessionScope.user.firstName}.  Cash: ${sessionScope.user.cash}</a></li>
-            <li><a href="logout.do">Logout</a></li>
-          </ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>

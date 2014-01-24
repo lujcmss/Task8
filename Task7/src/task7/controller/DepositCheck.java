@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.mybeans.form.FormBeanFactory;
 
 import task7.databeans.TransactionBean;
-import task7.formbeans.CustomerLoginForm;
+import task7.formbeans.LoginForm;
 import task7.formbeans.DepositForm;
 import task7.model.CustomerDAO;
 import task7.model.Model;

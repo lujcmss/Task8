@@ -1,5 +1,7 @@
 package task7.databeans;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,6 +45,17 @@ public class CustomerBean {
     @Column(nullable=false)
     private long cash;
     
+    private Date lastTradingDay;
+    
+	public Date getLastTradingDay() {
+		return lastTradingDay;
+	}
+	public void setLastTradingDay(Date lastTradingDay) {
+		this.lastTradingDay = lastTradingDay;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public int getCustomerId() {
 		return customerId;
 	}

@@ -1,5 +1,7 @@
 <jsp:include page="header.jsp" />
 <jsp:include page="error-list.jsp" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <div class="container">
     
       <div class="page-header">
@@ -8,28 +10,27 @@
       
 	<table class="table table-striped">
 		<h3>Funds Information</h3>
-        <thead>
+         <thead>
           <tr>
             <th>#</th>
             <th>Fund Name</th>
             <th>Fund Ticker</th>
             <th>Fund Price</th>
-            <th>Share</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Apple</td>
-            <td>APPL</td>
-            <td>100</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Google</td>
-            <td>GOOG</td>
-            <td>800</td>
-          </tr>
+ 			<c:set var="count" value="0" />
+			<c:forEach var="fundInfo" items="${ fundInfo }">
+				<c:set var="count" value="${ count+1 }" />
+				<tr>
+           			<td>${count}</td>
+           			<c:set var="price" value="${fundInfo.fundPrice}"/>
+            		<td><c:out value="${fundInfo.name}"/></td>
+            		<td><c:out value="${fundInfo.symbol}"/></td>
+            		<td><c:out value=""/><fmt:formatNumber type="number" 
+            			maxFractionDigits="2" minFractionDigits="2" value="${price}" /></td>
+	        	</tr>
+			</c:forEach>
         </tbody>
       </table>
 

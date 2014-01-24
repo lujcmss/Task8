@@ -14,7 +14,7 @@ import org.mybeans.form.FormBeanFactory;
 import sun.security.provider.MD5;
 import task7.databeans.CustomerBean;
 import task7.formbeans.CreateCustomerForm;
-import task7.formbeans.CustomerLoginForm;
+import task7.formbeans.LoginForm;
 import task7.model.CustomerDAO;
 import task7.model.Model;
 
@@ -37,6 +37,7 @@ public class CreateCustomerAccount extends Action {
         
 		try {
 			CreateCustomerForm form = formBeanFactory.create(request);
+			session.setAttribute("form", form);
 			
 			if (!form.isPresent()) {
 	            return "createCustomerAccount.jsp";

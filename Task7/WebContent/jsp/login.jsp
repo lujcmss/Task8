@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
 
-    <title>Signin Template for Bootstrap</title>
+    <title>Carnegie Financial Services</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/Task7/css/bootstrap.css" rel="stylesheet" type="text/css">

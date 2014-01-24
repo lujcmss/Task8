@@ -33,32 +33,36 @@ public class RequestCheck extends Action {
         // Set up the errors list
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors", errors);
-        HttpSession session = request.getSession(true);
+        HttpSession session = request.getSession();
 		try {
 			RequestForm form = formBeanFactory.create(request);
-			CustomerBean customerBean = customerDAO.getCustomerByEmail((String)session.getAttribute("email"));
+			CustomerBean customerBean = (CustomerBean) session.getAttribute("user"); 
+
 			if (!form.isPresent()) {
 	            return "requestCheck.jsp";
 	        }
-			
+
 			errors.addAll(form.getValidationErrors());
 			
 			if (form.getRequestAmount() * 100 > customerBean.getCash()) {
-				errors.add("No enough Money");
+				errors.add("No enough Money.");
 			}
 			
 		    if (errors.size() != 0) {
 		        return "requestCheck.jsp";
 		    }
+		    customerBean.setCash(customerBean.getCash() - (long)(form.getRequestAmount() * 100));
+		    customerDAO.update(customerBean);
 		    
 		    TransactionBean transactionBean = new TransactionBean();
 		    transactionBean.setAmount((long)(form.getRequestAmount() * 100));
 		    transactionBean.setCustomerBean(customerBean);
-		    transactionBean.setTransactionType("request");
+		    transactionBean.setTransactionType("request (pending)");
 		    transactionDAO.insert(transactionBean);
 			// check for errors
 			return "requestCheck.jsp";
         } catch (Exception e) {
+        	System.out.println(e);
         	errors.add(e.getMessage());
         	return "error.jsp";
         }
