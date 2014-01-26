@@ -1,6 +1,5 @@
 package task7.controller;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +10,6 @@ import org.mybeans.form.FormBeanFactory;
 
 import task7.databeans.CustomerBean;
 import task7.databeans.EmployeeBean;
-import task7.formbeans.ChangePasswordForm;
-import task7.formbeans.LoginForm;
 import task7.formbeans.EditInfoForm;
 import task7.model.CustomerDAO;
 import task7.model.EmployeeDAO;

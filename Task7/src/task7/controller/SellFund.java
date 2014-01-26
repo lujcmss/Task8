@@ -13,8 +13,6 @@ import task7.databeans.FundBean;
 import task7.databeans.FundInfoBean;
 import task7.databeans.PositionBean;
 import task7.databeans.TransactionBean;
-import task7.formbeans.BuyForm;
-import task7.formbeans.LoginForm;
 import task7.formbeans.SellFundForm;
 import task7.model.FundDAO;
 import task7.model.Model;

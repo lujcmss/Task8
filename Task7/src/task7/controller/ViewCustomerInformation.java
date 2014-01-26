@@ -1,6 +1,5 @@
 package task7.controller;
 
-import java.sql.Date;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +13,9 @@ import task7.databeans.FundInfoBean;
 import task7.databeans.PositionBean;
 import task7.databeans.TransactionBean;
 import task7.databeans.TransactionHistoryBean;
-import task7.formbeans.SellFundForm;
 import task7.formbeans.ViewForm;
 import task7.model.CustomerDAO;
+import task7.model.DateDAO;
 import task7.model.FundDAO;
 import task7.model.FundPriceHistoryDAO;
 import task7.model.Model;
@@ -27,6 +26,7 @@ public class ViewCustomerInformation extends Action {
 	private FormBeanFactory<ViewForm> formBeanFactory = FormBeanFactory.getInstance(ViewForm.class);
 
 	private FundDAO fundDAO;
+	private DateDAO dateDAO;
 	private CustomerDAO customerDAO;
 	private PositionDAO positionDAO;
 	private TransactionDAO transactionDAO;
@@ -34,6 +34,7 @@ public class ViewCustomerInformation extends Action {
 	
 	public ViewCustomerInformation(Model model) {
 		fundDAO = model.getFundDAO();
+		dateDAO = model.getDateDAO();
 		customerDAO = model.getCustomerDAO();
 		positionDAO = model.getPositionDAO();
 		transactionDAO = model.getTransactionDAO();
@@ -52,6 +53,8 @@ public class ViewCustomerInformation extends Action {
 			ViewForm form = formBeanFactory.create(request);
 
 	   	    if (!form.isPresent()) {
+	   	    	session.setAttribute("userInfo", null);
+				session.setAttribute("fundInfo", null);
 		        return "viewCustomerInformation.jsp";
 			}		
 			
@@ -83,9 +86,9 @@ public class ViewCustomerInformation extends Action {
 					for (int j = 0; j < fundBeans.length; j++) {
 						if (fundBeans[j].getFundId() == fundId) {
 							long nowPrice = fundPriceHistoryDAO.getPriceByFundAndDate(
-									fundId, (Date)session.getAttribute("date"));
+									fundId, dateDAO.getDate().getNewDate());
 							fundInfoBeans[i].setFundPrice(nowPrice / 100.0);
-	
+	/////////////////////////////////////////
 							fundInfoBeans[i].setName(fundBeans[j].getName());
 							fundInfoBeans[i].setSymbol(fundBeans[j].getSymbol());
 						}
@@ -108,11 +111,13 @@ public class ViewCustomerInformation extends Action {
 					transactionHistoryBeans[i].setStatus(transactionBeans[i].getStatus());
 					
 					String type = transactionHistoryBeans[i].getTransactionType();
-					if (type.startsWith("D") || type.startsWith("R") || type.equals("Buy (pending)")) {
+					String status = transactionHistoryBeans[i].getStatus();
+					
+					if (type.startsWith("D") || type.startsWith("R") || (type.startsWith("Buy") && status.equals("Pending"))) {
 						transactionHistoryBeans[i].setAmount(transactionBeans[i].getAmount() / 100.0);
 						transactionHistoryBeans[i].setShares(-1);
 						transactionHistoryBeans[i].setSharePrice(-1);
-					} else if (type.equals("Sell (pending)")) {
+					} else if (type.equals("Sell") && status.equals("Pending")) {
 						transactionHistoryBeans[i].setShares(transactionBeans[i].getAmount() / 1000.0);
 						transactionHistoryBeans[i].setAmount(-1);
 						transactionHistoryBeans[i].setSharePrice(-1);
@@ -129,7 +134,7 @@ public class ViewCustomerInformation extends Action {
 						long amount = transactionBeans[i].getAmount();
 						transactionHistoryBeans[i].setAmount(amount / 100.0);
 						transactionHistoryBeans[i].setSharePrice(price / 100.0);
-						transactionHistoryBeans[i].setShares((amount / 100.0) * (price / 100.0));
+						transactionHistoryBeans[i].setShares(amount * 1.0 / price);
 					}
 				}
 

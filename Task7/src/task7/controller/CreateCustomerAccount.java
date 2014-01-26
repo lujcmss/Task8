@@ -1,8 +1,5 @@
 package task7.controller;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,10 +8,8 @@ import javax.servlet.http.HttpSession;
 
 import org.mybeans.form.FormBeanFactory;
 
-import sun.security.provider.MD5;
 import task7.databeans.CustomerBean;
 import task7.formbeans.CreateCustomerForm;
-import task7.formbeans.LoginForm;
 import task7.model.CustomerDAO;
 import task7.model.Model;
 

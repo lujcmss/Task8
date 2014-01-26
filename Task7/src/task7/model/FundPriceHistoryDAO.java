@@ -6,7 +6,6 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import task7.databeans.FundBean;
 import task7.databeans.FundPriceHistoryBean;
 
 public class FundPriceHistoryDAO {

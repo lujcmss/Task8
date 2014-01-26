@@ -1,16 +1,14 @@
 package task7.controller;
 
 import java.sql.Date;
-import java.text.Normalizer.Form;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.omg.CORBA.PRIVATE_MEMBER;
-
 import task7.databeans.CustomerBean;
+import task7.databeans.DateBean;
 import task7.databeans.FundBean;
 import task7.databeans.FundPriceHistoryBean;
 import task7.databeans.PositionBean;
@@ -21,11 +19,13 @@ import task7.model.FundDAO;
 import task7.model.FundPriceHistoryDAO;
 import task7.model.Model;
 import task7.model.PositionDAO;
+import task7.model.DateDAO;
 import task7.model.TransactionDAO;
 
 public class TransitionDay extends Action {
 	
 	private FundDAO fundDAO;
+	private DateDAO dateDAO;
 	private CustomerDAO customerDAO;
 	private PositionDAO positionDAO;
 	private TransactionDAO transactionDAO;
@@ -33,6 +33,7 @@ public class TransitionDay extends Action {
 	
 	public TransitionDay(Model model) {
 		fundDAO = model.getFundDAO();
+		dateDAO = model.getDateDAO();
 		customerDAO = model.getCustomerDAO();
 		positionDAO = model.getPositionDAO();
 		transactionDAO = model.getTransactionDAO();
@@ -55,15 +56,14 @@ public class TransitionDay extends Action {
 					TransitionBean[] transitionBeans = new TransitionBean[fundBeans.length];
 					
 					if (num != fundBeans.length) {
+						DateBean date = dateDAO.getDate();
 						for (int i = 0; i < fundBeans.length; i++) {
 							transitionBeans[i] = new TransitionBean();
 							transitionBeans[i].setFundId(fundBeans[i].getFundId());
-							transitionBeans[i].setFundBean(fundBeans[i]);
-							
-							
-							transitionBeans[i].setLastDay((Date)session.getAttribute("date"));
+							transitionBeans[i].setFundBean(fundBeans[i]);							
+							transitionBeans[i].setLastDay(date.getNewDate());
 							double oldPrice = fundPriceHistoryDAO.getPriceByFundAndDate(
-									fundBeans[i].getFundId(), (Date)session.getAttribute("date"));
+									fundBeans[i].getFundId(), date.getNewDate());
 							transitionBeans[i].setOldPrice(oldPrice);
 						}
 						
@@ -72,22 +72,22 @@ public class TransitionDay extends Action {
 						errors.add("There are some new funds.");
 						return "transitionDay.jsp";
 					} else {
-						Date oldDate = (Date)session.getAttribute("date");
-						Date newDate;
+						DateBean date = dateDAO.getDate();
+						date.setOldDate(dateDAO.getDate().getNewDate());
 						try {
-							newDate = Date.valueOf(request.getParameter("newDate"));
+							date.setNewDate(Date.valueOf(request.getParameter("newDate")));
 						} catch (IllegalArgumentException e) {
 							errors.add("Wrong date format. It should be YYYY-MM-DD");
 							return "transitionDay.jsp";
 						}
 						
-						if (oldDate.before(newDate)) {
+						if (date.getOldDate().before(date.getNewDate())) {
 							for (int i = 0; i < num; i++) {
 								FundPriceHistoryBean fundPriceHistoryBean = new FundPriceHistoryBean();
 								fundPriceHistoryBean.setFundBean(fundDAO.getFundById(i+1));
 								String newPrice = (String)request.getParameter("newPrice_"+i);
 								fundPriceHistoryBean.setPrice((long)(Double.parseDouble(newPrice) * 100));
-								fundPriceHistoryBean.setPriceDate(newDate);
+								fundPriceHistoryBean.setPriceDate(date.getNewDate());
 								fundPriceHistoryDAO.insert(fundPriceHistoryBean);
 							}
 							
@@ -105,8 +105,8 @@ public class TransitionDay extends Action {
 											customerBean.getCustomerId(), fundBean.getFundId());
 									
 									double price = fundPriceHistoryDAO.getPriceByFundAndDate(
-											fundBean.getFundId(), newDate) / 100.0;
-									long share = (long) (tran.getAmount() / price);
+											fundBean.getFundId(), date.getNewDate());
+									long share = (long) (tran.getAmount() / price * 1000);
 									
 									if (positionBean == null) {
 										positionBean = new PositionBean();
@@ -123,8 +123,8 @@ public class TransitionDay extends Action {
 									FundBean fundBean = tran.getFundBean();
 									
 									double price = fundPriceHistoryDAO.getPriceByFundAndDate(
-											fundBean.getFundId(), newDate) / 100.0;
-									long amount = (long) (tran.getAmount() * price);
+											fundBean.getFundId(), date.getNewDate()) / 100;
+									long amount = (long) (tran.getAmount() * price / 10);
 									customerBean.setCash(customerBean.getCash() + amount);
 									customerDAO.update(customerBean);
 									
@@ -138,9 +138,10 @@ public class TransitionDay extends Action {
 								if (tran.getStatus().equals("Pending")) {
 									tran.setStatus("Done");
 								}
-								transactionDAO.update(tran);
 								
-								session.setAttribute("date", newDate);
+								tran.setExecuteDate(date.getNewDate());
+								transactionDAO.update(tran);
+								dateDAO.update(date);
 							}
 						} else {
 							errors.add("The new date must be after the old date.");
@@ -152,13 +153,14 @@ public class TransitionDay extends Action {
 				FundBean[] fundBeans = fundDAO.getAllFunds();
 				TransitionBean[] transitionBeans = new TransitionBean[fundBeans.length];
 
+				Date newDate = dateDAO.getDate().getNewDate();
 				for (int i = 0; i < fundBeans.length; i++) {
 					transitionBeans[i] = new TransitionBean();
 					transitionBeans[i].setFundId(fundBeans[i].getFundId());
 					transitionBeans[i].setFundBean(fundBeans[i]);
-					transitionBeans[i].setLastDay((Date)session.getAttribute("date"));
+					transitionBeans[i].setLastDay(newDate);
 					double oldPrice = fundPriceHistoryDAO.getPriceByFundAndDate(
-							fundBeans[i].getFundId(), (Date)session.getAttribute("date"));
+							fundBeans[i].getFundId(), newDate);
 					transitionBeans[i].setOldPrice(oldPrice);
 				}
 				

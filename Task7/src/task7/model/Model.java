@@ -3,8 +3,6 @@ package task7.model;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 
-import org.apache.tomcat.jdbc.pool.ConnectionPool;
-
 public class Model {
 	private CustomerDAO customerDAO;
 	private EmployeeDAO employeeDAO;
@@ -12,6 +10,7 @@ public class Model {
 	private FundPriceHistoryDAO fundPriceHistoryDAO;
 	private PositionDAO positionDAO;
 	private TransactionDAO transactionDAO;
+	private DateDAO dateDAO;
 
 	public Model(ServletConfig config) throws ServletException {
 		try {
@@ -25,6 +24,7 @@ public class Model {
 			fundPriceHistoryDAO = new FundPriceHistoryDAO();
 			positionDAO = new PositionDAO();
 			transactionDAO = new TransactionDAO();
+			dateDAO = new DateDAO();
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
@@ -36,5 +36,6 @@ public class Model {
 	public FundPriceHistoryDAO getFundPriceHistoryDAO() {return fundPriceHistoryDAO;}
 	public PositionDAO getPositionDAO() {return positionDAO;}
 	public TransactionDAO getTransactionDAO() {return transactionDAO;}
+	public DateDAO getDateDAO() {return dateDAO;}
 }
 

@@ -15,7 +15,7 @@
             <th>#</th>
             <th>Fund Name</th>
             <th>Fund Ticker</th>
-            <th>Fund Price</th>
+            <th>Last Day Price</th>
           </tr>
         </thead>
         <tbody>

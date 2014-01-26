@@ -1,6 +1,7 @@
 package task7.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,10 +13,12 @@ import javax.servlet.http.HttpSession;
 import task7.databeans.CustomerBean;
 import task7.databeans.EmployeeBean;
 import task7.databeans.FundBean;
+import task7.databeans.DateBean;
 import task7.model.CustomerDAO;
 import task7.model.EmployeeDAO;
 import task7.model.FundDAO;
 import task7.model.Model;
+import task7.model.DateDAO;
 
 @SuppressWarnings("serial")
 public class Controller extends HttpServlet {
@@ -71,6 +74,12 @@ public class Controller extends HttpServlet {
         fundBean.setName("Google");
         fundBean.setSymbol("GOOG");
         fundDAO.insert(fundBean);
+        
+        DateDAO dateDAO = model.getDateDAO();
+        DateBean dateBean = new DateBean();
+        dateBean.setOldDate(null);
+        dateBean.setNewDate(Date.valueOf("2014-01-01"));
+        dateDAO.insert(dateBean);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

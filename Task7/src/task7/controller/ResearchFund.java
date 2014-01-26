@@ -1,32 +1,28 @@
 package task7.controller;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import task7.databeans.CustomerBean;
 import task7.databeans.FundBean;
 import task7.databeans.FundInfoBean;
-import task7.databeans.FundPriceHistoryBean;
-import task7.databeans.PositionBean;
+import task7.model.DateDAO;
 import task7.model.FundDAO;
 import task7.model.FundPriceHistoryDAO;
 import task7.model.Model;
-import task7.model.PositionDAO;
 
 public class ResearchFund extends Action {
 	
 	private FundDAO fundDAO;
 	private FundPriceHistoryDAO fundPriceHistoryDAO;
-	private PositionDAO positionDAO;
+	private DateDAO dateDAO;
 	
 	public ResearchFund(Model model) {
 		fundDAO = model.getFundDAO();
+		dateDAO = model.getDateDAO();
 		fundPriceHistoryDAO = model.getFundPriceHistoryDAO();
-		positionDAO = model.getPositionDAO();
 	}
 
 	public String getName() { return "researchFund.do"; }
@@ -45,7 +41,7 @@ public class ResearchFund extends Action {
 
 			for (int i = 0; i < fundBeans.length; i++) {
 				long nowPrice = fundPriceHistoryDAO.getPriceByFundAndDate(
-						fundBeans[i].getFundId(), (Date)session.getAttribute("date"));
+						fundBeans[i].getFundId(), dateDAO.getDate().getNewDate());
 
 				fundInfoBeans[i] = new FundInfoBean();
 				fundInfoBeans[i].setFundPrice(nowPrice / 100.0);

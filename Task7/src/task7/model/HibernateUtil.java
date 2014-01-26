@@ -1,7 +1,5 @@
 package task7.model;
 
-import java.io.File;
-
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 

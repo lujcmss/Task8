@@ -40,12 +40,11 @@
 				<tr>
 				<form class="form-signin" method="post" action="sellFund.do">
            			<td>${count}</td>
-           			<c:set var="share" value="${fundInfo.share}"/>
            			<input type="hidden" name="fundName" value="${fundInfo.name}"/>
             		<td><c:out value="${fundInfo.name}"/></td>
             		<td><c:out value="${fundInfo.symbol}"/></td>
             		<td><fmt:formatNumber type="number" 
-            			maxFractionDigits="2" minFractionDigits="2" value="${share}" /></td>
+            			maxFractionDigits="2" minFractionDigits="2" value="${fundInfo.share}" /></td>
             		<td>
     						<input type="text" class="form-control" placeholder="0" required name="share">
         			</td>

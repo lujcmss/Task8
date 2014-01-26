@@ -1,17 +1,10 @@
 package task7.model;
+
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
-
-
-import org.hibernate.mapping.Array;
-
-import task7.databeans.CustomerBean;
-import task7.databeans.FundBean;
-import task7.databeans.PositionBean;
 import task7.databeans.TransactionBean;
 
 public class TransactionDAO {

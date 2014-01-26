@@ -22,7 +22,7 @@
         </colgroup>
         <thead>
           <tr>
-            <th>Transaction Id</th>
+            <th>#</th>
             <th>Transaction Date</th>
             <th>Fund Name</th>
             <th>Operation</th>
@@ -33,19 +33,43 @@
           </tr>
         </thead>
         <tbody>
+        	<c:set var="count" value="0" />
 			<c:forEach var="historyInfo" items="${ historyInfo }">
+				<c:set var="count" value="${ count+1 }" />
 				<tr>
-           			<td><c:out value="${historyInfo.transactionId}"/></td>
+					<td>${count}</td>
             		<td><c:out value="${historyInfo.executeDate}"/></td>
             		<td><c:out value="${historyInfo.fundBean.name}"/></td>
             		<td><c:out value="${historyInfo.transactionType}"/></td>
             		<td><c:out value="${historyInfo.status}"/></td>
-            		<td><c:out value=""/><fmt:formatNumber type="number" 
+            		
+            		<c:choose>
+            			<c:when test="${historyInfo.sharePrice==-1}">
+            				<td>-</td>
+            			</c:when>
+            			<c:otherwise>
+            				<td><c:out value=""/><fmt:formatNumber type="number" 
             			maxFractionDigits="2" minFractionDigits="2" value="${historyInfo.sharePrice}" /></td>
-            		<td><c:out value=""/><fmt:formatNumber type="number" 
+						</c:otherwise>
+					</c:choose>
+            		<c:choose>
+            			<c:when test="${historyInfo.shares==-1}">
+            				<td>-</td>
+            			</c:when>
+            			<c:otherwise>
+            				<td><c:out value=""/><fmt:formatNumber type="number" 
             			maxFractionDigits="3" minFractionDigits="3" value="${historyInfo.shares}" /></td>
-            		<td><c:out value=""/><fmt:formatNumber type="number" 
+						</c:otherwise>
+					</c:choose>
+            		<c:choose>
+            			<c:when test="${historyInfo.amount==-1}">
+            				<td>-</td>
+            			</c:when>
+            			<c:otherwise>
+            				<td><c:out value=""/><fmt:formatNumber type="number" 
             			maxFractionDigits="2" minFractionDigits="2" value="${historyInfo.amount}" /></td>
+						</c:otherwise>
+					</c:choose>
             		<td></td>
 	        	</tr>
 			</c:forEach>

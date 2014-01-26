@@ -1,6 +1,5 @@
 package task7.controller;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,13 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import task7.databeans.CustomerBean;
-import task7.databeans.EmployeeBean;
-import task7.databeans.FundBean;
-import task7.databeans.FundInfoBean;
-import task7.databeans.PositionBean;
 import task7.databeans.TransactionBean;
 import task7.databeans.TransactionHistoryBean;
-import task7.model.FundDAO;
 import task7.model.FundPriceHistoryDAO;
 import task7.model.Model;
 import task7.model.TransactionDAO;
@@ -71,7 +65,7 @@ public class TransactionHistory extends Action {
 					long amount = transactionBeans[i].getAmount();
 					transactionHistoryBeans[i].setAmount(amount / 100.0);
 					transactionHistoryBeans[i].setSharePrice(price / 100.0);
-					transactionHistoryBeans[i].setShares((amount / 100.0) * (price / 100.0));
+					transactionHistoryBeans[i].setShares(amount * 1.0 / price);
 				}
 			}
 

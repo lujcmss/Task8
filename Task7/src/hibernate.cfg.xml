@@ -17,5 +17,6 @@
         <mapping class="task7.databeans.FundPriceHistoryBean"></mapping>
         <mapping class="task7.databeans.PositionBean"></mapping>
         <mapping class="task7.databeans.TransactionBean"></mapping>
+        <mapping class="task7.databeans.DateBean"></mapping>
     </session-factory>
 </hibernate-configuration>

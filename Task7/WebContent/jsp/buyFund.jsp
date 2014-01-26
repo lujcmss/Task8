@@ -19,30 +19,30 @@
 	<table class="table table-striped">
 		<h3>Funds Information</h3>
 		<colgroup>
-          <col class="col-xs-1">
+		  <col class="col-xs-1">
           <col class="col-xs-3">
           <col class="col-xs-2">
-          <col class="col-xs-1">
+          <col class="col-xs-2">
           <col class="col-xs-2">
           <col class="col-xs-1">
         </colgroup>
          <thead>
           <tr>
-            <th>#</th>
+          	<th>#</th>
             <th>Fund Name</th>
             <th>Fund Ticker</th>
-            <th>Share</th>
-            <th>Amount to buy</th>
+            <th>Own Shares</th>
+            <th>Amount to buy ($)</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
- 			<c:set var="count" value="0" />
+        	<c:set var="count" value="0" />
 			<c:forEach var="fundInfo" items="${ buyFundInfo }">
 				<c:set var="count" value="${ count+1 }" />
 				<tr>
 				<form class="form-signin" method="post" action="buyFund.do">
-           			<td>${count}</td>
+					<td>${count}</td>
            			<c:set var="share" value="${fundInfo.share}"/>
            			<input type="hidden" name="fundName" value="${fundInfo.name}"/>
            			<td><c:out value="${fundInfo.name}"/></td>

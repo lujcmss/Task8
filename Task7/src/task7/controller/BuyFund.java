@@ -1,6 +1,5 @@
 package task7.controller;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,10 +14,8 @@ import task7.databeans.FundInfoBean;
 import task7.databeans.PositionBean;
 import task7.databeans.TransactionBean;
 import task7.formbeans.BuyForm;
-import task7.formbeans.LoginForm;
 import task7.model.CustomerDAO;
 import task7.model.FundDAO;
-import task7.model.FundPriceHistoryDAO;
 import task7.model.Model;
 import task7.model.PositionDAO;
 import task7.model.TransactionDAO;
@@ -29,14 +26,12 @@ public class BuyFund extends Action{
 	private FundDAO fundDAO;
 	private CustomerDAO customerDAO;
 	private PositionDAO positionDAO;
-	private FundPriceHistoryDAO fundPriceHistoryDAO;
 	private TransactionDAO transactionDAO;
 	
 	public BuyFund(Model model) {
 		fundDAO = model.getFundDAO();
 		customerDAO = model.getCustomerDAO();
 		positionDAO = model.getPositionDAO();
-		fundPriceHistoryDAO = model.getFundPriceHistoryDAO();
 		transactionDAO = model.getTransactionDAO();
 	}
 
@@ -82,7 +77,7 @@ public class BuyFund extends Action{
 			    	fundInfoBeans[0].setSymbol(fundBean.getSymbol());
 					for (int j = 0; j < positionBeans.length; j++)
 						if (positionBeans[j].getFundBean().getFundId() == fundBean.getFundId()) {
-						fundInfoBeans[0].setShare(positionBeans[j].getShares() / 100.0);
+						fundInfoBeans[0].setShare(positionBeans[j].getShares() / 1000.0);
 					}
 					
 					session.setAttribute("buyFundInfo", fundInfoBeans);
@@ -95,7 +90,7 @@ public class BuyFund extends Action{
 						
 						for (int j = 0; j < positionBeans.length; j++)
 							if (positionBeans[j].getFundBean().getFundId() == fundBeans[i].getFundId()) {
-							fundInfoBeans[i].setShare(positionBeans[j].getShares() / 100.0);
+							fundInfoBeans[i].setShare(positionBeans[j].getShares() / 1000.0);
 						}
 					}
 					

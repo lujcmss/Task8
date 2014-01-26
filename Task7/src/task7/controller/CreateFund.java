@@ -6,13 +6,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.Session;
 import org.mybeans.form.FormBeanFactory;
 
 import task7.databeans.FundBean;
-import task7.formbeans.CreateCustomerForm;
 import task7.formbeans.CreateFundForm;
-import task7.model.CustomerDAO;
 import task7.model.FundDAO;
 import task7.model.Model;
 

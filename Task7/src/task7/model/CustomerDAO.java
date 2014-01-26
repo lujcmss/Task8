@@ -1,13 +1,11 @@
 package task7.model;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Query;
-import org.hibernate.Transaction;
 
 import task7.databeans.CustomerBean;
-import task7.databeans.FundBean;
 
 public class CustomerDAO {
 	public void insert(CustomerBean customerBean) {

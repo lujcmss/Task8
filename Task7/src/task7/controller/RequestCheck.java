@@ -10,7 +10,6 @@ import org.mybeans.form.FormBeanFactory;
 
 import task7.databeans.CustomerBean;
 import task7.databeans.TransactionBean;
-import task7.formbeans.DepositForm;
 import task7.formbeans.RequestForm;
 import task7.model.CustomerDAO;
 import task7.model.Model;

@@ -1,8 +1,5 @@
 package task7.formbeans;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.mybeans.form.FormBean;
 
 public class ViewForm extends FormBean {
