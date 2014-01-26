@@ -35,14 +35,14 @@ public class TransactionBean {
 	private String transactionType;
 	
 	@Column(nullable=false)
-	private boolean pending;
-	
-	public boolean isPending() {
-		return pending;
+	private String status;
+
+	public String getStatus() {
+		return status;
 	}
 
-	public void setPending(boolean pending) {
-		this.pending = pending;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public int getTransactionId() {

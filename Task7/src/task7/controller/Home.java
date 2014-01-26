@@ -72,7 +72,6 @@ public class Home extends Action {
 			}
 	        return "home.jsp";
         } catch (Exception e) {
-        	System.out.println(e);
         	errors.add(e.getMessage());
         	return "error.jsp";
         }

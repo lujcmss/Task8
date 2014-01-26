@@ -84,11 +84,12 @@ public class DepositCheck extends Action {
 					session.setAttribute("customerList", customerListBean);
 				}
 		    } else {
+		    	long amount = (long) (form.getDepositAmount() * 100);
 			    TransactionBean transactionBean = new TransactionBean();
-			    transactionBean.setAmount((long)(form.getDepositAmount() * 100));
+			    transactionBean.setAmount(amount);
 			    transactionBean.setCustomerBean(customerDAO.getCustomerByEmail(form.getCustomerEmail()));
 			    transactionBean.setTransactionType("Deposit");
-			    transactionBean.setPending(true);
+			    transactionBean.setStatus("Pending");
 			    transactionDAO.insert(transactionBean);
 		    }
 	        return "depositCheck.jsp";

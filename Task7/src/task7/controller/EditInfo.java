@@ -72,8 +72,6 @@ public class EditInfo extends Action {
 			}
 			return "home.do";
         } catch (Exception e) {
-        	errors.add("Please reload website");
-        	System.out.println(e);
         	return "editInfo.jsp";
         }
     }

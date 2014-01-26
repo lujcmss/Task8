@@ -4,9 +4,8 @@ import java.sql.Date;
 
 public class TransitionBean {
 	private int fundId;
-	private Date lastday;
-	private String fundName;
-	private String fundSymbol;
+	private Date lastDay;
+	private FundBean fundBean;
 	private double oldPrice;
 	private double newPrice;
 	
@@ -16,23 +15,17 @@ public class TransitionBean {
 	public void setFundId(int fundId) {
 		this.fundId = fundId;
 	}
-	public Date getLastday() {
-		return lastday;
+	public Date getLastDay() {
+		return lastDay;
 	}
-	public void setLastday(Date lastday) {
-		this.lastday = lastday;
+	public void setLastDay(Date lastDay) {
+		this.lastDay = lastDay;
 	}
-	public String getFundName() {
-		return fundName;
+	public FundBean getFundBean() {
+		return fundBean;
 	}
-	public void setFundName(String fundName) {
-		this.fundName = fundName;
-	}
-	public String getFundSymbol() {
-		return fundSymbol;
-	}
-	public void setFundSymbol(String fundSymbol) {
-		this.fundSymbol = fundSymbol;
+	public void setFundBean(FundBean fundBean) {
+		this.fundBean = fundBean;
 	}
 	public double getOldPrice() {
 		return oldPrice;

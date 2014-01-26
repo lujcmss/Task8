@@ -47,7 +47,7 @@ public class SellFundForm extends FormBean{
 		List<String> errors = new ArrayList<String>();
 		
 		if (fund != null && fund.matches(".*[<>\"].*")) errors.add("fund may not contain angle brackets or quotes");
-		if (share != null && (!share.matches("^[1-9]d*$")||share.matches(".*[<>\"].*"))) errors.add("Illegal Amount");
+		//if (share != null && (!share.matches("^[1-9]d*$")||share.matches(".*[<>\"].*"))) errors.add("Illegal Amount");
 		return errors;
 	}
 }

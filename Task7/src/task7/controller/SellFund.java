@@ -103,21 +103,22 @@ public class SellFund extends Action {
 		    		}
 		    	}
 		    	
-		    	if (positionBean.getShares() < form.getShare() * 100) {
+		    	long share = (long) (form.getShare() * 1000);
+		    	if (positionBean.getShares() < share) {
 		    		errors.add("Not enough share.");
 		    		return "sellFund.jsp";
 		    	}
+		    	positionBean.setShares(positionBean.getShares() - share);
+		    	positionDAO.update(positionBean);
 		    	
 		    	TransactionBean transactionBean = new TransactionBean();
-		    	transactionBean.setAmount((long)(form.getShare() * 1000));
+		    	transactionBean.setAmount(share);
 		    	transactionBean.setCustomerBean(customerBean);
 		    	transactionBean.setFundBean(fundDAO.getFundByName(form.getFundName()));
 		    	transactionBean.setTransactionType("Sell");
-		    	transactionBean.setPending(true);
+		    	transactionBean.setStatus("Pending");
 		    	transactionDAO.insert(transactionBean);
-		    	errors.clear();
 		    }
-
 
 	        return "sellFund.jsp";
         } catch (Exception e) {

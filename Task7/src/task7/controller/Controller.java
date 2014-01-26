@@ -45,7 +45,7 @@ public class Controller extends HttpServlet {
         CustomerBean customerBean = new CustomerBean();
         customerBean.setAddr1("penn Ave");
         customerBean.setAddr2("Apt1");
-        customerBean.setCash(0);
+        customerBean.setCash(10000);
         customerBean.setCity("Pitt");
         customerBean.setCustomerEmail("c");
         customerBean.setFirstName("customer");
@@ -94,7 +94,6 @@ public class Controller extends HttpServlet {
         Object user = (Object) session.getAttribute("user");
         String action = getActionName(servletPath);
         
-        //System.out.println("servletPath="+servletPath+" requestURI="+request.getRequestURI()+"  user="+user);
         if (action.equals("login.do")) {
         	// Allow these actions without logging in
 			return Action.perform(action, request);

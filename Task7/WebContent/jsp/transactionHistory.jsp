@@ -15,16 +15,18 @@
           <col class="col-xs-2">
           <col class="col-xs-3">
           <col class="col-xs-2">
+          <col class="col-xs-2">
           <col class="col-xs-1">
           <col class="col-xs-1">
           <col class="col-xs-2">
         </colgroup>
         <thead>
           <tr>
-            <th>#</th>
+            <th>Transaction Id</th>
             <th>Transaction Date</th>
             <th>Fund Name</th>
             <th>Operation</th>
+            <th>Status</th>
             <th>Share Price</th>
             <th>Shares</th>
             <th>Amount</th>
@@ -35,8 +37,9 @@
 				<tr>
            			<td><c:out value="${historyInfo.transactionId}"/></td>
             		<td><c:out value="${historyInfo.executeDate}"/></td>
-            		<td><c:out value="${historyInfo.fundName}"/></td>
+            		<td><c:out value="${historyInfo.fundBean.name}"/></td>
             		<td><c:out value="${historyInfo.transactionType}"/></td>
+            		<td><c:out value="${historyInfo.status}"/></td>
             		<td><c:out value=""/><fmt:formatNumber type="number" 
             			maxFractionDigits="2" minFractionDigits="2" value="${historyInfo.sharePrice}" /></td>
             		<td><c:out value=""/><fmt:formatNumber type="number" 

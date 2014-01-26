@@ -2,14 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
  
- 
- 
     <div class="container">
     
      <div class="page-header">
         <h1>Transition Day</h1>
-      </div>
-       <form class="form-signin">
+     </div>
+      <jsp:include page="error-list.jsp" />
     	<table class="table table-striped">
 		<h3>Transition Information</h3>
 		<colgroup>
@@ -30,28 +28,32 @@
             <th>New Price</th>
           </tr>
         </thead>
+        
+		<form class="form-signin" method="post" action="transitionDay.do">
         <tbody>
  			<c:set var="count" value="0" />
 			<c:forEach var="transitionDayFunds" items="${ transitionDayFunds }">
-				<c:set var="count" value="${ count+1 }" />
 				<tr>
-				<form class="form-signin" method="post" action="transitionDay.do">
-           			<td><label name="findId_"><c:out value="${transitionDayFunds.fundId}" /></label></td>
-           			<td><label name="lastDay_"><c:out value="${transitionDayFunds.lastDay}"/></label></td>
-            		<td><label name="fundName_"><c:out value="${transitionDayFunds.fundName}"/></label></td>
-            		<td><label name="fundSymbol_"><c:out value="${transitionDayFunds.fundSymbol}"/></label></td>
-            		<td><label name="oldPrice_"><fmt:formatNumber type="number" 
-            			maxFractionDigits="2" minFractionDigits="2" value="${oldPrice}" /></label></td>
+           			<td><label for=${"findId_"}${count}><c:out value="${transitionDayFunds.fundId}" /></label></td>
+           			<td><label for=${"lastDay_"}${count}><c:out value="${transitionDayFunds.lastDay}"/></label></td>
+            		<td><label for=${"fundName_"}${count}><c:out value="${transitionDayFunds.fundBean.name}"/></label></td>
+            		<td><label for=${"fundSymbol_"}${count}><c:out value="${transitionDayFunds.fundBean.symbol}"/></label></td>
+            		<td><label for=${"oldPrice_"}${count}><fmt:formatNumber type="number" 
+            			maxFractionDigits="2" minFractionDigits="2" value="${transitionDayFunds.oldPrice}" /></label></td>
             		<td>
-    						<input type="text" class="form-control" placeholder="0" required name="newPrice">
+    					<input type="text" class="form-control" placeholder="0" required name=${"newPrice_"}${count}>
         			</td>
-            	</form>
 	        	</tr>
+	        	<c:set var="count" value="${ count+1 }" />
 			</c:forEach>
         </tbody>
-      </table>
-      <input type="text" class="form-control" placeholder="New Transition Date" required name="newDate">
-        <button class="btn btn-lg btn-primary btn-block" type="submit" name="button" value="Transition">Transition</button>
+        </table>
+              	<input type="text" class="form-control" style="width:200px; margin:0 auto;" placeholder="New Transition Date" required name="newDate" />
+              	<p></p>
+        		<button class="btn btn-lg btn-primary btn-block" style="width:200px; margin:0 auto;" type="submit" name="button" value="Transition">Transition</button>
+        </form>
+      
+
            
         </form>
 

@@ -12,31 +12,31 @@ import javax.persistence.Table;
 
 public class TransactionHistoryBean {
 	private int transactionId;
-	private String fundName;
+	private FundBean fundBean;
 	private Date executeDate;
 	private double shares;
 	private double amount;
 	private String transactionType;
 	private double sharePrice;
-	private boolean pending;
-	
-	public boolean isPending() {
-		return pending;
+	private String status;
+
+	public String getStatus() {
+		return status;
 	}
-	public void setPending(boolean pending) {
-		this.pending = pending;
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public FundBean getFundBean() {
+		return fundBean;
+	}
+	public void setFundBean(FundBean fundBean) {
+		this.fundBean = fundBean;
 	}
 	public int getTransactionId() {
 		return transactionId;
 	}
 	public void setTransactionId(int transactionId) {
 		this.transactionId = transactionId;
-	}
-	public String getFundName() {
-		return fundName;
-	}
-	public void setFundName(String fundName) {
-		this.fundName = fundName;
 	}
 	public Date getExecuteDate() {
 		return executeDate;

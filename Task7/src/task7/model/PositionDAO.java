@@ -49,4 +49,16 @@ public class PositionDAO {
 		PositionBean[] positionBeans = list.toArray(new PositionBean[list.size()]);
 		return positionBeans;
 	}
+	
+	public PositionBean getByCustomerAndFund(int CustomerId, int fundId) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Query query = session.createQuery("from PositionBean where customerBean_customerId = :customerId and fundBean_fundId = :fundId");
+		query.setParameter("customerId", CustomerId);
+		query.setParameter("fundId", fundId);
+		List<?> list = (List<?>) query.list();
+		
+		if (list.size() == 0) return null;
+		PositionBean positionBean = (PositionBean) list.get(0);
+		return positionBean;
+	}
 }

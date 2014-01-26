@@ -11,6 +11,7 @@ public class CreateEmployeeForm extends FormBean{
 	private String firstName;
 	private String lastName;
 	private String confirm;
+	
 	public String getConfirm() {
 		return confirm;
 	}

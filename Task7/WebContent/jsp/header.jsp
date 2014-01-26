@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -50,7 +51,7 @@
          
             <!-- customer -->
              <c:choose>
-             <c:when test="${sessionScope.userType=='Customer'}">
+             <c:when test="${userType=='Customer'}">
             <ul class="nav navbar-nav">
             <li class="active"><a href="home.do">Home</a></li>
             <li class="dropdown" class="active">
@@ -65,12 +66,13 @@
             <li><a href="transactionHistory.do">Transaction History</a></li>
             </ul>
 	          <ul class="nav navbar-nav navbar-right">
-	            <li><a>Hi, ${sessionScope.user.firstName}.  Cash: ${sessionScope.user.cash}</a></li>
+	            <li><a>Hi, ${user.firstName}.  Cash: $<fmt:formatNumber type="number" 
+            			maxFractionDigits="2" minFractionDigits="2" value="${user.cash/100}" /></a></li>
 	            <li><a href="logout.do">Logout</a></li>
 	          </ul>
             </c:when>
             
-            <c:when test="${sessionScope.userType=='Employee'}">
+            <c:when test="${userType=='Employee'}">
             <ul class="nav navbar-nav">
             <li class="active"><a href="home.do">Home</a></li>
             <li class="dropdown">

@@ -44,26 +44,26 @@ public class RequestCheck extends Action {
 
 			errors.addAll(form.getValidationErrors());
 			
-			if (form.getRequestAmount() * 100 > customerBean.getCash()) {
+			long amount = (long) (form.getRequestAmount() * 100);
+			if (amount > customerBean.getCash()) {
 				errors.add("No enough Money.");
 			}
 			
 		    if (errors.size() != 0) {
 		        return "requestCheck.jsp";
 		    }
-		    customerBean.setCash(customerBean.getCash() - (long)(form.getRequestAmount() * 100));
+		    customerBean.setCash(customerBean.getCash() - amount);
 		    customerDAO.update(customerBean);
 		    
 		    TransactionBean transactionBean = new TransactionBean();
-		    transactionBean.setAmount((long)(form.getRequestAmount() * 100));
+		    transactionBean.setAmount(amount);
 		    transactionBean.setCustomerBean(customerBean);
 		    transactionBean.setTransactionType("Request");
-		    transactionBean.setPending(true);
+		    transactionBean.setStatus("Pending");
 		    transactionDAO.insert(transactionBean);
 			// check for errors
 			return "requestCheck.jsp";
         } catch (Exception e) {
-        	System.out.println(e);
         	errors.add(e.getMessage());
         	return "error.jsp";
         }

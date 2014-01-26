@@ -75,7 +75,7 @@
           <tr>
             <th>Cash Balance</th>
             <td>$<fmt:formatNumber type="number" 
-            			maxFractionDigits="2" minFractionDigits="2" value="${user.cash}" /></td>
+            			maxFractionDigits="2" minFractionDigits="2" value="${user.cash/100}" /></td>
           </tr>
         </tbody>
       </table>

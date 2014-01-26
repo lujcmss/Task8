@@ -35,7 +35,8 @@
 			<c:forEach var="customerList" items="${customerList}">
 				<tr>
 				<form class="form-signin" method="post" action="depositCheck.do">
-            		<td><label name="customerEmail"><c:out value="${customerList.email}"/></label></td>
+					<input type="hidden" name="customerEmail" value="${customerList.email}" />
+            		<td><c:out value="${customerList.email}"/></td>
             		<td><c:out value="${customerList.firstName}"/>, <c:out value="${customerList.lastName}"/></td>
             		<td>
     						<input type="text" class="form-control" placeholder="0" required name="depositAmount">

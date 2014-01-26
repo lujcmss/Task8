@@ -52,10 +52,10 @@ public class TransactionDAO {
 		return transactionBeans;
 	}
 	
-	public TransactionBean[] getPendings(boolean pending) {
+	public TransactionBean[] getByStatus(String status) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		Query query = session.createQuery("from TransactionBean where pending = :pending");
-		query.setParameter("pending", pending);
+		Query query = session.createQuery("from TransactionBean where status = :status");
+		query.setParameter("status", status);
 		List<?> list = (List<?>) query.list();
 	  
 		TransactionBean[] transactionBeans = list.toArray(new TransactionBean[list.size()]);

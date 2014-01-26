@@ -102,9 +102,10 @@ public class ViewCustomerInformation extends Action {
 					transactionHistoryBeans[i] = new TransactionHistoryBean();
 					
 					transactionHistoryBeans[i].setExecuteDate(transactionBeans[i].getExecuteDate());
-					transactionHistoryBeans[i].setFundName(transactionBeans[i].getFundBean().getName());
+					transactionHistoryBeans[i].setFundBean(transactionBeans[i].getFundBean());
 					transactionHistoryBeans[i].setTransactionId(transactionBeans[i].getTransactionId());
 					transactionHistoryBeans[i].setTransactionType(transactionBeans[i].getTransactionType());
+					transactionHistoryBeans[i].setStatus(transactionBeans[i].getStatus());
 					
 					String type = transactionHistoryBeans[i].getTransactionType();
 					if (type.startsWith("D") || type.startsWith("R") || type.equals("Buy (pending)")) {
@@ -137,7 +138,6 @@ public class ViewCustomerInformation extends Action {
 			
 	        return "viewCustomerInformation.jsp";
 	    } catch (Exception e) {
-	    	System.out.println(e);
     	    errors.add(e.getMessage());
     	    return "viewCustomerInformation.jsp";
     	}

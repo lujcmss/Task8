@@ -8,6 +8,7 @@ import org.mybeans.form.FormBean;
 public class CreateFundForm extends FormBean{
 	private String fund;
 	private String ticker;
+	
 	public String getFund() {
 		return fund;
 	}

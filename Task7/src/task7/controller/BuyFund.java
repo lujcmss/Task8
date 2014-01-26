@@ -102,25 +102,25 @@ public class BuyFund extends Action{
 					session.setAttribute("buyFundInfo", fundInfoBeans);
 				}
 		    } else if (form.getButton().equals("buy")) {
-		    	if (customerBean.getCash() < form.getAmount() * 100) {
+		    	long amount = (long) (form.getAmount() * 100);
+		    	if (customerBean.getCash() < amount) {
 		    		errors.add("Not enough Money.");
 		    		return "buyFund.jsp";
 		    	}
-		    	customerBean.setCash(customerBean.getCash() - (long)(form.getAmount() * 100));
+		    	customerBean.setCash(customerBean.getCash() - amount);
 		    	customerDAO.update(customerBean);
 		    	
 		    	TransactionBean transactionBean = new TransactionBean();
-		    	transactionBean.setAmount((long)(form.getAmount() * 100));
+		    	transactionBean.setAmount(amount);
 		    	transactionBean.setCustomerBean(customerBean);
 		    	transactionBean.setFundBean(fundDAO.getFundByName(form.getFundName()));
 		    	transactionBean.setTransactionType("Buy");
-		    	transactionBean.setPending(true);
+		    	transactionBean.setStatus("Pending");
 		    	transactionDAO.insert(transactionBean);    	
 		    }
 
 	        return "buyFund.jsp";
         } catch (Exception e) {
-        	System.out.println(e);
         	errors.add(e.getMessage());
         	return "error.jsp";
         }

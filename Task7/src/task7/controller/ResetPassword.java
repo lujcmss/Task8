@@ -53,7 +53,6 @@ public class ResetPassword extends Action {
 			
 			return "viewCustomerInformation.do";
         } catch (Exception e) {
-        	System.out.println(e);
         	return "resetPassword.jsp";
         }
     }

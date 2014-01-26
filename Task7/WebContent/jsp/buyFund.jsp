@@ -44,7 +44,8 @@
 				<form class="form-signin" method="post" action="buyFund.do">
            			<td>${count}</td>
            			<c:set var="share" value="${fundInfo.share}"/>
-            		<td><label name="fundName"><c:out value="${fundInfo.name}"/></label></td>
+           			<input type="hidden" name="fundName" value="${fundInfo.name}"/>
+           			<td><c:out value="${fundInfo.name}"/></td>
             		<td><c:out value="${fundInfo.symbol}"/></td>
             		<td><c:out value=""/><fmt:formatNumber type="number" 
             			maxFractionDigits="2" minFractionDigits="2" value="${share}" /></td>

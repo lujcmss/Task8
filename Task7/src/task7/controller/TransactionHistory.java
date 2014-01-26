@@ -35,26 +35,26 @@ public class TransactionHistory extends Action {
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors", errors);
         HttpSession session = request.getSession();
+        
 		try {
 			CustomerBean customerBean = (CustomerBean)session.getAttribute("user");
 			TransactionBean[] transactionBeans = transactionDAO.getTransactionsByCustomerId(customerBean.getCustomerId());
 			TransactionHistoryBean[] transactionHistoryBeans = new TransactionHistoryBean[transactionBeans.length];
-			
+
 			for (int i = 0; i < transactionBeans.length; i++) {
 				transactionHistoryBeans[i] = new TransactionHistoryBean();
-				
 				transactionHistoryBeans[i].setExecuteDate(transactionBeans[i].getExecuteDate());
-				transactionHistoryBeans[i].setFundName(transactionBeans[i].getFundBean().getName());
+				transactionHistoryBeans[i].setFundBean(transactionBeans[i].getFundBean());
 				transactionHistoryBeans[i].setTransactionId(transactionBeans[i].getTransactionId());
 				transactionHistoryBeans[i].setTransactionType(transactionBeans[i].getTransactionType());
-				
+				transactionHistoryBeans[i].setStatus(transactionBeans[i].getStatus());
 				String type = transactionHistoryBeans[i].getTransactionType();
-				boolean pending = transactionHistoryBeans[i].isPending();
-				if (type.startsWith("D") || type.startsWith("R") || (type.equals("Buy") && pending)) {
+				String status = transactionHistoryBeans[i].getStatus();
+				if (type.startsWith("D") || type.startsWith("R") || (type.equals("Buy") && status.equals("Pending"))) {
 					transactionHistoryBeans[i].setAmount(transactionBeans[i].getAmount() / 100.0);
 					transactionHistoryBeans[i].setShares(-1);
 					transactionHistoryBeans[i].setSharePrice(-1);
-				} else if (type.equals("Sell") && pending) {
+				} else if (type.equals("Sell") && status.equals("Pending")) {
 					transactionHistoryBeans[i].setShares(transactionBeans[i].getAmount() / 1000.0);
 					transactionHistoryBeans[i].setAmount(-1);
 					transactionHistoryBeans[i].setSharePrice(-1);
@@ -78,7 +78,6 @@ public class TransactionHistory extends Action {
 			session.setAttribute("historyInfo", transactionHistoryBeans);
 	        return "transactionHistory.jsp";
         } catch (Exception e) {
-        	System.out.println(e);
         	errors.add(e.getMessage());
         	return "error.jsp";
         }

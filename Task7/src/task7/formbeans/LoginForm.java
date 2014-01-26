@@ -10,6 +10,7 @@ public class LoginForm extends FormBean{
 	private String email;
 	private String psw;
 	private String userType;
+	
 	public String getEmail() {
 		return email;
 	}
