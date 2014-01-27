@@ -68,7 +68,6 @@ public class EditInfo extends Action {
 				    customerBean.setLastName(form.getLastName());
 				    customerBean.setState(form.getState());
 				    customerBean.setZip(form.getZipCode());
-		
 				    customerDAO.update(customerBean);
 				}
 			}

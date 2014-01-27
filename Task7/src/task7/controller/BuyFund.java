@@ -113,11 +113,12 @@ public class BuyFund extends Action{
 		    	long amount = (long) (form.getAmount() * 100);
 		    	
 		    	synchronized (customerDAO) {
-			    	if (customerBean.getCash() < amount) {
+		    		long cash = customerDAO.getCustomerByEmail(customerBean.getEmail()).getCash(); 
+			    	if (cash < amount) {
 			    		errors.add("Not enough Money.");
 			    		return "buyFund.jsp";
 			    	}
-			    	customerBean.setCash(customerBean.getCash() - amount);
+			    	customerBean.setCash(cash - amount);
 			    	customerDAO.update(customerBean);
 				}
 		    	
@@ -127,9 +128,10 @@ public class BuyFund extends Action{
 		    	transactionBean.setFundBean(fundDAO.getFundByName(form.getFundName()));
 		    	transactionBean.setTransactionType("Buy");
 		    	transactionBean.setStatus("Pending");
-		    	transactionDAO.insert(transactionBean);    	
+		    	transactionDAO.insert(transactionBean);
 		    }
-
+		    
+		    session.setAttribute("user", customerDAO.getCustomerByEmail(customerBean.getEmail()));
 	        return "buyFund.jsp";
         } catch (Exception e) {
         	System.out.println(e);

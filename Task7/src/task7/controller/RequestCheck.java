@@ -45,17 +45,19 @@ public class RequestCheck extends Action {
 
 			errors.addAll(form.getValidationErrors());
 			
+			if (errors.size() != 0) {
+		        return "requestCheck.jsp";
+		    }
+			
 			long amount = (long) (form.getRequestAmount() * 100);
 			
 			synchronized (customerDAO) {
-				if (amount > customerBean.getCash()) {
+				long cash = customerDAO.getCustomerByEmail(customerBean.getEmail()).getCash();
+				if (amount > cash) {
 					errors.add("No enough Money.");
-				}
-				
-			    if (errors.size() != 0) {
 			        return "requestCheck.jsp";
 			    }
-			    customerBean.setCash(customerBean.getCash() - amount);
+			    customerBean.setCash(cash - amount);
 			    customerDAO.update(customerBean);
 			}
 		    
@@ -66,6 +68,7 @@ public class RequestCheck extends Action {
 		    transactionBean.setStatus("Pending");
 		    transactionDAO.insert(transactionBean);
 			
+		    session.setAttribute("user", customerDAO.getCustomerByEmail(customerBean.getEmail()));
 			return "requestCheck.jsp";
         } catch (Exception e) {
         	errors.add(e.getMessage());

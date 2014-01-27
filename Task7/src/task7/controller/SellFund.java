@@ -14,6 +14,7 @@ import task7.databeans.FundInfoBean;
 import task7.databeans.PositionBean;
 import task7.databeans.TransactionBean;
 import task7.formbeans.SellFundForm;
+import task7.model.CustomerDAO;
 import task7.model.FundDAO;
 import task7.model.Model;
 import task7.model.PositionDAO;
@@ -23,11 +24,13 @@ public class SellFund extends Action {
 	private FormBeanFactory<SellFundForm> formBeanFactory = FormBeanFactory.getInstance(SellFundForm.class);
 
 	private FundDAO fundDAO;
+	private CustomerDAO customerDAO;
 	private PositionDAO positionDAO;
 	private TransactionDAO transactionDAO;
 	
 	public SellFund(Model model) {
 		fundDAO = model.getFundDAO();
+		customerDAO = model.getCustomerDAO();
 		positionDAO = model.getPositionDAO();
 		transactionDAO = model.getTransactionDAO();
 	}
@@ -96,16 +99,17 @@ public class SellFund extends Action {
 				}
 		    } else if (form.getButton().equals("sell")) {
 		    	PositionBean positionBean = new PositionBean();
-		    	for (int i = 0; i < positionBeans.length; i++) {
-		    		if (positionBeans[i].getFundBean().getName().equals(form.getFundName())) {
-		    			positionBean = positionBeans[i];
-		    		}
-		    	}
-		    	
 		    	long share = (long) (form.getShare() * 1000);
 		    	
-		    	synchronized (positionDAO) {
-			    	if (positionBean.getShares() < share) {
+		    	synchronized (positionDAO) {   
+			    	for (int i = 0; i < positionBeans.length; i++) {
+			    		if (positionBeans[i].getFundBean().getName().equals(form.getFundName())) {
+			    			positionBean = positionBeans[i];
+			    			break;
+			    		}
+			    	}
+			    	
+		    		if (positionBean.getShares() < share) {
 			    		errors.add("Not enough share.");
 			    		return "sellFund.jsp";
 			    	}
@@ -131,7 +135,8 @@ public class SellFund extends Action {
 				
 				session.setAttribute("sellFundInfo", fundInfoBeans);
 		    }
-
+		    
+		    session.setAttribute("user", customerDAO.getCustomerByEmail(customerBean.getEmail()));
 	        return "sellFund.jsp";
         } catch (Exception e) {
         	errors.add(e.getMessage());
