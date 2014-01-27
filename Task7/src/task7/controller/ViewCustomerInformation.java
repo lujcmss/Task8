@@ -89,7 +89,6 @@ public class ViewCustomerInformation extends Action {
 							long nowPrice = fundPriceHistoryDAO.getPriceByFundAndDate(
 									fundId, dateDAO.getDate().getNewDate());
 							fundInfoBeans[i].setFundPrice(nowPrice / 100.0);
-	/////////////////////////////////////////
 							fundInfoBeans[i].setName(fundBeans[j].getName());
 							fundInfoBeans[i].setSymbol(fundBeans[j].getSymbol());
 						}

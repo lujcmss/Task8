@@ -61,6 +61,11 @@
             	</c:choose>
             </td>
           </tr>
+          <tr>
+            <th>Cash Balance</th>
+            <td>$<fmt:formatNumber type="number" 
+            			maxFractionDigits="2" minFractionDigits="2" value="${userinfo.cash/100}" /></td>
+          </tr>
         </tbody>
       </table>
       
