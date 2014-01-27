@@ -67,6 +67,7 @@ public class ChangePassword extends Action {
 			}
 			return "home.do";
         } catch (Exception e) {
+        	errors.add(e.getMessage());
         	return "changePassword.jsp";
         }
     }

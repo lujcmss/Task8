@@ -48,9 +48,9 @@
 			</c:forEach>
         </tbody>
         </table>
-              	<input type="text" class="form-control" style="width:200px; margin:0 auto;" placeholder="New Transition Date" required name="newDate" />
+              	<input type="text" class="form-control" style="width:280px; margin:0 auto;" placeholder="New Transition Date (YYYY-MM-DD)" required name="newDate" />
               	<p></p>
-        		<button class="btn btn-lg btn-primary btn-block" style="width:200px; margin:0 auto;" type="submit" name="button" value="Transition">Transition</button>
+        		<button class="btn btn-lg btn-primary btn-block" style="width:280px; margin:0 auto;" type="submit" name="button" value="Transition">Transition</button>
         </form>
       
 

@@ -73,7 +73,7 @@ public class TransactionHistory extends Action {
 	        return "transactionHistory.jsp";
         } catch (Exception e) {
         	errors.add(e.getMessage());
-        	return "error.jsp";
+        	return "transactionHistory.jsp";
         }
 	}
 }

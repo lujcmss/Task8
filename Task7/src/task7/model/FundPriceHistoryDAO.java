@@ -11,32 +11,32 @@ import task7.databeans.FundPriceHistoryBean;
 public class FundPriceHistoryDAO {
 	public void insert(FundPriceHistoryBean fundpricehistory) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-
-		session.beginTransaction();
-
-		session.save(fundpricehistory);
-
-		session.getTransaction().commit();
-
+		try {
+	        session.beginTransaction();
+	        session.save(fundpricehistory);
+	        session.getTransaction().commit();
+		} catch (Exception e) {
+			if (session.getTransaction() != null) {
+				session.getTransaction().rollback();
+			}
+		} finally {
+			session.close();
+		}
 	}
 
 	public void update(FundPriceHistoryBean fundpricehistory) {
-
 		Session session = HibernateUtil.getSessionFactory().openSession();
-
-		session.beginTransaction();
-		session.merge(fundpricehistory);
-		session.getTransaction().commit();
-
-	}
-	public void delete(FundPriceHistoryBean fundpricehistory)
-	{
-		Session session = HibernateUtil.getSessionFactory().openSession();
-
-		session.beginTransaction();
-		session.delete(fundpricehistory);
-		session.getTransaction().commit();
-
+		try {
+			session.beginTransaction();
+			session.merge(fundpricehistory);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			if (session.getTransaction() != null) {
+				session.getTransaction().rollback();
+			}
+		} finally {
+			session.close();
+		}
 
 	}
 
@@ -44,8 +44,9 @@ public class FundPriceHistoryDAO {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Query query = session.createQuery("from FundPriceHistoryBean");
 		List<?> list = (List<?>) query.list();
-	  
 		FundPriceHistoryBean[] fundHistoryBeans = list.toArray(new FundPriceHistoryBean[list.size()]);
+
+		session.close();
 		return fundHistoryBeans;
 	}
 	
@@ -56,12 +57,10 @@ public class FundPriceHistoryDAO {
 		query.setParameter("priceDate", date);
 		List<?> list = (List<?>) query.list();
 	  
-		if (list == null || list.size() == 0) return 0;
+		if (list.size() == 0) return 0;
 		FundPriceHistoryBean fundHistoryBean = (FundPriceHistoryBean) list.get(0);
+
+		session.close();
 		return fundHistoryBean.getPrice();		
 	}
 }
-
-
-
-

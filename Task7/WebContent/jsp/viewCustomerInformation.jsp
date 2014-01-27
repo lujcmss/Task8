@@ -72,8 +72,8 @@
             <th>Fund Name</th>
             <th>Fund Ticker</th>
             <th>Fund Price</th>
-            <th>Share</th>
-            <th>Value</th>
+            <th>Shares</th>
+            <th>Total Value</th>
           </tr>
         </thead>
         <tbody>
@@ -88,7 +88,7 @@
             			maxFractionDigits="2" minFractionDigits="2" value="${price}" /></td>
             		<td><c:out value=""/><fmt:formatNumber type="number" 
             			maxFractionDigits="3" minFractionDigits="3" value="${share}" /></td>
-            		<td><c:out value=""/><fmt:formatNumber type="number" 
+            		<td><c:out value="$"/><fmt:formatNumber type="number" 
             			maxFractionDigits="2" minFractionDigits="2" value="${share * price}" /></td>
             		<td></td>
 	        	</tr>

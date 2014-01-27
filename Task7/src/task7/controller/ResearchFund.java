@@ -61,7 +61,7 @@ public class ResearchFund extends Action {
 			return "researchFund.jsp";
         } catch (Exception e) {
         	errors.add(e.getMessage());
-        	return "error.jsp";
+        	return "researchFund.jsp";
         }
     }
 }

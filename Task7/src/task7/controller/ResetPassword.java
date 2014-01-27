@@ -48,6 +48,7 @@ public class ResetPassword extends Action {
 			
 			return "viewCustomerInformation.do";
         } catch (Exception e) {
+        	errors.add(e.getMessage());
         	return "resetPassword.jsp";
         }
     }
