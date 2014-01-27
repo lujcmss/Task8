@@ -33,6 +33,7 @@ public class DepositCheck extends Action {
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors", errors);
         HttpSession session = request.getSession();
+        session.setAttribute("curPage", "depositCheck.do");
         
 		try {
 			DepositForm form = formBeanFactory.create(request);

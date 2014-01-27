@@ -33,6 +33,7 @@ public class ChangePassword extends Action {
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors", errors);
         HttpSession session = request.getSession();
+        session.setAttribute("curPage", "home.do");
         
 		try {
 			ChangePasswordForm form = formBeanFactory.create(request);

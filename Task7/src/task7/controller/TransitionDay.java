@@ -47,6 +47,7 @@ public class TransitionDay extends Action {
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors", errors);
         HttpSession session = request.getSession();
+        session.setAttribute("curPage", "transitionDay.do");
         
 		try {
 			if (request.getParameter("button") != null && request.getParameter("button").equals("Transition")) {
@@ -141,8 +142,26 @@ public class TransitionDay extends Action {
 								
 								tran.setExecuteDate(date.getNewDate());
 								transactionDAO.update(tran);
-								dateDAO.update(date);
 							}
+							
+							dateDAO.update(date);
+							
+							fundBeans = fundDAO.getAllFunds();
+							transitionBeans = new TransitionBean[fundBeans.length];
+
+							Date newDate = dateDAO.getDate().getNewDate();
+							for (int i = 0; i < fundBeans.length; i++) {
+								transitionBeans[i] = new TransitionBean();
+								transitionBeans[i].setFundId(fundBeans[i].getFundId());
+								transitionBeans[i].setFundBean(fundBeans[i]);
+								transitionBeans[i].setLastDay(newDate);
+								double oldPrice = fundPriceHistoryDAO.getPriceByFundAndDate(
+										fundBeans[i].getFundId(), newDate) / 100.0;
+								transitionBeans[i].setOldPrice(oldPrice);
+							}
+							
+							session.setAttribute("fundNum", fundBeans.length);
+							session.setAttribute("transitionDayFunds", transitionBeans);	
 						} else {
 							errors.add("The new date must be after the old date.");
 							return "transitionDay.jsp";

@@ -35,28 +35,42 @@
       <form class="form-signin" method = "post" action="login.do">
         <h2 class="form-signin-heading">Please sign in</h2>
                 <c:choose>
-        			<c:when test="${ form == null || form.email == null }">
+        			<c:when test="${email == null}">
         				<input type="text" class="form-control" placeholder="Username" required autofocus name="email">
         			</c:when>
         			<c:otherwise>
-        				<input type="text" class="form-control" placeholder="Username" value="${ form.email }" required autofocus name="email">
+        				<input type="text" class="form-control" placeholder="Username" value="${email}" required autofocus name="email">
         			</c:otherwise>
         		</c:choose>
-        <input type="password" class="form-control" placeholder="Password" required name="psw">
-        <label class="checkbox">
-          <input type="checkbox" name = "rembember" value="remember-me"> Remember me
-        </label>
+        		<c:choose>
+        			<c:when test="${password == null}">
+        				<input type="password" class="form-control" placeholder="Password" required name="psw">
+        			</c:when>
+        			<c:otherwise>
+        				<input type="password" class="form-control" placeholder="Password" value="${password}" required name="psw">
+        			</c:otherwise>
+        		</c:choose>
+        		<br/>
+        		<c:choose>
+        			<c:when test="${remember == null}">
+        				<input type="checkbox" name = "remember" value="remember" /> Remember Password
+        			</c:when>
+        			<c:otherwise>
+        				<input type="checkbox" name = "remember" value="remember" checked="checked"/> Remember Password
+        			</c:otherwise>
+        		</c:choose>
+
         <div class="row">
 
   <div class="col-lg-6">
     <div class="input-group">
       <span class="input-group-addon">
       	    <c:choose>
-      			<c:when test="${ form == null || form.userType == null }">
+      			<c:when test="${userType == null}">
         			<input type="radio" name="userType" value="Employee"> Login as Employee
        				<input type="radio" name="userType" value="Customer"> Login as Customer
        			</c:when>
-       			<c:when test="${form.userType == 'Employee'}">
+       			<c:when test="${userType == 'Employee'}">
         			<input type="radio" name="userType" value="Employee" checked="checked"> Login as Employee
        				<input type="radio" name="userType" value="Customer"> Login as Customer
        			</c:when>

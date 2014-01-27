@@ -27,7 +27,7 @@
           <tr>
             <th>Customer E-mail</th>
             <th>Customer Name</th>
-            <th>Deposit Amount</th>
+            <th>Deposit Amount ($)</th>
             <th></th>
           </tr>
         </thead>

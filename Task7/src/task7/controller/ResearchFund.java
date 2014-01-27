@@ -32,6 +32,8 @@ public class ResearchFund extends Action {
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors", errors);
         HttpSession session = request.getSession(true);
+        session.setAttribute("curPage", "funds.do");
+        
 		try {
 			//CustomerBean customerBean = (CustomerBean)session.getAttribute("user");
 			FundBean[] fundBeans = fundDAO.getAllFunds();

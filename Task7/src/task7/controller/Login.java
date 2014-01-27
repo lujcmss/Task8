@@ -36,8 +36,7 @@ public class Login extends Action {
 		try {
 			//Testing login form bean, by Patrick
 			LoginForm form = formBeanFactory.create(request);
-			session.setAttribute("form", form);
-			
+
 			if (!form.isPresent()) {
 	            return "login.jsp";
 	        }
@@ -78,6 +77,16 @@ public class Login extends Action {
 		    
 	        session.setAttribute("userType", form.getUserType());
 	        session.setAttribute("email", form.getEmail());
+	        
+	        String[] remembers = request.getParameterValues("remember");
+
+	        if (remembers == null) {
+	        	session.setAttribute("remember", null);
+	        	session.setAttribute("password", null);
+	        } else {
+	        	session.setAttribute("remember", "remember");
+	        	session.setAttribute("password", form.getPsw());
+	        }
 		    
 			return "home.do";
         } catch (Exception e) {

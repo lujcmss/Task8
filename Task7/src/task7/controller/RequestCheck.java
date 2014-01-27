@@ -33,6 +33,8 @@ public class RequestCheck extends Action {
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors", errors);
         HttpSession session = request.getSession();
+        session.setAttribute("curPage", "requestCheck.do");
+        
 		try {
 			RequestForm form = formBeanFactory.create(request);
 			CustomerBean customerBean = (CustomerBean) session.getAttribute("user"); 

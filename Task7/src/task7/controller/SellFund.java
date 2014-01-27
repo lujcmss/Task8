@@ -39,6 +39,7 @@ public class SellFund extends Action {
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors", errors);
         HttpSession session = request.getSession();
+        session.setAttribute("curPage", "funds.do");
         
 		try {
 			SellFundForm form = formBeanFactory.create(request);
@@ -68,7 +69,7 @@ public class SellFund extends Action {
 			    	}
 			    	if (fundBean == null) {
 			    		errors.add("No fund Matches.");
-			    		session.setAttribute("fundInfo", null);
+			    		session.setAttribute("sellFundInfo", null);
 			    		return "sellFund.jsp";
 			    	}
 			    	
@@ -116,6 +117,16 @@ public class SellFund extends Action {
 		    	transactionBean.setTransactionType("Sell");
 		    	transactionBean.setStatus("Pending");
 		    	transactionDAO.insert(transactionBean);
+		    	
+		    	FundInfoBean[] fundInfoBeans = new FundInfoBean[positionBeans.length];
+				for (int i = 0; i < positionBeans.length; i++) {
+					fundInfoBeans[i] = new FundInfoBean();
+					fundInfoBeans[i].setName(positionBeans[i].getFundBean().getName());
+					fundInfoBeans[i].setSymbol(positionBeans[i].getFundBean().getSymbol());
+					fundInfoBeans[i].setShare(positionBeans[i].getShares() / 1000.0);
+				}
+				
+				session.setAttribute("sellFundInfo", fundInfoBeans);
 		    }
 
 	        return "sellFund.jsp";

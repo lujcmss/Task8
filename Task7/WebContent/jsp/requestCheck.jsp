@@ -6,9 +6,10 @@
       </div>
     <jsp:include page="error-list.jsp" />
       <form class="form-signin" method="POST" action="requestCheck.do">
+      	<label>Please input the request amount ($)</label>
         <input type="text" class="form-control" placeholder="Request Amount" required autofocus name="requestAmount">
         <p></p>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Withdraw</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Request</button>
       </form>
 
     </div> <!-- /container -->

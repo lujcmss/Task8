@@ -26,7 +26,7 @@
           <tr>
             <th>#</th>
             <th>Fund Name</th>
-            <th>Share Price</th>
+            <th>Ticker</th>
 
 
           </tr>

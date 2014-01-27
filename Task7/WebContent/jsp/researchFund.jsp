@@ -27,7 +27,7 @@
            			<c:set var="price" value="${fundInfo.fundPrice}"/>
             		<td><c:out value="${fundInfo.name}"/></td>
             		<td><c:out value="${fundInfo.symbol}"/></td>
-            		<td><c:out value=""/><fmt:formatNumber type="number" 
+            		<td>$<fmt:formatNumber type="number" 
             			maxFractionDigits="2" minFractionDigits="2" value="${price}" /></td>
 	        	</tr>
 			</c:forEach>

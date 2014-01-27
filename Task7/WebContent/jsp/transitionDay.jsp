@@ -38,7 +38,7 @@
            			<td><label for=${"lastDay_"}${count}><c:out value="${transitionDayFunds.lastDay}"/></label></td>
             		<td><label for=${"fundName_"}${count}><c:out value="${transitionDayFunds.fundBean.name}"/></label></td>
             		<td><label for=${"fundSymbol_"}${count}><c:out value="${transitionDayFunds.fundBean.symbol}"/></label></td>
-            		<td><label for=${"oldPrice_"}${count}><fmt:formatNumber type="number" 
+            		<td><label for=${"oldPrice_"}${count}>$<fmt:formatNumber type="number" 
             			maxFractionDigits="2" minFractionDigits="2" value="${transitionDayFunds.oldPrice}" /></label></td>
             		<td>
     					<input type="text" class="form-control" placeholder="0" required name=${"newPrice_"}${count}>

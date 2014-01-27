@@ -84,11 +84,11 @@
            			<c:set var="price" value="${fundInfo.fundPrice}"/>
             		<td><c:out value="${fundInfo.name}"/></td>
             		<td><c:out value="${fundInfo.symbol}"/></td>
-            		<td><c:out value=""/><fmt:formatNumber type="number" 
+            		<td>$<fmt:formatNumber type="number" 
             			maxFractionDigits="2" minFractionDigits="2" value="${price}" /></td>
-            		<td><c:out value=""/><fmt:formatNumber type="number" 
+            		<td><fmt:formatNumber type="number" 
             			maxFractionDigits="3" minFractionDigits="3" value="${share}" /></td>
-            		<td><c:out value="$"/><fmt:formatNumber type="number" 
+            		<td>$<c:out value="$"/><fmt:formatNumber type="number" 
             			maxFractionDigits="2" minFractionDigits="2" value="${share * price}" /></td>
             		<td></td>
 	        	</tr>
@@ -117,7 +117,7 @@
             <th>Status</th>
             <th>Share Price</th>
             <th>Shares</th>
-            <th>Amount</th>
+            <th>Total Value</th>
           </tr>
         </thead>
         <tbody>
@@ -136,7 +136,7 @@
             				<td>-</td>
             			</c:when>
             			<c:otherwise>
-            				<td><c:out value=""/><fmt:formatNumber type="number" 
+            				<td>$<fmt:formatNumber type="number" 
             			maxFractionDigits="2" minFractionDigits="2" value="${historyInfo.sharePrice}" /></td>
 						</c:otherwise>
 					</c:choose>
@@ -145,7 +145,7 @@
             				<td>-</td>
             			</c:when>
             			<c:otherwise>
-            				<td><c:out value=""/><fmt:formatNumber type="number" 
+            				<td><fmt:formatNumber type="number" 
             			maxFractionDigits="3" minFractionDigits="3" value="${historyInfo.shares}" /></td>
 						</c:otherwise>
 					</c:choose>
@@ -154,7 +154,7 @@
             				<td>-</td>
             			</c:when>
             			<c:otherwise>
-            				<td><c:out value=""/><fmt:formatNumber type="number" 
+            				<td>$<fmt:formatNumber type="number" 
             			maxFractionDigits="2" minFractionDigits="2" value="${historyInfo.amount}" /></td>
 						</c:otherwise>
 					</c:choose>

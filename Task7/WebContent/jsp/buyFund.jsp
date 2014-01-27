@@ -24,6 +24,7 @@
           <col class="col-xs-2">
           <col class="col-xs-2">
           <col class="col-xs-2">
+          <col class="col-xs-2">
           <col class="col-xs-1">
         </colgroup>
          <thead>
@@ -31,6 +32,7 @@
           	<th>#</th>
             <th>Fund Name</th>
             <th>Fund Ticker</th>
+            <th>Previous Price</th>
             <th>Owned Shares</th>
             <th>Amount to buy ($)</th>
             <th></th>
@@ -46,7 +48,9 @@
            			<input type="hidden" name="fundName" value="${fundInfo.name}"/>
            			<td><c:out value="${fundInfo.name}"/></td>
             		<td><c:out value="${fundInfo.symbol}"/></td>
-            		<td><c:out value=""/><fmt:formatNumber type="number" 
+            		<td>$<fmt:formatNumber type="number" 
+            			maxFractionDigits="2" minFractionDigits="2" value="${fundInfo.fundPrice}" /></td>
+            		<td><fmt:formatNumber type="number" 
             			maxFractionDigits="3" minFractionDigits="3" value="${fundInfo.share}" /></td>
             		<td>
     						<input type="text" class="form-control" placeholder="0" required name="amount">

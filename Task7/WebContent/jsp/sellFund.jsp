@@ -44,7 +44,7 @@
            			<input type="hidden" name="fundName" value="${fundInfo.name}"/>
             		<td><c:out value="${fundInfo.name}"/></td>
             		<td><c:out value="${fundInfo.symbol}"/></td>
-            		<td><c:out value=""/><fmt:formatNumber type="number" 
+            		<td><fmt:formatNumber type="number" 
             			maxFractionDigits="3" minFractionDigits="3" value="${fundInfo.share}" /></td>
             		<td>
     						<input type="text" class="form-control" placeholder="0" required name="share">

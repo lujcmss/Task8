@@ -29,6 +29,7 @@ public class CreateCustomerAccount extends Action {
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors", errors);
         HttpSession session = request.getSession(true);
+        session.setAttribute("curPage", "manageAccounts.do");
         
 		try {
 			CreateCustomerForm form = formBeanFactory.create(request);
