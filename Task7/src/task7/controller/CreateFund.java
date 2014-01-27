@@ -50,12 +50,15 @@ public class CreateFund extends Action {
 		        return "createFund.jsp";
 	        }
 		   	
-		    FundBean fundBean = new FundBean();
-		    fundBean.setName(form.getFund());
-		    fundBean.setSymbol(form.getTicker());
-		    fundDAO.insert(fundBean);
+		    synchronized (fundDAO) {
+			    FundBean fundBean = new FundBean();
+			    fundBean.setName(form.getFund());
+			    fundBean.setSymbol(form.getTicker());
+			    fundDAO.insert(fundBean);
+			    
+			    session.setAttribute("funds", fundDAO.getAllFunds());
+			}
 		    
-		    session.setAttribute("funds", fundDAO.getAllFunds());
 	        return "createFund.jsp";
         } catch (Exception e) {
         	errors.add(e.getMessage());

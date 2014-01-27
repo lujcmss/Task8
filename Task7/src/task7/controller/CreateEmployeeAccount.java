@@ -48,14 +48,15 @@ public class CreateEmployeeAccount extends Action {
 		        return "createEmployeeAccount.jsp";
 		    }
 		    
-		    EmployeeBean employeeBean = new EmployeeBean();
-		    employeeBean.setEmail(form.getEmail());
-		    employeeBean.setFirstName(form.getFirstName());
-		    employeeBean.setLastName(form.getLastName());
-		    employeeBean.setPassword(form.getPsw());
-		    employeeDAO.insert(employeeBean);
+		    synchronized (employeeDAO) {
+			    EmployeeBean employeeBean = new EmployeeBean();
+			    employeeBean.setEmail(form.getEmail());
+			    employeeBean.setFirstName(form.getFirstName());
+			    employeeBean.setLastName(form.getLastName());
+			    employeeBean.setPassword(form.getPsw());
+			    employeeDAO.insert(employeeBean);
+			}
 		    
-			// check for errors
 			return "home.jsp";
         } catch (Exception e) {
         	errors.add(e.getMessage());

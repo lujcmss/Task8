@@ -68,6 +68,7 @@ public class Home extends Action {
 				}
 				session.setAttribute("fundInfo", fundInfoBeans);
 			}
+			
 	        return "home.jsp";
         } catch (Exception e) {
         	errors.add(e.getMessage());

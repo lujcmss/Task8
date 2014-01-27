@@ -25,7 +25,6 @@ public class Logout extends Action {
         session.setAttribute("form", null);
         session.setAttribute("fundInfo", null);
 
-		request.setAttribute("message", "You are now logged out");
 	    return "login.do";
     }
 }

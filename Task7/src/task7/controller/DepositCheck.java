@@ -89,6 +89,7 @@ public class DepositCheck extends Action {
 			    transactionBean.setStatus("Pending");
 			    transactionDAO.insert(transactionBean);
 		    }
+		    
 	        return "depositCheck.jsp";
         } catch (Exception e) {
         	errors.add(e.getMessage());

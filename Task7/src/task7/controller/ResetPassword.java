@@ -43,10 +43,12 @@ public class ResetPassword extends Action {
 		        return "resetPassword.jsp";
 		    }
 		    
-		    CustomerBean customerBean = (CustomerBean)session.getAttribute("userInfo");
-		    customerBean.setPassword(form.getNewpsw());
-		    customerDAO.update(customerBean);
-			
+		    synchronized (customerDAO) {
+			    CustomerBean customerBean = (CustomerBean)session.getAttribute("userInfo");
+			    customerBean.setPassword(form.getNewpsw());
+			    customerDAO.update(customerBean);
+			}
+		    
 			return "viewCustomerInformation.do";
         } catch (Exception e) {
         	errors.add(e.getMessage());

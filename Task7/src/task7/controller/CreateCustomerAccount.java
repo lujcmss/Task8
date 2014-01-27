@@ -49,20 +49,21 @@ public class CreateCustomerAccount extends Action {
 		        return "createCustomerAccount.jsp";
 		    }
 		    
-		    CustomerBean customerBean = new CustomerBean();
-		    customerBean.setAddr1(form.getAddr1());
-		    customerBean.setAddr2(form.getAddr2());
-		    customerBean.setCash(0);
-		    customerBean.setCity(form.getCity());
-		    customerBean.setCustomerEmail(form.getEmail());
-		    customerBean.setFirstName(form.getFirstName());
-		    customerBean.setLastName(form.getLastName());
-		    customerBean.setPassword(form.getPsw());
-		    customerBean.setState(form.getState());
-		    customerBean.setZip(form.getZipCode());
-		    customerDAO.insert(customerBean);
+		    synchronized (customerDAO) {	
+			    CustomerBean customerBean = new CustomerBean();
+			    customerBean.setAddr1(form.getAddr1());
+			    customerBean.setAddr2(form.getAddr2());
+			    customerBean.setCash(0);
+			    customerBean.setCity(form.getCity());
+			    customerBean.setCustomerEmail(form.getEmail());
+			    customerBean.setFirstName(form.getFirstName());
+			    customerBean.setLastName(form.getLastName());
+			    customerBean.setPassword(form.getPsw());
+			    customerBean.setState(form.getState());
+			    customerBean.setZip(form.getZipCode());
+			    customerDAO.insert(customerBean);
+		    }
 		    
-			// check for errors
 			return "home.jsp";
         } catch (Exception e) {
         	errors.add(e.getMessage());

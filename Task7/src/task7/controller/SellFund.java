@@ -103,12 +103,15 @@ public class SellFund extends Action {
 		    	}
 		    	
 		    	long share = (long) (form.getShare() * 1000);
-		    	if (positionBean.getShares() < share) {
-		    		errors.add("Not enough share.");
-		    		return "sellFund.jsp";
-		    	}
-		    	positionBean.setShares(positionBean.getShares() - share);
-		    	positionDAO.update(positionBean);
+		    	
+		    	synchronized (positionDAO) {
+			    	if (positionBean.getShares() < share) {
+			    		errors.add("Not enough share.");
+			    		return "sellFund.jsp";
+			    	}
+			    	positionBean.setShares(positionBean.getShares() - share);
+			    	positionDAO.update(positionBean);
+				}
 		    	
 		    	TransactionBean transactionBean = new TransactionBean();
 		    	transactionBean.setAmount(share);

@@ -58,13 +58,16 @@ public class ChangePassword extends Action {
 				employeeDAO.update(employeeBean);
 			} else {
 			    CustomerBean customerBean = customerDAO.getCustomerByEmail((String)session.getAttribute("email"));
-			    if (!customerBean.getPassword().equals(form.getOldpsw())) {
-			    	errors.add("Wrong password!");
-			    	return "changePassword.jsp";
-			    }
 			    
-			    customerBean.setPassword(form.getNewpsw());
-			    customerDAO.update(customerBean);
+			    synchronized (customerDAO) {
+				    if (!customerBean.getPassword().equals(form.getOldpsw())) {
+				    	errors.add("Wrong password!");
+				    	return "changePassword.jsp";
+				    }
+				    
+				    customerBean.setPassword(form.getNewpsw());
+				    customerDAO.update(customerBean);
+				}
 			}
 			return "home.do";
         } catch (Exception e) {

@@ -51,23 +51,28 @@ public class EditInfo extends Action {
 			if (userType.equals("Employee")) {
 				EmployeeBean employeeBean = (EmployeeBean)session.getAttribute("user");
 				
-				employeeBean.setFirstName(form.getFirstName());
-				employeeBean.setLastName(form.getLastName());
-				
-				employeeDAO.update(employeeBean);
+				synchronized (employeeDAO) {
+					employeeBean.setFirstName(form.getFirstName());
+					employeeBean.setLastName(form.getLastName());
+					
+					employeeDAO.update(employeeBean);
+				}
 			} else {
 			    CustomerBean customerBean = (CustomerBean)session.getAttribute("user");
 			    
-			    customerBean.setAddr1(form.getAddr1());
-			    customerBean.setAddr2(form.getAddr2());
-			    customerBean.setCity(form.getCity());
-			    customerBean.setFirstName(form.getFirstName());
-			    customerBean.setLastName(form.getLastName());
-			    customerBean.setState(form.getState());
-			    customerBean.setZip(form.getZipCode());
-	
-			    customerDAO.update(customerBean);
+			    synchronized (customerDAO) {
+				    customerBean.setAddr1(form.getAddr1());
+				    customerBean.setAddr2(form.getAddr2());
+				    customerBean.setCity(form.getCity());
+				    customerBean.setFirstName(form.getFirstName());
+				    customerBean.setLastName(form.getLastName());
+				    customerBean.setState(form.getState());
+				    customerBean.setZip(form.getZipCode());
+		
+				    customerDAO.update(customerBean);
+				}
 			}
+			
 			return "home.do";
         } catch (Exception e) {
         	errors.add(e.getMessage());

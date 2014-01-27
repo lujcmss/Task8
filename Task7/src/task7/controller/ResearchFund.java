@@ -59,7 +59,7 @@ public class ResearchFund extends Action {
 				*/
 			}
 			session.setAttribute("fundInfo", fundInfoBeans);
-			// check for errors
+			
 			return "researchFund.jsp";
         } catch (Exception e) {
         	errors.add(e.getMessage());

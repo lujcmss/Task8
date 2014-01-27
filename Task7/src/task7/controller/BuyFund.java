@@ -111,12 +111,15 @@ public class BuyFund extends Action{
 				}
 		    } else if (form.getButton().equals("buy")) {
 		    	long amount = (long) (form.getAmount() * 100);
-		    	if (customerBean.getCash() < amount) {
-		    		errors.add("Not enough Money.");
-		    		return "buyFund.jsp";
-		    	}
-		    	customerBean.setCash(customerBean.getCash() - amount);
-		    	customerDAO.update(customerBean);
+		    	
+		    	synchronized (customerDAO) {
+			    	if (customerBean.getCash() < amount) {
+			    		errors.add("Not enough Money.");
+			    		return "buyFund.jsp";
+			    	}
+			    	customerBean.setCash(customerBean.getCash() - amount);
+			    	customerDAO.update(customerBean);
+				}
 		    	
 		    	TransactionBean transactionBean = new TransactionBean();
 		    	transactionBean.setAmount(amount);
