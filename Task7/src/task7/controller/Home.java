@@ -70,7 +70,7 @@ public class Home extends Action {
 	        return "home.jsp";
         } catch (Exception e) {
         	errors.add(e.getMessage());
-        	return "error.jsp";
+        	return "home.jsp";
         }
     }
 }

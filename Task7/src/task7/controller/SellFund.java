@@ -78,7 +78,7 @@ public class SellFund extends Action {
 			    	fundInfoBeans[0].setSymbol(fundBean.getSymbol());
 					for (int j = 0; j < positionBeans.length; j++)
 						if (positionBeans[j].getFundBean().getFundId() == fundBean.getFundId()) {
-						fundInfoBeans[0].setShare(positionBeans[j].getShares() / 100.0);
+						fundInfoBeans[0].setShare(positionBeans[j].getShares() / 1000.0);
 					}
 					
 					session.setAttribute("sellFundInfo", fundInfoBeans);
@@ -88,7 +88,7 @@ public class SellFund extends Action {
 						fundInfoBeans[i] = new FundInfoBean();
 						fundInfoBeans[i].setName(positionBeans[i].getFundBean().getName());
 						fundInfoBeans[i].setSymbol(positionBeans[i].getFundBean().getSymbol());
-						fundInfoBeans[i].setShare(positionBeans[i].getShares() / 100.0);
+						fundInfoBeans[i].setShare(positionBeans[i].getShares() / 1000.0);
 					}
 					
 					session.setAttribute("sellFundInfo", fundInfoBeans);
@@ -121,7 +121,7 @@ public class SellFund extends Action {
 	        return "sellFund.jsp";
         } catch (Exception e) {
         	errors.add(e.getMessage());
-        	return "error.jsp";
+        	return "sellFund.jsp";
         }
     }
 }

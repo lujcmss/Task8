@@ -88,9 +88,10 @@ public class BuyFund extends Action{
 						fundInfoBeans[i].setName(fundBeans[i].getName());
 						fundInfoBeans[i].setSymbol(fundBeans[i].getSymbol());
 						
-						for (int j = 0; j < positionBeans.length; j++)
+						for (int j = 0; j < positionBeans.length; j++) {
 							if (positionBeans[j].getFundBean().getFundId() == fundBeans[i].getFundId()) {
-							fundInfoBeans[i].setShare(positionBeans[j].getShares() / 1000.0);
+								fundInfoBeans[i].setShare(positionBeans[j].getShares() / 1000.0);
+							}
 						}
 					}
 					
@@ -116,8 +117,9 @@ public class BuyFund extends Action{
 
 	        return "buyFund.jsp";
         } catch (Exception e) {
+        	System.out.println(e);
         	errors.add(e.getMessage());
-        	return "error.jsp";
+        	return "buyFund.jsp";
         }
     }
 }

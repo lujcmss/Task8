@@ -1,5 +1,6 @@
 <jsp:include page="header.jsp" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <div class="container"> 
       <div class="page-header">
         <h1>Sell Fund</h1>
@@ -28,7 +29,7 @@
             <th>#</th>
             <th>Fund Name</th>
             <th>Fund Ticker</th>
-            <th>Share</th>
+            <th>Owned Shares</th>
             <th>Shares to sell</th>
             <th></th>
           </tr>
@@ -43,8 +44,8 @@
            			<input type="hidden" name="fundName" value="${fundInfo.name}"/>
             		<td><c:out value="${fundInfo.name}"/></td>
             		<td><c:out value="${fundInfo.symbol}"/></td>
-            		<td><fmt:formatNumber type="number" 
-            			maxFractionDigits="2" minFractionDigits="2" value="${fundInfo.share}" /></td>
+            		<td><c:out value=""/><fmt:formatNumber type="number" 
+            			maxFractionDigits="3" minFractionDigits="3" value="${fundInfo.share}" /></td>
             		<td>
     						<input type="text" class="form-control" placeholder="0" required name="share">
         			</td>

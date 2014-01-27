@@ -4,7 +4,7 @@
       <div class="page-header">
         <h1>Request Check</h1>
       </div>
-    <jsp:include page="error-list.jsp" />  
+    <jsp:include page="error-list.jsp" />
       <form class="form-signin" method="POST" action="requestCheck.do">
         <input type="text" class="form-control" placeholder="Request Amount" required autofocus name="requestAmount">
         <p></p>

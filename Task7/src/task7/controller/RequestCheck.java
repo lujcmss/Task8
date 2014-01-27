@@ -64,7 +64,7 @@ public class RequestCheck extends Action {
 			return "requestCheck.jsp";
         } catch (Exception e) {
         	errors.add(e.getMessage());
-        	return "error.jsp";
+        	return "requestCheck.jsp";
         }
     }
 }

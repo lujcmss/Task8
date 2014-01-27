@@ -81,7 +81,7 @@ public class Login extends Action {
 		    
 			return "home.do";
         } catch (Exception e) {
-        	errors.add("Please reload website");
+        	errors.add(e.getMessage());
         	return "login.jsp";
         }
     }

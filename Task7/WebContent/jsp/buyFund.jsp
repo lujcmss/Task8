@@ -31,7 +31,7 @@
           	<th>#</th>
             <th>Fund Name</th>
             <th>Fund Ticker</th>
-            <th>Own Shares</th>
+            <th>Owned Shares</th>
             <th>Amount to buy ($)</th>
             <th></th>
           </tr>
@@ -43,12 +43,11 @@
 				<tr>
 				<form class="form-signin" method="post" action="buyFund.do">
 					<td>${count}</td>
-           			<c:set var="share" value="${fundInfo.share}"/>
            			<input type="hidden" name="fundName" value="${fundInfo.name}"/>
            			<td><c:out value="${fundInfo.name}"/></td>
             		<td><c:out value="${fundInfo.symbol}"/></td>
             		<td><c:out value=""/><fmt:formatNumber type="number" 
-            			maxFractionDigits="2" minFractionDigits="2" value="${share}" /></td>
+            			maxFractionDigits="3" minFractionDigits="3" value="${fundInfo.share}" /></td>
             		<td>
     						<input type="text" class="form-control" placeholder="0" required name="amount">
         			</td>

@@ -10,17 +10,31 @@ import task7.databeans.CustomerBean;
 public class CustomerDAO {
 	public void insert(CustomerBean customerBean) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-
-        session.beginTransaction();
-        session.save(customerBean);
-        session.getTransaction().commit();
+		try {
+	        session.beginTransaction();
+	        session.save(customerBean);
+	        session.getTransaction().commit();
+		} catch (Exception e) {
+			if (session.getTransaction() != null) {
+				session.getTransaction().rollback();
+			}
+		} finally {
+			session.close();
+		}
 	}
 	public void update(CustomerBean customerBean) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-
-		session.beginTransaction();
-		session.merge(customerBean);
-		session.getTransaction().commit();
+		try {
+			session.beginTransaction();
+			session.merge(customerBean);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			if (session.getTransaction() != null) {
+				session.getTransaction().rollback();
+			}
+		} finally {
+			session.close();
+		}
 	}
 	
 	public CustomerBean getCustomerByEmail(String email) {
@@ -29,9 +43,10 @@ public class CustomerDAO {
 		query.setParameter("email", email);
 		List<?> list = (List<?>) query.list();
 	  
-		if (list.size() == 0) return null;
-		
+		if (list.size() == 0) return null;		
 		CustomerBean customerBean = (CustomerBean) list.get(0);
+		
+		session.close();
 		return customerBean;
 	}
 	
@@ -40,7 +55,8 @@ public class CustomerDAO {
 		Query query = session.createQuery("from CustomerBean where email = :email ");
 		query.setParameter("email", email);
 		List<?> list = (List<?>) query.list();
-	  
+
+		session.close();
 		if (list.size() == 0) return false;
 		return true;
 	}
@@ -49,10 +65,9 @@ public class CustomerDAO {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Query query = session.createQuery("from CustomerBean");
 		List<?> list = (List<?>) query.list();
-	  
-		if (list.size() == 0) return null;
-		
 		CustomerBean[] customerBeans = list.toArray(new CustomerBean[list.size()]);
+		
+		session.close();
 		return customerBeans;
 	}
 }

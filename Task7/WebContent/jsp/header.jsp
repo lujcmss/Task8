@@ -83,7 +83,7 @@
                 <li class="divider"></li>
                 <li class="dropdown-header">Customer</li>
                 <li><a href="createCustomerAccount.do">Create Customer Account</a></li>
-                <li><a href="viewCustomerInformation.do">Reset Customer Password</a></li>
+                <!-- li><a href="viewCustomerInformation.do">Reset Customer Password</a></li-->
                 <li><a href="viewCustomerInformation.do">View Customer Information</a></li>
               </ul>
             </li>

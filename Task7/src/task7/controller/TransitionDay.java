@@ -63,7 +63,7 @@ public class TransitionDay extends Action {
 							transitionBeans[i].setFundBean(fundBeans[i]);							
 							transitionBeans[i].setLastDay(date.getNewDate());
 							double oldPrice = fundPriceHistoryDAO.getPriceByFundAndDate(
-									fundBeans[i].getFundId(), date.getNewDate());
+									fundBeans[i].getFundId(), date.getNewDate()) / 100.0;
 							transitionBeans[i].setOldPrice(oldPrice);
 						}
 						
@@ -160,7 +160,7 @@ public class TransitionDay extends Action {
 					transitionBeans[i].setFundBean(fundBeans[i]);
 					transitionBeans[i].setLastDay(newDate);
 					double oldPrice = fundPriceHistoryDAO.getPriceByFundAndDate(
-							fundBeans[i].getFundId(), newDate);
+							fundBeans[i].getFundId(), newDate) / 100.0;
 					transitionBeans[i].setOldPrice(oldPrice);
 				}
 				

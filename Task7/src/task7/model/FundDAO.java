@@ -10,26 +10,31 @@ import task7.databeans.FundBean;
 public class FundDAO {
 	public void insert(FundBean fund) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-
-        session.beginTransaction(); 
-        session.save(fund);       
-        session.getTransaction().commit();
+		try {
+	        session.beginTransaction();
+	        session.save(fund);
+	        session.getTransaction().commit();
+		} catch (Exception e) {
+			if (session.getTransaction() != null) {
+				session.getTransaction().rollback();
+			}
+		} finally {
+			session.close();
+		}
 	}
 	public void update(FundBean fund) {
-
 		Session session = HibernateUtil.getSessionFactory().openSession();
-
-		session.beginTransaction();
-		session.merge(fund);
-		session.getTransaction().commit();
-	}
-	public void delete(FundBean fund)
-	{
-		Session session = HibernateUtil.getSessionFactory().openSession();
-
-		session.beginTransaction();
-		session.delete(fund);
-		session.getTransaction().commit();
+		try {
+			session.beginTransaction();
+			session.merge(fund);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			if (session.getTransaction() != null) {
+				session.getTransaction().rollback();
+			}
+		} finally {
+			session.close();
+		}
 	}
 
 	public FundBean getFundById(int fundId) {
@@ -39,8 +44,9 @@ public class FundDAO {
 		List<?> list = (List<?>) query.list();
 	  
 		if (list.size() == 0) return null;
-		
 		FundBean fundBean = (FundBean) list.get(0);
+
+		session.close();
 		return fundBean;
 	}
 	
@@ -63,8 +69,9 @@ public class FundDAO {
 		List<?> list = (List<?>) query.list();
 	  
 		if (list.size() == 0) return null;
-		
 		FundBean fundBean = (FundBean) list.get(0);
+
+		session.close();
 		return fundBean;
 	}
 	
@@ -73,7 +80,8 @@ public class FundDAO {
 		Query query = session.createQuery("from FundBean where name = :name ");
 		query.setParameter("name", fundName);
 		List<?> list = (List<?>) query.list();
-	  
+
+		session.close();
 		if (list.size() == 0) return false;
 		return true;
 	}
@@ -83,7 +91,8 @@ public class FundDAO {
 		Query query = session.createQuery("from FundBean where symbol = :symbol ");
 		query.setParameter("symbol", symbol);
 		List<?> list = (List<?>) query.list();
-	  
+
+		session.close();
 		if (list.size() == 0) return false;
 		return true;
 	}
@@ -92,10 +101,9 @@ public class FundDAO {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Query query = session.createQuery("from FundBean");
 		List<?> list = (List<?>) query.list();
-		
-		if (list.size() == 0) return null;
-		
 		FundBean[] fundBeans = list.toArray(new FundBean[list.size()]);
+
+		session.close();
 		return fundBeans;
 	}
 }
