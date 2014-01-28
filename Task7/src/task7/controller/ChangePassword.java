@@ -54,22 +54,26 @@ public class ChangePassword extends Action {
 
 			String userType = (String) session.getAttribute("userType");
 			if (userType.equals("Employee")) {
-				EmployeeBean employeeBean = employeeDAO
-						.getEmployeeByEmail((String) session
-								.getAttribute("email"));
-				if (!employeeBean.getPassword().equals(form.getOldpsw())) {
-					errors.add("Wrong Password!");
+				synchronized (employeeDAO) {
+					EmployeeBean employeeBean = employeeDAO
+							.getEmployeeByEmail((String) session
+									.getAttribute("email"));
+					
+					if (!employeeBean.getPassword().equals(form.getOldpsw())) {
+						errors.add("Wrong Password!");
+						return "changePassword.jsp";
+					}
+	
+					employeeBean.setPassword(form.getNewpsw());
+					employeeDAO.update(employeeBean);
+					success.add("Password Changed");
 				}
-
-				employeeBean.setPassword(form.getNewpsw());
-				employeeDAO.update(employeeBean);
-				success.add("Password Changed");
 			} else {
-				CustomerBean customerBean = customerDAO
-						.getCustomerByEmail((String) session
-								.getAttribute("email"));
-
 				synchronized (customerDAO) {
+					CustomerBean customerBean = customerDAO
+							.getCustomerByEmail((String) session
+									.getAttribute("email"));
+					
 					if (!customerBean.getPassword().equals(form.getOldpsw())) {
 						errors.add("Wrong password!");
 						return "changePassword.jsp";
@@ -77,8 +81,7 @@ public class ChangePassword extends Action {
 
 					customerBean.setPassword(form.getNewpsw());
 					customerDAO.update(customerBean);
-					success.add("Password Changed");
-					
+					success.add("Password Changed");	
 				}
 			}
 			
