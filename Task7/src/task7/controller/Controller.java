@@ -111,7 +111,7 @@ public class Controller extends HttpServlet {
 			// Allow these actions without logging in
 			return Action.perform(action, request);
 		}
-
+		
 		if (user == null) {
 			// If the user hasn't logged in, direct him to the login page
 			return Action.perform("login.do", request);

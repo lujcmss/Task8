@@ -1,5 +1,4 @@
-<!-- jsp:include page="header.jsp" flush="true"/ -->
-<%@ include file="header.jsp"%>
+<jsp:include page="header.jsp"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -46,7 +45,9 @@
 						<td><label for=${"oldPrice_"}${count}>$<fmt:formatNumber
 									type="number" maxFractionDigits="2" minFractionDigits="2"
 									value="${transitionDayFunds.oldPrice}" /></label></td>
-						<td><input type="text" class="form-control" placeholder="0"
+						<td><input type="text" class="form-control" placeholder="0" value="<fmt:formatNumber
+									type="number" maxFractionDigits="2" minFractionDigits="2"
+									value="${transitionDayFunds.newPrice}" />"
 							required name=${"newPrice_"}${count}></td>
 					</tr>
 					<c:set var="count" value="${count+1}" />

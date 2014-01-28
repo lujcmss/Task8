@@ -1,5 +1,4 @@
-<!-- jsp:include page="header.jsp" flush="true"/ -->
-<%@ include file="header.jsp"%>
+<jsp:include page="header.jsp"/>
 
 <div class="container">
 
