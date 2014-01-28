@@ -6,9 +6,9 @@
 	</c:when>
 	<c:otherwise>
 		<c:forEach var="item" items="${success}">
-			<p>
-				<c:out value=" Success!  : ${ item}" />
-			</p>
+		
+				<h5><font color="green"><c:out value=" Success!  : ${ item}" /></font></h5>
+		
 		</c:forEach>
 	</c:otherwise>
 </c:choose>

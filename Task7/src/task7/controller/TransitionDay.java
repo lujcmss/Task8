@@ -48,10 +48,12 @@ public class TransitionDay extends Action {
 	public String perform(HttpServletRequest request) {
 		// Set up the errors list
 		List<String> errors = new ArrayList<String>();
-		request.setAttribute("errors", errors);
-		HttpSession session = request.getSession();
 		List<String> success = new ArrayList<String>();
+		request.setAttribute("errors", errors);
 		request.setAttribute("success", success);
+		HttpSession session = request.getSession();
+	
+		
 		session.setAttribute("curPage", "transitionDay.do");
 		Random random = new Random();
 
@@ -111,7 +113,8 @@ public class TransitionDay extends Action {
 											fundBeans[i].getFundId(),
 											date.getNewDate()) / 100.0;
 							transitionBeans[i].setOldPrice(oldPrice);
-
+							transitionBeans[i].setLastDay(date.getNewDate());
+							
 							long newPrice = validNumber(request
 									.getParameter("newPrice_" + i));
 							if (newPrice == 0) {
@@ -252,6 +255,7 @@ public class TransitionDay extends Action {
 							session.setAttribute("fundNum", fundBeans.length);
 							session.setAttribute("transitionDayFunds",
 									transitionBeans);
+							success.add(" Transition Day registered ");
 						} else {
 							errors.add("The new date must be after the old date.");
 							return "transitionDay.jsp";
@@ -280,7 +284,6 @@ public class TransitionDay extends Action {
 
 				session.setAttribute("fundNum", fundBeans.length);
 				session.setAttribute("transitionDayFunds", transitionBeans);
-				success.add(" Transition Day registered ");
 			}
 
 			return "transitionDay.jsp";

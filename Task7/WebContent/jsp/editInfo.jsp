@@ -4,7 +4,7 @@
 <div class="container">
 
 	<div class="page-header">
-		<h1>Create Customer Account</h1>
+		<h1>Edit Information</h1>
 	</div>
 	<jsp:include page="error-list.jsp" />
 	<jsp:include page="success-list.jsp" />
