@@ -8,6 +8,7 @@
 		<h1>Research Fund</h1>
 	</div>
 	<jsp:include page="error-list.jsp" />
+	<jsp:include page="success-list.jsp" />
 
 	<table class="table table-striped">
 		<h3>Funds Information</h3>

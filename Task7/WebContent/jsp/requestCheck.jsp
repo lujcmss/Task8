@@ -5,6 +5,7 @@
 		<h1>Request Check</h1>
 	</div>
 	<jsp:include page="error-list.jsp" />
+	<jsp:include page="success-list.jsp" />
 	<form class="form-signin" method="POST" action="requestCheck.do">
 		<label>Please input the request amount ($)</label> <input type="text"
 			class="form-control" placeholder="Request Amount" required autofocus

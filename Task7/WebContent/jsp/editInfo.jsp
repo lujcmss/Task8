@@ -7,6 +7,7 @@
 		<h1>Create Customer Account</h1>
 	</div>
 	<jsp:include page="error-list.jsp" />
+	<jsp:include page="success-list.jsp" />
 
 	<form class="form-signin" method="post" action="editInfo.do">
 		<input type="text" class="form-control" placeholder="First Name"

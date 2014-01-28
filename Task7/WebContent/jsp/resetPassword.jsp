@@ -6,6 +6,7 @@
 		<h1>Reset Password</h1>
 	</div>
 	<jsp:include page="error-list.jsp" />
+	<jsp:include page="success-list.jsp" />
 	<form class="form-signin" method="post" action="resetPassword.do">
 		<input type="password" class="form-control" placeholder="New Password"
 			required name="newpsw"> <input type="password"

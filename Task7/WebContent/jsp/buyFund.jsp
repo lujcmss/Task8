@@ -9,6 +9,7 @@
 	</div>
 
 	<jsp:include page="error-list.jsp" />
+	<jsp:include page="success-list.jsp" />
 	<div class="search-bar">
 		<form class="navbar-form navbar-center" method="post"
 			action="buyFund.do">

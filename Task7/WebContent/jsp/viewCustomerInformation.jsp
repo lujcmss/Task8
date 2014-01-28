@@ -7,6 +7,7 @@
 		<h1>Customer Information</h1>
 	</div>
 	<jsp:include page="error-list.jsp" />
+	<jsp:include page="success-list.jsp" />
 
 	<div class="search-bar">
 		<form class="navbar-form navbar-center" method="POST"

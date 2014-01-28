@@ -6,6 +6,7 @@
 		<h1>Create Fund</h1>
 	</div>
 	<jsp:include page="error-list.jsp" />
+	<jsp:include page="success-list.jsp" />
 	<form class="form-signin">
 		<h4>Fund Name</h4>
 		<input type="text" class="form-control" placeholder="Fund Name"

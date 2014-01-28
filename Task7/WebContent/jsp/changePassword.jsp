@@ -5,6 +5,7 @@
 		<h1>Change Password</h1>
 	</div>
 	<jsp:include page="error-list.jsp" />
+	<jsp:include page="success-list.jsp" />
 	<form class="form-signin" method="post" action="changePassword.do">
 		<input type="password" class="form-control" placeholder="Old Password"
 			required name="oldpsw"> <input type="password"

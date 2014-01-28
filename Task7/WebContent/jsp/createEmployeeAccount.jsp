@@ -8,6 +8,7 @@
 	</div>
 
 	<jsp:include page="error-list.jsp" />
+	<jsp:include page="success-list.jsp" />
 
 	<form class="form-signin">
 		<c:choose>

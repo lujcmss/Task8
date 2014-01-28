@@ -2,12 +2,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <c:choose>
-	<c:when test="${empty errors}">
+	<c:when test="${empty success}">
 	</c:when>
 	<c:otherwise>
-		<c:forEach var="item" items="${errors}">
+		<c:forEach var="item" items="${success}">
 			<p>
-				<c:out value=" Error  : ${ item}" />
+				<c:out value=" Success!  : ${ item}" />
 			</p>
 		</c:forEach>
 	</c:otherwise>
