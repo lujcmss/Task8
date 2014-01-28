@@ -105,8 +105,7 @@
 											minFractionDigits="2" value="${price}" /></td>
 									<td><fmt:formatNumber type="number" maxFractionDigits="3"
 											minFractionDigits="3" value="${share}" /></td>
-									<td>$<c:out value="" />
-										<fmt:formatNumber type="number" maxFractionDigits="2"
+									<td>$<fmt:formatNumber type="number" maxFractionDigits="2"
 											minFractionDigits="2" value="${share * price}" /></td>
 									<td></td>
 								</tr>
