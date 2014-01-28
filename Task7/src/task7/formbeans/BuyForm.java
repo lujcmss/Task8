@@ -10,7 +10,7 @@ public class BuyForm extends FormBean {
 	private String amount;
 	private String button;
 	private String fundName;
-	
+
 	public String getFundName() {
 		return fundName;
 	}
@@ -34,20 +34,26 @@ public class BuyForm extends FormBean {
 	public double getAmount() {
 		return Double.parseDouble(amount);
 	}
-	
+
 	public void setFund(String s) {
-		this.fund = trimAndConvert(s,"<>>\"]");
+		this.fund = trimAndConvert(s, "<>>\"]");
 	}
-	
+
 	public void setAmount(String a) {
-		this.amount = trimAndConvert(a,"<>>\"]");
+		this.amount = trimAndConvert(a, "<>>\"]");
 	}
-	
+
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
-		
-		if (fund != null && fund.matches(".*[<>\"].*")) errors.add("fund may not contain angle brackets or quotes");
-		//if (amount != null && (!amount.matches("^[1-9]d*$")||amount.matches(".*[<>\"].*"))) errors.add("Illegal Amount");
+
+		if (fund != null && fund.matches(".*[<>\"].*"))
+			errors.add("fund may not contain angle brackets or quotes");
+		if (amount == null
+				|| (!amount.matches("^(([0-9]+[\\.]?[0-9]+)|[1-9])$") || amount
+						.matches(".*[<>\"].*")))
+			errors.add("Illegal Amount");
+		if (fundName == null || fundName.matches(".*[<>\"].*"))
+			errors.add("fund name may not contain angle brackets or quotes");
 		return errors;
 	}
 }

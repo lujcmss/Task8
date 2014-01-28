@@ -80,9 +80,8 @@ public class EditInfoForm extends FormBean {
 		if (lastName == null || lastName.length() == 0) {
 			errors.add("Lastname is required");
 		}
-
-		if (errors.size() > 0)
-			return errors;
+		if (!zipCode.matches("^\\d{1,10}$"))
+			errors.add("Illegal Zipcode");
 
 		return errors;
 	}

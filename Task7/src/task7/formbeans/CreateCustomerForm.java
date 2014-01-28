@@ -133,15 +133,15 @@ public class CreateCustomerForm extends FormBean {
 			errors.add("State is required");
 		}
 
-		if (errors.size() > 0)
-			return errors;
 
-		if (email.matches(".*[<>\"].*"))
-			errors.add("email may not contain angle brackets or quotes");
+		if (!email.matches("^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"))
+			errors.add("Illegal email");
 		if (psw.matches(".*[<>\"].*"))
 			errors.add("Password may not contain angle brackets or quotes");
 		if (!confirm.equals(psw))
 			errors.add("Password doesn't match password confirmation");
+		if (!zipCode.matches("^\\d{1,10}$"))
+			errors.add("Illegal Zipcode");
 
 		return errors;
 	}

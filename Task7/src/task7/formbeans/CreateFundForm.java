@@ -35,8 +35,9 @@ public class CreateFundForm extends FormBean{
 		if (errors.size() > 0)
 		return errors;
 		
-		if (fund.matches(".*[<>\"].*")) errors.add("email may not contain angle brackets or quotes");
-		if (ticker.matches(".*[<>\"].*")) errors.add("Illegal may not contain angle brackets or quotes");
+		if (fund.matches(".*[<>\"].*")) errors.add("fund may not contain angle brackets or quotes");
+		if (ticker.matches(".*[<>\"].*")) errors.add(" ticker may not contain angle brackets or quotes");
+		if(!ticker.matches("^[A-Za-z0-9]\\w{1,5}$")) errors.add("Illegal ticker");
 		return errors;
 	}
 	

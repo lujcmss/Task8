@@ -5,37 +5,48 @@ import java.util.List;
 
 import org.mybeans.form.FormBean;
 
-public class DepositForm extends FormBean{
+public class DepositForm extends FormBean {
 	private String depositAmount;
 	private String button;
 	private String customerEmail;
-	
+
 	public double getDepositAmount() {
 		return Double.parseDouble(depositAmount);
 	}
+
 	public void setDepositAmount(String depositAmount) {
-		this.depositAmount = depositAmount;
+		this.depositAmount = trimAndConvert(depositAmount, "<>>\"]");
 	}
+
 	public String getButton() {
 		return button;
 	}
+
 	public void setButton(String button) {
 		this.button = button;
 	}
+
 	public String getCustomerEmail() {
 		return customerEmail;
 	}
+
 	public void setCustomerEmail(String customerEmail) {
-		this.customerEmail = customerEmail;
+		this.customerEmail = trimAndConvert(customerEmail, "<>>\"]");
 	}
 
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
-	
+
+		if (!customerEmail
+				.matches("^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"))
+			errors.add("Illegal email");
+		
+		if (depositAmount == null
+				|| (!depositAmount.matches("^(([0-9]+[\\.]?[0-9]+)|[1-9])$") || depositAmount
+						.matches(".*[<>\"].*")))
+			errors.add("Illegal Amount");
+
 		return errors;
 	}
 
-	
-	
-	
 }

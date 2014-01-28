@@ -49,10 +49,10 @@ public class LoginForm extends FormBean{
 		if (psw == null || psw.length() == 0) {
 			errors.add("Password is required");
 		}
-		if (errors.size() > 0)
-		return errors;
+	 
+		if (!email.matches("^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"))
+			errors.add("Illegal email");
 		
-		if (email.matches(".*[<>\"].*")) errors.add("email may not contain angle brackets or quotes");
 		if (psw.matches(".*[<>\"].*")) errors.add("Password may not contain angle brackets or quotes");
 		return errors;
 	}
