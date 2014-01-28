@@ -52,9 +52,12 @@ public class BuyFundForm extends FormBean {
 			errors.add("fund may not contain angle brackets or quotes");
 		if (amount != null
 				&& (!amount.matches("^(([0-9]+[\\.]?[0-9]+)|[1-9])$") || amount
-						.matches(".*[<>\"].*")))
+						.matches(".*[<>\"].*"))) {
 			errors.add("Illegal Amount");
-
+		} else if (amount != null && !amount.equals("")) {
+			double tmp = Double.parseDouble(amount);
+			if (tmp < 0.01) errors.add("The amount should be larger than $0.01");
+		}
 		return errors;
 	}
 }

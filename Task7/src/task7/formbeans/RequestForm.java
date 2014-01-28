@@ -21,8 +21,13 @@ public class RequestForm extends FormBean {
 
 		if (requestAmount == null
 				|| (!requestAmount.matches("^(([0-9]+[\\.]?[0-9]+)|[1-9])$") || requestAmount
-						.matches(".*[<>\"].*")))
+						.matches(".*[<>\"].*"))) {
 			errors.add("Illegal Amount");
+		} else {
+			double tmp = Double.parseDouble(requestAmount);
+			if (tmp < 0.01) errors.add("Requset amount should be larger than $0.01");
+		}
+		
 		return errors;
 	}
 }

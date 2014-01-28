@@ -32,6 +32,8 @@ public class SellFundForm extends FormBean {
 	}
 
 	public double getShare() {
+		if (share == null || share.equals(""))
+			return 0;
 		return Double.parseDouble(share);
 	}
 
@@ -50,8 +52,12 @@ public class SellFundForm extends FormBean {
 			errors.add("fund may not contain angle brackets or quotes");
 		if (share != null
 				&& (!share.matches("^(([0-9]+[\\.]?[0-9]+)|[1-9])$") || share
-						.matches(".*[<>\"].*")))
+						.matches(".*[<>\"].*"))) {
 			errors.add("Illegal Amount");
+		} else if (share != null && !share.equals("")) {
+			double tmp = Double.parseDouble(share);
+			if (tmp < 0.001) errors.add("The share should be larger than 0.001");
+		}
 
 		return errors;
 	}

@@ -117,7 +117,7 @@ public class TransitionDay extends Action {
 							if (newPrice == 0) {
 								errors.add("New Price cannot be \""
 										+ request.getParameter("newPrice_" + i)
-										+ "\"");
+										+ "\", it should be between $1 and $500");
 							}
 							if (newPrice == (long) (oldPrice * 100)) {
 								transitionBeans[i]
@@ -280,7 +280,7 @@ public class TransitionDay extends Action {
 
 				session.setAttribute("fundNum", fundBeans.length);
 				session.setAttribute("transitionDayFunds", transitionBeans);
-				success.add(" Transition Day registered " );
+				success.add(" Transition Day registered ");
 			}
 
 			return "transitionDay.jsp";
@@ -294,6 +294,10 @@ public class TransitionDay extends Action {
 		if (s == null || !s.matches("^(([0-9]+[\\.]?[0-9]+)|[1-9])$"))
 			return 0;
 
-		return (long) (Double.parseDouble(s) * 100);
+		long tmp = (long) (Double.parseDouble(s) * 100);
+		if (tmp < 100 || tmp > 50000)
+			return 0;
+
+		return tmp;
 	}
 }

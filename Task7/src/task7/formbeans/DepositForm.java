@@ -45,8 +45,12 @@ public class DepositForm extends FormBean {
 
 		if (depositAmount != null
 				&& (!depositAmount.matches("^(([0-9]+[\\.]?[0-9]+)|[1-9])$") || depositAmount
-						.matches(".*[<>\"].*")))
+						.matches(".*[<>\"].*"))) {
 			errors.add("Illegal Amount");
+		} else if (depositAmount != null && !depositAmount.equals("")) {
+			double tmp = Double.parseDouble(depositAmount);
+			if (tmp < 0.01 || tmp > Long.valueOf("10000000000")) errors.add("Deposit amount should be between $0.01 and $10,000,000,000");
+		}
 
 		return errors;
 	}
