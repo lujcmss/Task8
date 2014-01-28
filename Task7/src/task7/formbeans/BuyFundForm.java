@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.mybeans.form.FormBean;
 
-public class BuyForm extends FormBean {
+public class BuyFundForm extends FormBean {
 	private String fund;
 	private String amount;
 	private String button;
@@ -32,6 +32,8 @@ public class BuyForm extends FormBean {
 	}
 
 	public double getAmount() {
+		if (amount == null || amount.equals(""))
+			return 0;
 		return Double.parseDouble(amount);
 	}
 
@@ -48,12 +50,11 @@ public class BuyForm extends FormBean {
 
 		if (fund != null && fund.matches(".*[<>\"].*"))
 			errors.add("fund may not contain angle brackets or quotes");
-		if (amount == null
-				|| (!amount.matches("^(([0-9]+[\\.]?[0-9]+)|[1-9])$") || amount
+		if (amount != null
+				&& (!amount.matches("^(([0-9]+[\\.]?[0-9]+)|[1-9])$") || amount
 						.matches(".*[<>\"].*")))
 			errors.add("Illegal Amount");
-		if (fundName == null || fundName.matches(".*[<>\"].*"))
-			errors.add("fund name may not contain angle brackets or quotes");
+
 		return errors;
 	}
 }

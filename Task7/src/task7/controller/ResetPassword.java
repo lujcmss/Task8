@@ -14,46 +14,49 @@ import task7.model.CustomerDAO;
 import task7.model.Model;
 
 public class ResetPassword extends Action {
-	private FormBeanFactory<ResetPasswordForm> formBeanFactory = FormBeanFactory.getInstance(ResetPasswordForm.class);
-	
+	private FormBeanFactory<ResetPasswordForm> formBeanFactory = FormBeanFactory
+			.getInstance(ResetPasswordForm.class);
+
 	private CustomerDAO customerDAO;
-	
+
 	public ResetPassword(Model model) {
 		customerDAO = model.getCustomerDAO();
 	}
 
-	public String getName() { return "resetPassword.do"; }
+	public String getName() {
+		return "resetPassword.do";
+	}
 
 	public String perform(HttpServletRequest request) {
-        // Set up the errors list
-        List<String> errors = new ArrayList<String>();
-        request.setAttribute("errors", errors);
-        HttpSession session = request.getSession();
-        session.setAttribute("curPage", "manageAccounts.do");
-        
+		// Set up the errors list
+		List<String> errors = new ArrayList<String>();
+		request.setAttribute("errors", errors);
+		HttpSession session = request.getSession();
+		session.setAttribute("curPage", "manageAccounts.do");
+
 		try {
 			ResetPasswordForm form = formBeanFactory.create(request);
-			
-			if (!form.isPresent()) {
-	            return "resetPassword.jsp";
-	        }
-			
-			errors.addAll(form.getValidationErrors());
-		    if (errors.size() != 0) {
-		        return "resetPassword.jsp";
-		    }
-		    
-		    synchronized (customerDAO) {
-			    CustomerBean customerBean = (CustomerBean)session.getAttribute("userInfo");
-			    customerBean.setPassword(form.getNewpsw());
-			    customerDAO.update(customerBean);
-			}
-		    
-			return "viewCustomerInformation.do";
-        } catch (Exception e) {
-        	errors.add(e.getMessage());
-        	return "resetPassword.jsp";
-        }
-    }
-}
 
+			if (!form.isPresent()) {
+				return "resetPassword.jsp";
+			}
+
+			errors.addAll(form.getValidationErrors());
+			if (errors.size() != 0) {
+				return "resetPassword.jsp";
+			}
+
+			synchronized (customerDAO) {
+				CustomerBean customerBean = (CustomerBean) session
+						.getAttribute("userInfo");
+				customerBean.setPassword(form.getNewpsw());
+				customerDAO.update(customerBean);
+			}
+
+			return "viewCustomerInformation.do";
+		} catch (Exception e) {
+			errors.add(e.getMessage());
+			return "resetPassword.jsp";
+		}
+	}
+}

@@ -11,6 +11,8 @@ public class DepositForm extends FormBean {
 	private String customerEmail;
 
 	public double getDepositAmount() {
+		if (depositAmount == null || depositAmount.equals(""))
+			return 0;
 		return Double.parseDouble(depositAmount);
 	}
 
@@ -37,12 +39,12 @@ public class DepositForm extends FormBean {
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
 
-		if (!customerEmail
-				.matches("^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"))
-			errors.add("Illegal email");
-		
-		if (depositAmount == null
-				|| (!depositAmount.matches("^(([0-9]+[\\.]?[0-9]+)|[1-9])$") || depositAmount
+		// if (!customerEmail
+		// .matches("^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"))
+		// errors.add("Illegal email");
+
+		if (depositAmount != null
+				&& (!depositAmount.matches("^(([0-9]+[\\.]?[0-9]+)|[1-9])$") || depositAmount
 						.matches(".*[<>\"].*")))
 			errors.add("Illegal Amount");
 

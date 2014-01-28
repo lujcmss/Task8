@@ -13,19 +13,20 @@ public class Logout extends Action {
 	public Logout(Model model) {
 	}
 
-	public String getName() { return "logout.do"; }
+	public String getName() {
+		return "logout.do";
+	}
 
 	public String perform(HttpServletRequest request) {
-        // Set up the errors list
-        List<String> errors = new ArrayList<String>();
-        request.setAttribute("errors", errors);
-        
-        HttpSession session = request.getSession(false);
-        session.setAttribute("user", null);
-        session.setAttribute("form", null);
-        session.setAttribute("fundInfo", null);
+		// Set up the errors list
+		List<String> errors = new ArrayList<String>();
+		request.setAttribute("errors", errors);
 
-	    return "login.do";
-    }
+		HttpSession session = request.getSession(false);
+		session.setAttribute("user", null);
+		session.setAttribute("form", null);
+		session.setAttribute("fundInfo", null);
+
+		return "login.do";
+	}
 }
-

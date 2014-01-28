@@ -11,9 +11,9 @@ public class EmployeeDAO {
 	public void insert(EmployeeBean employeeBean) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-	        session.beginTransaction();
-	        session.save(employeeBean);
-	        session.getTransaction().commit();
+			session.beginTransaction();
+			session.save(employeeBean);
+			session.getTransaction().commit();
 		} catch (Exception e) {
 			if (session.getTransaction() != null) {
 				session.getTransaction().rollback();
@@ -22,6 +22,7 @@ public class EmployeeDAO {
 			session.close();
 		}
 	}
+
 	public void update(EmployeeBean employeeBean) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
@@ -36,27 +37,32 @@ public class EmployeeDAO {
 			session.close();
 		}
 	}
+
 	public EmployeeBean getEmployeeByEmail(String email) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		Query query = session.createQuery("from EmployeeBean where email = :email ");
+		Query query = session
+				.createQuery("from EmployeeBean where email = :email ");
 		query.setParameter("email", email);
 		List<?> list = (List<?>) query.list();
-	  
-		if (list.size() == 0) return null;
+
+		if (list.size() == 0)
+			return null;
 		EmployeeBean employeeBean = (EmployeeBean) list.get(0);
 
 		session.close();
 		return employeeBean;
 	}
-	
+
 	public boolean hasEmployee(String email) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		Query query = session.createQuery("from EmployeeBean where email = :email ");
+		Query query = session
+				.createQuery("from EmployeeBean where email = :email ");
 		query.setParameter("email", email);
 		List<?> list = (List<?>) query.list();
 
 		session.close();
-		if (list.size() == 0) return false;
+		if (list.size() == 0)
+			return false;
 		return true;
 	}
 }

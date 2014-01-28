@@ -134,8 +134,8 @@ public class CreateCustomerForm extends FormBean {
 		}
 
 
-		if (!email.matches("^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"))
-			errors.add("Illegal email");
+		//if (!email.matches("^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"))
+		//	errors.add("Illegal email");
 		if (psw.matches(".*[<>\"].*"))
 			errors.add("Password may not contain angle brackets or quotes");
 		if (!confirm.equals(psw))

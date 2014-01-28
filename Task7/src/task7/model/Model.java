@@ -14,10 +14,10 @@ public class Model {
 
 	public Model(ServletConfig config) throws ServletException {
 		try {
-			//String jdbcDriver = config.getInitParameter("jdbcDriverName");
-			//String jdbcURL    = config.getInitParameter("jdbcURL");
-			
-			//ConnectionPool pool = new ConnectionPool(jdbcDriver, jdbcURL);
+			// String jdbcDriver = config.getInitParameter("jdbcDriverName");
+			// String jdbcURL = config.getInitParameter("jdbcURL");
+
+			// ConnectionPool pool = new ConnectionPool(jdbcDriver, jdbcURL);
 			customerDAO = new CustomerDAO();
 			employeeDAO = new EmployeeDAO();
 			fundDAO = new FundDAO();
@@ -29,13 +29,32 @@ public class Model {
 			throw new ServletException(e);
 		}
 	}
-	
-	public CustomerDAO getCustomerDAO() {return customerDAO;}
-	public EmployeeDAO getEmployeeDAO() {return employeeDAO;}
-	public FundDAO getFundDAO() {return fundDAO;}
-	public FundPriceHistoryDAO getFundPriceHistoryDAO() {return fundPriceHistoryDAO;}
-	public PositionDAO getPositionDAO() {return positionDAO;}
-	public TransactionDAO getTransactionDAO() {return transactionDAO;}
-	public DateDAO getDateDAO() {return dateDAO;}
-}
 
+	public CustomerDAO getCustomerDAO() {
+		return customerDAO;
+	}
+
+	public EmployeeDAO getEmployeeDAO() {
+		return employeeDAO;
+	}
+
+	public FundDAO getFundDAO() {
+		return fundDAO;
+	}
+
+	public FundPriceHistoryDAO getFundPriceHistoryDAO() {
+		return fundPriceHistoryDAO;
+	}
+
+	public PositionDAO getPositionDAO() {
+		return positionDAO;
+	}
+
+	public TransactionDAO getTransactionDAO() {
+		return transactionDAO;
+	}
+
+	public DateDAO getDateDAO() {
+		return dateDAO;
+	}
+}

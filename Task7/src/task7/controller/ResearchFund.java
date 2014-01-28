@@ -6,64 +6,76 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import task7.databeans.CustomerBean;
 import task7.databeans.FundBean;
 import task7.databeans.FundInfoBean;
+import task7.model.CustomerDAO;
 import task7.model.DateDAO;
 import task7.model.FundDAO;
 import task7.model.FundPriceHistoryDAO;
 import task7.model.Model;
 
 public class ResearchFund extends Action {
-	
+
 	private FundDAO fundDAO;
+	private CustomerDAO customerDAO;
 	private FundPriceHistoryDAO fundPriceHistoryDAO;
 	private DateDAO dateDAO;
-	
+
 	public ResearchFund(Model model) {
 		fundDAO = model.getFundDAO();
 		dateDAO = model.getDateDAO();
+		customerDAO = model.getCustomerDAO();
 		fundPriceHistoryDAO = model.getFundPriceHistoryDAO();
 	}
 
-	public String getName() { return "researchFund.do"; }
+	public String getName() {
+		return "researchFund.do";
+	}
 
 	public String perform(HttpServletRequest request) {
-        // Set up the errors list
-        List<String> errors = new ArrayList<String>();
-        request.setAttribute("errors", errors);
-        HttpSession session = request.getSession(true);
-        session.setAttribute("curPage", "funds.do");
-        
+		// Set up the errors list
+		List<String> errors = new ArrayList<String>();
+		request.setAttribute("errors", errors);
+		HttpSession session = request.getSession(true);
+		session.setAttribute("curPage", "funds.do");
+
 		try {
-			//CustomerBean customerBean = (CustomerBean)session.getAttribute("user");
+			CustomerBean customerBean = (CustomerBean)session.getAttribute("user");
+			session.setAttribute("user",
+					customerDAO.getCustomerByEmail(customerBean.getEmail()));
+			
 			FundBean[] fundBeans = fundDAO.getAllFunds();
 			FundInfoBean[] fundInfoBeans = new FundInfoBean[fundBeans.length];
 
-			//PositionBean[] positionBeans = positionDAO.getByCustomerId(customerBean.getCustomerId());
+			// PositionBean[] positionBeans =
+			// positionDAO.getByCustomerId(customerBean.getCustomerId());
 
 			for (int i = 0; i < fundBeans.length; i++) {
 				long nowPrice = fundPriceHistoryDAO.getPriceByFundAndDate(
-						fundBeans[i].getFundId(), dateDAO.getDate().getNewDate());
+						fundBeans[i].getFundId(), dateDAO.getDate()
+								.getNewDate());
 
 				fundInfoBeans[i] = new FundInfoBean();
 				fundInfoBeans[i].setFundPrice(nowPrice / 100.0);
-				
+
 				fundInfoBeans[i].setName(fundBeans[i].getName());
 				fundInfoBeans[i].setSymbol(fundBeans[i].getSymbol());
-				
+
 				/*
-				for (int j = 0; j < positionBeans.length; j++)
-					if (positionBeans[j].getFundBean().getFundId() == fundBeans[i].getFundId()) {
-					fundInfoBeans[i].setShare(positionBeans[j].getShares() / 100.0);
-				}
-				*/
+				 * for (int j = 0; j < positionBeans.length; j++) if
+				 * (positionBeans[j].getFundBean().getFundId() ==
+				 * fundBeans[i].getFundId()) {
+				 * fundInfoBeans[i].setShare(positionBeans[j].getShares() /
+				 * 100.0); }
+				 */
 			}
 			session.setAttribute("fundInfo", fundInfoBeans);
-			
+
 			return "researchFund.jsp";
-        } catch (Exception e) {
-        	errors.add(e.getMessage());
-        	return "researchFund.jsp";
-        }
-    }
+		} catch (Exception e) {
+			errors.add(e.getMessage());
+			return "researchFund.jsp";
+		}
+	}
 }

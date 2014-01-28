@@ -16,63 +16,71 @@ import task7.model.Model;
 import task7.model.TransactionDAO;
 
 public class RequestCheck extends Action {
-	private FormBeanFactory<RequestForm> formBeanFactory = FormBeanFactory.getInstance(RequestForm.class);
-	
+	private FormBeanFactory<RequestForm> formBeanFactory = FormBeanFactory
+			.getInstance(RequestForm.class);
+
 	private TransactionDAO transactionDAO;
 	private CustomerDAO customerDAO;
-	
+
 	public RequestCheck(Model model) {
 		transactionDAO = model.getTransactionDAO();
 		customerDAO = model.getCustomerDAO();
 	}
 
-	public String getName() { return "requestCheck.do"; }
+	public String getName() {
+		return "requestCheck.do";
+	}
 
 	public String perform(HttpServletRequest request) {
-        // Set up the errors list
-        List<String> errors = new ArrayList<String>();
-        request.setAttribute("errors", errors);
-        HttpSession session = request.getSession();
-        session.setAttribute("curPage", "requestCheck.do");
-        
+		// Set up the errors list
+		List<String> errors = new ArrayList<String>();
+		request.setAttribute("errors", errors);
+		HttpSession session = request.getSession();
+		session.setAttribute("curPage", "requestCheck.do");
+
 		try {
 			RequestForm form = formBeanFactory.create(request);
-			CustomerBean customerBean = (CustomerBean) session.getAttribute("user"); 
+			CustomerBean customerBean = (CustomerBean) session
+					.getAttribute("user");
+			session.setAttribute("user",
+					customerDAO.getCustomerByEmail(customerBean.getEmail()));
 
 			if (!form.isPresent()) {
-	            return "requestCheck.jsp";
-	        }
+				return "requestCheck.jsp";
+			}
 
 			errors.addAll(form.getValidationErrors());
-			
+
 			if (errors.size() != 0) {
-		        return "requestCheck.jsp";
-		    }
-			
+				return "requestCheck.jsp";
+			}
+
 			long amount = (long) (form.getRequestAmount() * 100);
-			
+
 			synchronized (customerDAO) {
-				long cash = customerDAO.getCustomerByEmail(customerBean.getEmail()).getCash();
+				long cash = customerDAO.getCustomerByEmail(
+						customerBean.getEmail()).getCash();
 				if (amount > cash) {
 					errors.add("No enough Money.");
-			        return "requestCheck.jsp";
-			    }
-			    customerBean.setCash(cash - amount);
-			    customerDAO.update(customerBean);
+					return "requestCheck.jsp";
+				}
+				customerBean.setCash(cash - amount);
+				customerDAO.update(customerBean);
 			}
-		    
-		    TransactionBean transactionBean = new TransactionBean();
-		    transactionBean.setAmount(amount);
-		    transactionBean.setCustomerBean(customerBean);
-		    transactionBean.setTransactionType("Request");
-		    transactionBean.setStatus("Pending");
-		    transactionDAO.insert(transactionBean);
-			
-		    session.setAttribute("user", customerDAO.getCustomerByEmail(customerBean.getEmail()));
+
+			TransactionBean transactionBean = new TransactionBean();
+			transactionBean.setAmount(amount);
+			transactionBean.setCustomerBean(customerBean);
+			transactionBean.setTransactionType("Request");
+			transactionBean.setStatus("Pending");
+			transactionDAO.insert(transactionBean);
+
+			session.setAttribute("user",
+					customerDAO.getCustomerByEmail(customerBean.getEmail()));
 			return "requestCheck.jsp";
-        } catch (Exception e) {
-        	errors.add(e.getMessage());
-        	return "requestCheck.jsp";
-        }
-    }
+		} catch (Exception e) {
+			errors.add(e.getMessage());
+			return "requestCheck.jsp";
+		}
+	}
 }

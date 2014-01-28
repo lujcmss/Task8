@@ -29,8 +29,9 @@ public class ViewForm extends FormBean {
 			errors.add("email is required");
 		}
 
-		if (!customerEmail.matches("^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"))
-			errors.add("Illegal email");
+		//if (!customerEmail.matches("^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"))
+		//	errors.add("Illegal email");
+		
 		return errors;
 }
 }

@@ -9,31 +9,37 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="TASK7_DATE")
-public class DateBean implements Serializable{
+@Table(name = "TASK7_DATE")
+public class DateBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id @GeneratedValue
+	@Id
+	@GeneratedValue
 	private int dateId;
 
 	private Date oldDate;
 	private Date newDate;
-	
+
 	public int getDateId() {
 		return dateId;
 	}
+
 	public void setDateId(int dateId) {
 		this.dateId = dateId;
 	}
+
 	public Date getOldDate() {
 		return oldDate;
 	}
+
 	public void setOldDate(Date oldDate) {
 		this.oldDate = oldDate;
 	}
+
 	public Date getNewDate() {
 		return newDate;
 	}
+
 	public void setNewDate(Date newDate) {
 		this.newDate = newDate;
 	}

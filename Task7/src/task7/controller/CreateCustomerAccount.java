@@ -14,60 +14,63 @@ import task7.model.CustomerDAO;
 import task7.model.Model;
 
 public class CreateCustomerAccount extends Action {
-	private FormBeanFactory<CreateCustomerForm> formBeanFactory = FormBeanFactory.getInstance(CreateCustomerForm.class);
-	
+	private FormBeanFactory<CreateCustomerForm> formBeanFactory = FormBeanFactory
+			.getInstance(CreateCustomerForm.class);
+
 	private CustomerDAO customerDAO;
-	
+
 	public CreateCustomerAccount(Model model) {
 		customerDAO = model.getCustomerDAO();
 	}
 
-	public String getName() { return "createCustomerAccount.do"; }
+	public String getName() {
+		return "createCustomerAccount.do";
+	}
 
 	public String perform(HttpServletRequest request) {
-        // Set up the errors list
-        List<String> errors = new ArrayList<String>();
-        request.setAttribute("errors", errors);
-        HttpSession session = request.getSession(true);
-        session.setAttribute("curPage", "manageAccounts.do");
-        
+		// Set up the errors list
+		List<String> errors = new ArrayList<String>();
+		request.setAttribute("errors", errors);
+		HttpSession session = request.getSession(true);
+		session.setAttribute("curPage", "manageAccounts.do");
+
 		try {
 			CreateCustomerForm form = formBeanFactory.create(request);
 			session.setAttribute("form", form);
-			
+
 			if (!form.isPresent()) {
-	            return "createCustomerAccount.jsp";
-	        }
-			
+				return "createCustomerAccount.jsp";
+			}
+
 			errors.addAll(form.getValidationErrors());
-			
-		    if (customerDAO.hasCustomer((String)form.getEmail()) == true) {
-		    	errors.add("Email already been used.");
-		    }
-		    
-		    if (errors.size() != 0) {
-		        return "createCustomerAccount.jsp";
-		    }
-		    
-		    synchronized (customerDAO) {	
-			    CustomerBean customerBean = new CustomerBean();
-			    customerBean.setAddr1(form.getAddr1());
-			    customerBean.setAddr2(form.getAddr2());
-			    customerBean.setCash(0);
-			    customerBean.setCity(form.getCity());
-			    customerBean.setCustomerEmail(form.getEmail());
-			    customerBean.setFirstName(form.getFirstName());
-			    customerBean.setLastName(form.getLastName());
-			    customerBean.setPassword(form.getPsw());
-			    customerBean.setState(form.getState());
-			    customerBean.setZip(form.getZipCode());
-			    customerDAO.insert(customerBean);
-		    }
-		    
+
+			if (customerDAO.hasCustomer((String) form.getEmail()) == true) {
+				errors.add("Email already been used.");
+			}
+
+			if (errors.size() != 0) {
+				return "createCustomerAccount.jsp";
+			}
+
+			synchronized (customerDAO) {
+				CustomerBean customerBean = new CustomerBean();
+				customerBean.setAddr1(form.getAddr1());
+				customerBean.setAddr2(form.getAddr2());
+				customerBean.setCash(0);
+				customerBean.setCity(form.getCity());
+				customerBean.setCustomerEmail(form.getEmail());
+				customerBean.setFirstName(form.getFirstName());
+				customerBean.setLastName(form.getLastName());
+				customerBean.setPassword(form.getPsw());
+				customerBean.setState(form.getState());
+				customerBean.setZip(form.getZipCode());
+				customerDAO.insert(customerBean);
+			}
+
 			return "home.jsp";
-        } catch (Exception e) {
-        	errors.add(e.getMessage());
-        	return "createCustomerAccount.jsp";
-        }
-    }
+		} catch (Exception e) {
+			errors.add(e.getMessage());
+			return "createCustomerAccount.jsp";
+		}
+	}
 }

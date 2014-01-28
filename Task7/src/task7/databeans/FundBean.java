@@ -7,19 +7,19 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="TASK7_FUND")
+@Table(name = "TASK7_FUND")
 public class FundBean {
-	
-	@Id @GeneratedValue
+
+	@Id
+	@GeneratedValue
 	private int fundId;
- 
- 
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String name;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String symbol;
-	
+
 	public int getFundId() {
 		return fundId;
 	}

@@ -15,83 +15,88 @@ import task7.model.EmployeeDAO;
 import task7.model.Model;
 
 public class Login extends Action {
-	private FormBeanFactory<LoginForm> formBeanFactory = FormBeanFactory.getInstance(LoginForm.class);
-	
+	private FormBeanFactory<LoginForm> formBeanFactory = FormBeanFactory
+			.getInstance(LoginForm.class);
+
 	private EmployeeDAO employeeDAO;
 	private CustomerDAO customerDAO;
-	
+
 	public Login(Model model) {
 		employeeDAO = model.getEmployeeDAO();
 		customerDAO = model.getCustomerDAO();
 	}
 
-	public String getName() { return "login.do"; }
+	public String getName() {
+		return "login.do";
+	}
 
 	public String perform(HttpServletRequest request) {
-        // Set up the errors list
-        List<String> errors = new ArrayList<String>();
-        request.setAttribute("errors", errors);
-        HttpSession session = request.getSession();
-        
+		// Set up the errors list
+		List<String> errors = new ArrayList<String>();
+		request.setAttribute("errors", errors);
+		HttpSession session = request.getSession();
+
 		try {
-			//Testing login form bean, by Patrick
+			// Testing login form bean, by Patrick
 			LoginForm form = formBeanFactory.create(request);
 
 			if (!form.isPresent()) {
-	            return "login.jsp";
-	        }
-			
+				return "login.jsp";
+			}
+
 			errors.addAll(form.getValidationErrors());
-		        if (errors.size() != 0) {
-		            return "login.jsp";
-		        }
-		    
-		    if (form.getUserType().equals("")) {
-		    	errors.add("Please select user type.");
-		    	return "login.jsp";
-		    }
+			if (errors.size() != 0) {
+				return "login.jsp";
+			}
 
-		    if (form.getUserType().equals("Employee")) {
-		    	EmployeeBean employeeBean = employeeDAO.getEmployeeByEmail(form.getEmail());
-		    	if (employeeBean == null) {
-		    		errors.add("No such Employee");
-		    		return "login.jsp";
-		    	}
-		        if (!employeeBean.getPassword().equals(form.getPsw())) {
-		            errors.add("Incorrect password");
-		            return "login.jsp";
-		        }
-		        session.setAttribute("user", employeeBean);
-		    } else {
-		    	CustomerBean customerBean = customerDAO.getCustomerByEmail(form.getEmail());
-		    	if (customerBean == null) {
-		    		errors.add("No such Customer");
-		    		return "login.jsp";
-		    	}
-		        if (!customerBean.getPassword().equals(form.getPsw())) {
-		            errors.add("Incorrect password");
-		            return "login.jsp";
-		        }
-		        session.setAttribute("user", customerBean);
-		    }
-		    
-	        session.setAttribute("userType", form.getUserType());
-	        session.setAttribute("email", form.getEmail());
-	        
-	        String[] remembers = request.getParameterValues("remember");
+			if (form.getUserType().equals("")) {
+				errors.add("Please select user type.");
+				return "login.jsp";
+			}
 
-	        if (remembers == null) {
-	        	session.setAttribute("remember", null);
-	        	session.setAttribute("password", null);
-	        } else {
-	        	session.setAttribute("remember", "remember");
-	        	session.setAttribute("password", form.getPsw());
-	        }
-		    
+			if (form.getUserType().equals("Employee")) {
+				EmployeeBean employeeBean = employeeDAO.getEmployeeByEmail(form
+						.getEmail());
+				if (employeeBean == null) {
+					errors.add("No such Employee");
+					return "login.jsp";
+				}
+				if (!employeeBean.getPassword().equals(form.getPsw())) {
+					errors.add("Incorrect password");
+					return "login.jsp";
+				}
+				session.setAttribute("user", employeeBean);
+			} else {
+				CustomerBean customerBean = customerDAO.getCustomerByEmail(form
+						.getEmail());
+				if (customerBean == null) {
+					errors.add("No such Customer");
+					return "login.jsp";
+				}
+				if (!customerBean.getPassword().equals(form.getPsw())) {
+					errors.add("Incorrect password");
+					return "login.jsp";
+				}
+				session.setAttribute("user", customerBean);
+			}
+
+			session.setAttribute("userType", form.getUserType());
+			session.setAttribute("email", form.getEmail());
+
+			String[] remembers = request.getParameterValues("remember");
+
+			if (remembers == null) {
+				session.setAttribute("remember", null);
+				session.setAttribute("password", null);
+			} else {
+				session.setAttribute("remember", "remember");
+				session.setAttribute("password", form.getPsw());
+			}
+
 			return "home.do";
-        } catch (Exception e) {
-        	errors.add(e.getMessage());
-        	return "login.jsp";
-        }
-    }
+		} catch (Exception e) {
+			errors.add(e.getMessage());
+			return "login.jsp";
+		}
+	}
 }

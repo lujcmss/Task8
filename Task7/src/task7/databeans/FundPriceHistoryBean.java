@@ -11,21 +11,21 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="TASK7_FUNDPRICEHISTORY")
-public class FundPriceHistoryBean implements Serializable{
+@Table(name = "TASK7_FUNDPRICEHISTORY")
+public class FundPriceHistoryBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@ManyToOne
-	@JoinColumn(referencedColumnName="FUNDID")
+	@JoinColumn(referencedColumnName = "FUNDID")
 	private FundBean fundBean;
 
 	@Id
 	private Date priceDate;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private long price;
-	
+
 	public FundBean getFundBean() {
 		return fundBean;
 	}

@@ -11,9 +11,9 @@ public class DateDAO {
 	public void insert(DateBean time) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-	        session.beginTransaction();
-	        session.save(time);
-	        session.getTransaction().commit();
+			session.beginTransaction();
+			session.save(time);
+			session.getTransaction().commit();
 		} catch (Exception e) {
 			if (session.getTransaction() != null) {
 				session.getTransaction().rollback();
@@ -22,6 +22,7 @@ public class DateDAO {
 			session.close();
 		}
 	}
+
 	public void update(DateBean time) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
@@ -36,13 +37,14 @@ public class DateDAO {
 			session.close();
 		}
 	}
-	
+
 	public DateBean getDate() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Query query = session.createQuery("from DateBean");
 		List<?> list = (List<?>) query.list();
-		
-		if (list.size() == 0) return null;
+
+		if (list.size() == 0)
+			return null;
 		DateBean dateBean = (DateBean) list.get(0);
 
 		session.close();

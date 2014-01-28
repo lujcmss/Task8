@@ -11,30 +11,31 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="TASK7_TRANSACTION")
+@Table(name = "TASK7_TRANSACTION")
 public class TransactionBean {
-	
-	@Id @GeneratedValue
+
+	@Id
+	@GeneratedValue
 	private int transactionId;
-	
+
 	@ManyToOne
-	@JoinColumn(referencedColumnName="CUSTOMERID")
+	@JoinColumn(referencedColumnName = "CUSTOMERID")
 	private CustomerBean customerBean;
-	
+
 	@ManyToOne
-	@JoinColumn(referencedColumnName="FUNDID")
+	@JoinColumn(referencedColumnName = "FUNDID")
 	private FundBean fundBean;
-	
+
 	private Date executeDate;
 
 	private long shares;
 
 	private long amount;
 
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String transactionType;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String status;
 
 	public String getStatus() {

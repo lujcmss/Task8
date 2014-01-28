@@ -6,21 +6,21 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="TASK7_EMPLOYEE")
+@Table(name = "TASK7_EMPLOYEE")
 public class EmployeeBean {
 
 	@Id
 	private String email;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String password;
-	
-	@Column(nullable=false)
-    private String firstName;
-	
-	@Column(nullable=false)
-    private String lastName;
-	
+
+	@Column(nullable = false)
+	private String firstName;
+
+	@Column(nullable = false)
+	private String lastName;
+
 	public String getEmail() {
 		return email;
 	}

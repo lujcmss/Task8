@@ -10,21 +10,21 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="TASK7_POSITION")
-public class PositionBean implements Serializable{
+@Table(name = "TASK7_POSITION")
+public class PositionBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@ManyToOne
-	@JoinColumn(referencedColumnName="CUSTOMERID")
+	@JoinColumn(referencedColumnName = "CUSTOMERID")
 	private CustomerBean customerBean;
-	
+
 	@Id
 	@ManyToOne
-	@JoinColumn(referencedColumnName="FUNDID")
+	@JoinColumn(referencedColumnName = "FUNDID")
 	private FundBean fundBean;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private long shares;
 
 	public CustomerBean getCustomerBean() {
@@ -49,5 +49,5 @@ public class PositionBean implements Serializable{
 
 	public void setShares(long shares) {
 		this.shares = shares;
-	}	
+	}
 }
