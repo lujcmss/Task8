@@ -44,6 +44,8 @@ public class SellFund extends Action {
 		// Set up the errors list
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
+		List<String> success = new ArrayList<String>();
+		request.setAttribute("success", success);
 		HttpSession session = request.getSession();
 		session.setAttribute("curPage", "funds.do");
 		session.setAttribute("sellFundInfo", null);
@@ -154,6 +156,7 @@ public class SellFund extends Action {
 				}
 
 				session.setAttribute("sellFundInfo", fundInfoBeans);
+				success.add(" " +form.getFundName() + " Sold! (Pending)");
 			}
 
 			session.setAttribute("user",

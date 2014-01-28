@@ -49,7 +49,9 @@ public class BuyFund extends Action {
 	public String perform(HttpServletRequest request) {
 		// Set up the errors list
 		List<String> errors = new ArrayList<String>();
+		List<String> success = new ArrayList<String>();
 		request.setAttribute("errors", errors);
+		request.setAttribute("success", success);
 		HttpSession session = request.getSession();
 		session.setAttribute("curPage", "funds.do");
 		session.setAttribute("fundInfo", null);
@@ -146,10 +148,12 @@ public class BuyFund extends Action {
 				transactionBean.setTransactionType("Buy");
 				transactionBean.setStatus("Pending");
 				transactionDAO.insert(transactionBean);
+				success.add(form.getFundName()+ " Bought (Pending)");
 			}
 
 			session.setAttribute("user",
 					customerDAO.getCustomerByEmail(customerBean.getEmail()));
+			
 			return "buyFund.jsp";
 		} catch (Exception e) {
 			System.out.println(e);

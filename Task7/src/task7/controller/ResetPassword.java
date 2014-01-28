@@ -31,6 +31,8 @@ public class ResetPassword extends Action {
 		// Set up the errors list
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
+		List<String> success = new ArrayList<String>();
+		request.setAttribute("success", success);
 		HttpSession session = request.getSession();
 		session.setAttribute("curPage", "manageAccounts.do");
 
@@ -51,9 +53,10 @@ public class ResetPassword extends Action {
 						.getAttribute("userInfo");
 				customerBean.setPassword(form.getNewpsw());
 				customerDAO.update(customerBean);
+				success.add(" Password changed");
 			}
-
-			return "viewCustomerInformation.do";
+			
+			return "resetPassword.jsp";
 		} catch (Exception e) {
 			errors.add(e.getMessage());
 			return "resetPassword.jsp";

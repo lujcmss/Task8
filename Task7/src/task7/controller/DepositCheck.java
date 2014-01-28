@@ -35,6 +35,8 @@ public class DepositCheck extends Action {
 		// Set up the errors list
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
+		List<String> success = new ArrayList<String>();
+		request.setAttribute("success", success);
 		HttpSession session = request.getSession();
 		session.setAttribute("curPage", "depositCheck.do");
 
@@ -102,6 +104,7 @@ public class DepositCheck extends Action {
 				transactionBean.setTransactionType("Deposit");
 				transactionBean.setStatus("Pending");
 				transactionDAO.insert(transactionBean);
+				success.add(form.getCustomerEmail() + " Got a deposit for $" + form.getDepositAmount());
 			}
 
 			return "depositCheck.jsp";

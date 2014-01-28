@@ -12,6 +12,7 @@
 					<c:out value="${user.lastName}" />
 				</h1>
 			</div>
+			<jsp:include page="success-list.jsp"/>
 			<table class="table table-striped">
 				<h3>Basic Information</h3>
 				<div style="text-align: right">

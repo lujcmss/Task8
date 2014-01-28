@@ -35,6 +35,8 @@ public class ChangePassword extends Action {
 		// Set up the errors list
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
+		List<String> success = new ArrayList<String>();
+		request.setAttribute("success", success);
 		HttpSession session = request.getSession();
 		session.setAttribute("curPage", "home.do");
 
@@ -61,6 +63,7 @@ public class ChangePassword extends Action {
 
 				employeeBean.setPassword(form.getNewpsw());
 				employeeDAO.update(employeeBean);
+				success.add("Password Changed");
 			} else {
 				CustomerBean customerBean = customerDAO
 						.getCustomerByEmail((String) session
@@ -74,9 +77,12 @@ public class ChangePassword extends Action {
 
 					customerBean.setPassword(form.getNewpsw());
 					customerDAO.update(customerBean);
+					success.add("Password Changed");
+					
 				}
 			}
-			return "home.do";
+			
+			return "changePassword.jsp";
 		} catch (Exception e) {
 			errors.add(e.getMessage());
 			return "changePassword.jsp";

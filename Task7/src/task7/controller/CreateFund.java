@@ -32,6 +32,8 @@ public class CreateFund extends Action {
 		// Set up the errors list
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
+		List<String> success = new ArrayList<String>();
+		request.setAttribute("success", success);
 		HttpSession session = request.getSession();
 		session.setAttribute("funds", fundDAO.getAllFunds());
 		session.setAttribute("curPage", "createFund.do");
@@ -58,7 +60,8 @@ public class CreateFund extends Action {
 				FundBean fundBean = new FundBean();
 				fundBean.setName(form.getFund());
 				fundBean.setSymbol(form.getTicker());
-				fundDAO.insert(fundBean);	
+				fundDAO.insert(fundBean);
+				success.add(form.getFund()+ " Created!");
 			}
 			
 			session.setAttribute("funds", fundDAO.getAllFunds());

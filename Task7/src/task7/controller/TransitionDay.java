@@ -50,6 +50,8 @@ public class TransitionDay extends Action {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 		HttpSession session = request.getSession();
+		List<String> success = new ArrayList<String>();
+		request.setAttribute("success", success);
 		session.setAttribute("curPage", "transitionDay.do");
 		Random random = new Random();
 
@@ -278,6 +280,7 @@ public class TransitionDay extends Action {
 
 				session.setAttribute("fundNum", fundBeans.length);
 				session.setAttribute("transitionDayFunds", transitionBeans);
+				success.add(" Transition Day registered " );
 			}
 
 			return "transitionDay.jsp";

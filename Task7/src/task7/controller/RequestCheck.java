@@ -35,6 +35,8 @@ public class RequestCheck extends Action {
 		// Set up the errors list
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
+		List<String> success = new ArrayList<String>();
+		request.setAttribute("success", success);
 		HttpSession session = request.getSession();
 		session.setAttribute("curPage", "requestCheck.do");
 
@@ -74,7 +76,7 @@ public class RequestCheck extends Action {
 			transactionBean.setTransactionType("Request");
 			transactionBean.setStatus("Pending");
 			transactionDAO.insert(transactionBean);
-
+			success.add(" $"+form.getRequestAmount()+" has been requested for withdrawal");
 			session.setAttribute("user",
 					customerDAO.getCustomerByEmail(customerBean.getEmail()));
 			return "requestCheck.jsp";
