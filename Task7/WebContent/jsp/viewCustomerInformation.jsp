@@ -14,7 +14,7 @@
 			action="viewCustomerInformation.do">
 			<div class="form-group">
 				<input type="text" class="form-control"
-					placeholder="Search user email here" autofocus name="customerEmail">
+					placeholder="Search username here" autofocus name="customerEmail">
 			</div>
 			<button type="submit" class="btn btn-default" name="button"
 				value="search">Search</button>
@@ -105,7 +105,7 @@
 											minFractionDigits="2" value="${price}" /></td>
 									<td><fmt:formatNumber type="number" maxFractionDigits="3"
 											minFractionDigits="3" value="${share}" /></td>
-									<td>$<c:out value="$" />
+									<td>$<c:out value="" />
 										<fmt:formatNumber type="number" maxFractionDigits="2"
 											minFractionDigits="2" value="${share * price}" /></td>
 									<td></td>

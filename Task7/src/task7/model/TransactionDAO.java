@@ -55,8 +55,8 @@ public class TransactionDAO {
 		List<?> list = (List<?>) query.list();
 		TransactionBean[] transactionBeans = list
 				.toArray(new TransactionBean[list.size()]);
-
 		session.close();
+		
 		return transactionBeans;
 	}
 
@@ -68,8 +68,8 @@ public class TransactionDAO {
 		List<?> list = (List<?>) query.list();
 		TransactionBean[] transactionBeans = list
 				.toArray(new TransactionBean[list.size()]);
-
 		session.close();
+		
 		return transactionBeans;
 	}
 }

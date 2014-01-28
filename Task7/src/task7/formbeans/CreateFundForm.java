@@ -14,7 +14,7 @@ public class CreateFundForm extends FormBean {
 	}
 
 	public void setFund(String fund) {
-		this.fund = trimAndConvert(fund, "<>>\"]");
+		this.fund = trimAndConvert(fund, "<>>\"]").toLowerCase();
 	}
 
 	public String getTicker() {
@@ -22,7 +22,7 @@ public class CreateFundForm extends FormBean {
 	}
 
 	public void setTicker(String ticker) {
-		this.ticker = trimAndConvert(ticker, "<>>\"]");
+		this.ticker = trimAndConvert(ticker, "<>>\"]").toUpperCase();
 	}
 
 	public List<String> getValidationErrors() {

@@ -44,12 +44,11 @@ public class EmployeeDAO {
 				.createQuery("from EmployeeBean where email = :email ");
 		query.setParameter("email", email);
 		List<?> list = (List<?>) query.list();
-
+		session.close();
+		
 		if (list.size() == 0)
 			return null;
 		EmployeeBean employeeBean = (EmployeeBean) list.get(0);
-
-		session.close();
 		return employeeBean;
 	}
 
@@ -59,8 +58,8 @@ public class EmployeeDAO {
 				.createQuery("from EmployeeBean where email = :email ");
 		query.setParameter("email", email);
 		List<?> list = (List<?>) query.list();
-
 		session.close();
+		
 		if (list.size() == 0)
 			return false;
 		return true;

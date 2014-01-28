@@ -45,24 +45,23 @@ public class CreateFund extends Action {
 
 			errors.addAll(form.getValidationErrors());
 
-			if (fundDAO.hasFund(form.getFund()) == true
-					|| fundDAO.hasTicker(form.getTicker()) == true) {
-				errors.add("Fund already exist.");
-			}
-
-			if (errors.size() != 0) {
-				return "createFund.jsp";
-			}
-
 			synchronized (fundDAO) {
+				if (fundDAO.hasFund(form.getFund()) == true
+						|| fundDAO.hasTicker(form.getTicker()) == true) {
+					errors.add("Fund already exist.");
+				}
+	
+				if (errors.size() != 0) {
+					return "createFund.jsp";
+				}
+
 				FundBean fundBean = new FundBean();
 				fundBean.setName(form.getFund());
 				fundBean.setSymbol(form.getTicker());
-				fundDAO.insert(fundBean);
-
-				session.setAttribute("funds", fundDAO.getAllFunds());
+				fundDAO.insert(fundBean);	
 			}
-
+			
+			session.setAttribute("funds", fundDAO.getAllFunds());
 			return "createFund.jsp";
 		} catch (Exception e) {
 			errors.add(e.getMessage());

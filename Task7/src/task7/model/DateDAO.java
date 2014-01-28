@@ -42,12 +42,11 @@ public class DateDAO {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Query query = session.createQuery("from DateBean");
 		List<?> list = (List<?>) query.list();
-
+		session.close();
+		
 		if (list.size() == 0)
 			return null;
 		DateBean dateBean = (DateBean) list.get(0);
-
-		session.close();
 		return dateBean;
 	}
 }

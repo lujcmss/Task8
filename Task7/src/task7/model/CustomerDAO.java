@@ -44,12 +44,11 @@ public class CustomerDAO {
 				.createQuery("from CustomerBean where email = :email ");
 		query.setParameter("email", email);
 		List<?> list = (List<?>) query.list();
+		session.close();
 
 		if (list.size() == 0)
 			return null;
 		CustomerBean customerBean = (CustomerBean) list.get(0);
-
-		session.close();
 		return customerBean;
 	}
 
@@ -59,8 +58,8 @@ public class CustomerDAO {
 				.createQuery("from CustomerBean where email = :email ");
 		query.setParameter("email", email);
 		List<?> list = (List<?>) query.list();
-
 		session.close();
+
 		if (list.size() == 0)
 			return false;
 		return true;
@@ -72,8 +71,8 @@ public class CustomerDAO {
 		List<?> list = (List<?>) query.list();
 		CustomerBean[] customerBeans = list.toArray(new CustomerBean[list
 				.size()]);
-
 		session.close();
+
 		return customerBeans;
 	}
 }

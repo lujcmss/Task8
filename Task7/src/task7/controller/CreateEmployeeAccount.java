@@ -43,15 +43,15 @@ public class CreateEmployeeAccount extends Action {
 
 			errors.addAll(form.getValidationErrors());
 
-			if (employeeDAO.hasEmployee(form.getEmail()) == true) {
-				errors.add("Email already been used.");
-			}
-
-			if (errors.size() != 0) {
-				return "createEmployeeAccount.jsp";
-			}
-
 			synchronized (employeeDAO) {
+				if (employeeDAO.hasEmployee(form.getEmail()) == true) {
+					errors.add("Username already been used.");
+				}
+	
+				if (errors.size() != 0) {
+					return "createEmployeeAccount.jsp";
+				}
+
 				EmployeeBean employeeBean = new EmployeeBean();
 				employeeBean.setEmail(form.getEmail());
 				employeeBean.setFirstName(form.getFirstName());

@@ -171,6 +171,10 @@ public class TransitionDay extends Action {
 								if (customerBean == null)
 									continue;
 
+								customerBean.setLastTradingDay(date
+										.getNewDate());
+								customerDAO.update(customerBean);
+
 								if (type.equals("Buy")) {
 									FundBean fundBean = tran.getFundBean();
 									PositionBean positionBean = positionDAO

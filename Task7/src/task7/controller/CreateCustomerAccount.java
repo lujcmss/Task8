@@ -44,15 +44,15 @@ public class CreateCustomerAccount extends Action {
 
 			errors.addAll(form.getValidationErrors());
 
-			if (customerDAO.hasCustomer((String) form.getEmail()) == true) {
-				errors.add("Email already been used.");
-			}
-
-			if (errors.size() != 0) {
-				return "createCustomerAccount.jsp";
-			}
-
 			synchronized (customerDAO) {
+				if (customerDAO.hasCustomer((String) form.getEmail()) == true) {
+					errors.add("Username already been used.");
+				}
+	
+				if (errors.size() != 0) {
+					return "createCustomerAccount.jsp";
+				}
+
 				CustomerBean customerBean = new CustomerBean();
 				customerBean.setAddr1(form.getAddr1());
 				customerBean.setAddr2(form.getAddr2());

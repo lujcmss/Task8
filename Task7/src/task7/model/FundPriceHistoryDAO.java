@@ -46,8 +46,8 @@ public class FundPriceHistoryDAO {
 		List<?> list = (List<?>) query.list();
 		FundPriceHistoryBean[] fundHistoryBeans = list
 				.toArray(new FundPriceHistoryBean[list.size()]);
-
 		session.close();
+
 		return fundHistoryBeans;
 	}
 
@@ -58,13 +58,12 @@ public class FundPriceHistoryDAO {
 		query.setParameter("fundId", fundId);
 		query.setParameter("priceDate", date);
 		List<?> list = (List<?>) query.list();
+		session.close();
 
 		if (list.size() == 0)
 			return 0;
 		FundPriceHistoryBean fundHistoryBean = (FundPriceHistoryBean) list
 				.get(0);
-
-		session.close();
 		return fundHistoryBean.getPrice();
 	}
 }

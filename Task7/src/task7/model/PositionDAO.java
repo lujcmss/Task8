@@ -46,8 +46,8 @@ public class PositionDAO {
 		List<?> list = (List<?>) query.list();
 		PositionBean[] positionBeans = list.toArray(new PositionBean[list
 				.size()]);
-
 		session.close();
+		
 		return positionBeans;
 	}
 
@@ -58,12 +58,11 @@ public class PositionDAO {
 		query.setParameter("customerId", CustomerId);
 		query.setParameter("fundId", fundId);
 		List<?> list = (List<?>) query.list();
-
+		session.close();
+		
 		if (list.size() == 0)
 			return null;
 		PositionBean positionBean = (PositionBean) list.get(0);
-
-		session.close();
 		return positionBean;
 	}
 }

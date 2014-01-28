@@ -12,7 +12,7 @@
 		<form class="navbar-form navbar-center" method="post"
 			action="depositCheck.do">
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Customer Email"
+				<input type="text" class="form-control" placeholder="Customer Username"
 					name="customerEmail">
 			</div>
 			<button type="submit" class="btn btn-default" name="button"

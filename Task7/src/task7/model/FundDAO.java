@@ -44,12 +44,11 @@ public class FundDAO {
 				.createQuery("from FundBean where fundId = :fundId ");
 		query.setParameter("fundId", fundId);
 		List<?> list = (List<?>) query.list();
+		session.close();
 
 		if (list.size() == 0)
 			return null;
 		FundBean fundBean = (FundBean) list.get(0);
-
-		session.close();
 		return fundBean;
 	}
 
@@ -58,10 +57,10 @@ public class FundDAO {
 		Query query = session.createQuery("from FundBean where name = :name ");
 		query.setParameter("name", fundName);
 		List<?> list = (List<?>) query.list();
+		session.close();
 
 		if (list.size() == 0)
 			return null;
-
 		FundBean fundBean = (FundBean) list.get(0);
 		return fundBean;
 	}
@@ -72,12 +71,11 @@ public class FundDAO {
 				.createQuery("from FundBean where symbol = :symbol ");
 		query.setParameter("symbol", symbol);
 		List<?> list = (List<?>) query.list();
+		session.close();
 
 		if (list.size() == 0)
 			return null;
 		FundBean fundBean = (FundBean) list.get(0);
-
-		session.close();
 		return fundBean;
 	}
 
@@ -86,8 +84,8 @@ public class FundDAO {
 		Query query = session.createQuery("from FundBean where name = :name ");
 		query.setParameter("name", fundName);
 		List<?> list = (List<?>) query.list();
-
 		session.close();
+
 		if (list.size() == 0)
 			return false;
 		return true;
@@ -99,8 +97,8 @@ public class FundDAO {
 				.createQuery("from FundBean where symbol = :symbol ");
 		query.setParameter("symbol", symbol);
 		List<?> list = (List<?>) query.list();
-
 		session.close();
+
 		if (list.size() == 0)
 			return false;
 		return true;
@@ -111,8 +109,8 @@ public class FundDAO {
 		Query query = session.createQuery("from FundBean");
 		List<?> list = (List<?>) query.list();
 		FundBean[] fundBeans = list.toArray(new FundBean[list.size()]);
-
 		session.close();
+		
 		return fundBeans;
 	}
 }
