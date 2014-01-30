@@ -44,6 +44,13 @@ public class CreateFundForm extends FormBean {
 			errors.add(" ticker may not contain angle brackets or quotes");
 		if (!ticker.matches("^[A-Za-z0-9]\\w{1,5}$"))
 			errors.add("Illegal ticker");
+		if (fund.length()>100) {
+			errors.add("Fund name is too long");
+		}
+
+		if (ticker.length()>100) {
+			errors.add("Ticker is too long");
+		}
 		return errors;
 	}
 

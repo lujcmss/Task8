@@ -142,6 +142,39 @@ public class CreateCustomerForm extends FormBean {
 			errors.add("Password doesn't match password confirmation");
 		if (!zipCode.matches("^\\d{1,10}$"))
 			errors.add("Illegal Zipcode");
+		if (firstName.length()>100) {
+			errors.add("Firstname  is too long");
+		}
+
+		if (lastName.length()>100) {
+			errors.add("Lastname  is too long");
+		}
+
+		if (confirm.length()>100) {
+			errors.add("Confirm Password  is too long");
+		}
+
+		if (email.length()>100) {
+			errors.add("Email  is too long");
+		}
+
+		if (psw.length()>100) {
+			errors.add("Password  is too long");
+		}
+
+		if (addr1.length()>100) {
+			errors.add("Address1  is too long");
+		}
+		if (addr2.length()>100) {
+			errors.add("Address2  is too long");
+		}
+		if (city.length()>100) {
+			errors.add("City is too long");
+		}
+	
+		if (state.length()>100) {
+			errors.add("State is too long");
+		}
 
 		return errors;
 	}

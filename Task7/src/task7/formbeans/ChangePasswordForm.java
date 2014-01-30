@@ -14,16 +14,13 @@ public class ChangePasswordForm extends FormBean {
 		return oldpsw;
 	}
 
-
 	public void setOldpsw(String oldpsw) {
 		this.oldpsw = trimAndConvert(oldpsw, "<>>\"]");
 	}
 
-
 	public String getNewpsw() {
 		return newpsw;
 	}
-
 
 	public void setNewpsw(String newpsw) {
 		this.newpsw = trimAndConvert(newpsw, "<>>\"]");
@@ -33,9 +30,8 @@ public class ChangePasswordForm extends FormBean {
 		return confirmpsw;
 	}
 
-
 	public void setConfirmpsw(String confirmpsw) {
-		this.confirmpsw= trimAndConvert(confirmpsw, "<>>\"]");
+		this.confirmpsw = trimAndConvert(confirmpsw, "<>>\"]");
 	}
 
 	public List<String> getValidationErrors() {
@@ -48,16 +44,23 @@ public class ChangePasswordForm extends FormBean {
 		if (newpsw == null || newpsw.length() == 0) {
 			errors.add("New password is required");
 		}
-		
+
 		if (errors.size() > 0)
 			return errors;
 
 		if (newpsw.matches(".*[<>\"].*"))
 			errors.add("Password may not contain angle brackets or quotes");
-		
+
 		if (!newpsw.equals(confirmpsw))
 			errors.add("New password must be same with confirm password");
 
+		if (oldpsw.length() > 100) {
+			errors.add("Old password is too long");
+		}
+
+		if (newpsw.length() > 100) {
+			errors.add("Old password is too long");
+		}
 		return errors;
 	}
 

@@ -84,6 +84,15 @@ public class EditInfoForm extends FormBean {
 		if (zipCode != null && !zipCode.matches("^\\d{1,10}$"))
 			errors.add("Illegal Zipcode");
 
+
+		if (firstName.length()>100) {
+			errors.add("Firstname is too long");
+		}
+
+		if (lastName.length()>100) {
+			errors.add("Lastname is required");
+		}
+		
 		return errors;
 	}
 

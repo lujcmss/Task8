@@ -85,6 +85,25 @@ public class CreateEmployeeForm extends FormBean{
 		if (!confirm.equals(psw))
 			errors.add("Password doesn't match password confirmation");
 
+		if (firstName.length()>100) {
+			errors.add("Firstname is too long");
+		}
+
+		if (lastName.length()>100) {
+			errors.add("Lastname is  too long");
+		}
+
+		if (confirm.length()>100) {
+			errors.add("Confirm Password is too long");
+		}
+
+		if (email.length()>100) {
+			errors.add("Email is  too long");
+		}
+
+		if (psw.length()>100) {
+			errors.add("Password is too long");
+		}
 		
 
 		return errors;
