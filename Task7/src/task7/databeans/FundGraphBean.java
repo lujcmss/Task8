@@ -43,7 +43,7 @@ public class FundGraphBean {
     private static final String dbPass = "root";
     private static final String sqlquery =
             "select p.name as name,o.price as value,o.priceDate as period " +
-                    "from task7_fund p, task7_fundpricehistory o " +
+                    "from TASK7_FUND p, TASK7_FUNDPRICEHISTORY o " +
                     "where p.fundId = o.fundBean_fundId";
 
     public List getReportsList() throws Exception {

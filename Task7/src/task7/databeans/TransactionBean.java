@@ -1,5 +1,6 @@
 package task7.databeans;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -12,7 +13,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "TASK7_TRANSACTION")
-public class TransactionBean {
+public class TransactionBean implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
