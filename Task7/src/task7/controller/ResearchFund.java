@@ -46,7 +46,7 @@ public class ResearchFund extends Action {
 		HttpSession session = request.getSession(true);
 		session.setAttribute("curPage", "funds.do");
 		session.setAttribute("searched", false);
-		
+
 		try {
 			CustomerBean customerBean = (CustomerBean) session
 					.getAttribute("user");
@@ -61,14 +61,14 @@ public class ResearchFund extends Action {
 			}
 
 			FundBean[] fundBeans = fundDAO.getAllFunds();
-			
-			
-			if (!form.isPresent() || form.getButton() == null || form.getButton().equals("search")) {
+
+			if (!form.isPresent() || form.getButton() == null
+					|| form.getButton().equals("search")) {
 				if (form.isPresent() && form.getFundName() != null
 						&& !form.getFundName().equals("")) {
 					FundBean fundBean = fundDAO.getFundByName(form
 							.getFundName());
-					
+
 					if (fundBean == null) {
 						fundBean = fundDAO.getFundByTicker(form.getFundName());
 					}
@@ -76,26 +76,29 @@ public class ResearchFund extends Action {
 						errors.add("No fund Matches.");
 						return "researchFund.jsp";
 					}
-					
-					
+
 					FundPriceHistoryBean[] fundPriceHistoryBeans = fundPriceHistoryDAO
 							.getHistoryByFundId(fundBean.getFundId());
 
-					long minPrice = fundPriceHistoryBeans[0].getPrice();
-					long maxPrice = fundPriceHistoryBeans[0].getPrice();
-					long avgPrice = fundPriceHistoryBeans[0].getPrice();
-					
+					long minPrice = 0, maxPrice = 0, avgPrice = 0;
+					if (fundPriceHistoryBeans.length > 0) {
+						minPrice = fundPriceHistoryBeans[0].getPrice();
+						maxPrice = fundPriceHistoryBeans[0].getPrice();
+						avgPrice = fundPriceHistoryBeans[0].getPrice();
+					}
+
 					for (int i = 1; i < fundPriceHistoryBeans.length; i++) {
 						long tmp = fundPriceHistoryBeans[i].getPrice();
-						if (minPrice > tmp) minPrice = tmp;
-						if (maxPrice < tmp) maxPrice = tmp;
+						if (minPrice > tmp)
+							minPrice = tmp;
+						if (maxPrice < tmp)
+							maxPrice = tmp;
 						avgPrice += tmp;
 					}
 
-					long nowPrice = fundPriceHistoryDAO
-							.getPriceByFundAndDate(
-									fundBean.getFundId(), dateDAO
-											.getDate().getNewDate());
+					long nowPrice = fundPriceHistoryDAO.getPriceByFundAndDate(
+							fundBean.getFundId(), dateDAO.getDate()
+									.getNewDate());
 
 					FundInfoBean[] fundInfoBeans = new FundInfoBean[1];
 					fundInfoBeans[0] = new FundInfoBean();
@@ -104,45 +107,53 @@ public class ResearchFund extends Action {
 					fundInfoBeans[0].setFundPrice(nowPrice / 100.0);
 					fundInfoBeans[0].setFundMaxPrice(maxPrice / 100.0);
 					fundInfoBeans[0].setFundMinPrice(minPrice / 100.0);
-					fundInfoBeans[0].setFundAvgPrice(avgPrice / 100.0 / fundPriceHistoryBeans.length);
-					
+					fundInfoBeans[0].setFundAvgPrice(avgPrice / 100.0
+							/ Math.min(fundPriceHistoryBeans.length, 1));
+
 					session.setAttribute("fundName", fundBean.getName());
 					session.setAttribute("searched", true);
 					session.setAttribute("fundInfo", fundInfoBeans);
 				} else {
 					FundInfoBean[] fundInfoBeans = new FundInfoBean[fundBeans.length];
-					
+
 					for (int i = 0; i < fundBeans.length; i++) {
-						
+
 						long nowPrice = fundPriceHistoryDAO
 								.getPriceByFundAndDate(
 										fundBeans[i].getFundId(), dateDAO
 												.getDate().getNewDate());
-						
+
 						fundInfoBeans[i] = new FundInfoBean();
 						fundInfoBeans[i].setFundPrice(nowPrice / 100.0);
-						
+
 						FundPriceHistoryBean[] fundPriceHistoryBeans = fundPriceHistoryDAO
 								.getHistoryByFundId(fundBeans[i].getFundId());
-						long minPrice = fundPriceHistoryBeans[0].getPrice();
-						long maxPrice = fundPriceHistoryBeans[0].getPrice();
-						long avgPrice = fundPriceHistoryBeans[0].getPrice();
-						
+
+						long minPrice = 0, maxPrice = 0, avgPrice = 0;
+						if (fundPriceHistoryBeans.length > 0) {
+							minPrice = fundPriceHistoryBeans[0].getPrice();
+							maxPrice = fundPriceHistoryBeans[0].getPrice();
+							avgPrice = fundPriceHistoryBeans[0].getPrice();
+						}
+
 						for (int j = 1; j < fundPriceHistoryBeans.length; j++) {
 							long tmp = fundPriceHistoryBeans[j].getPrice();
-							if (minPrice > tmp) minPrice = tmp;
-							if (maxPrice < tmp) maxPrice = tmp;
+							if (minPrice > tmp)
+								minPrice = tmp;
+							if (maxPrice < tmp)
+								maxPrice = tmp;
 							avgPrice += tmp;
 						}
-						
+
 						fundInfoBeans[i].setName(fundBeans[i].getName());
 						fundInfoBeans[i].setSymbol(fundBeans[i].getSymbol());
 						fundInfoBeans[i].setFundMaxPrice(maxPrice / 100.0);
 						fundInfoBeans[i].setFundMinPrice(minPrice / 100.0);
-						fundInfoBeans[i].setFundAvgPrice(avgPrice / 100.0 / fundPriceHistoryBeans.length);
-						
+						fundInfoBeans[i].setFundAvgPrice(avgPrice / 100.0
+								/ Math.min(fundPriceHistoryBeans.length, 1));
+
 					}
-					
+
 					session.setAttribute("fundInfo", fundInfoBeans);
 					session.setAttribute("searched", false);
 				}
