@@ -108,7 +108,7 @@ public class ResearchFund extends Action {
 					fundInfoBeans[0].setFundMaxPrice(maxPrice / 100.0);
 					fundInfoBeans[0].setFundMinPrice(minPrice / 100.0);
 					fundInfoBeans[0].setFundAvgPrice(avgPrice / 100.0
-							/ Math.min(fundPriceHistoryBeans.length, 1));
+							/ Math.max(fundPriceHistoryBeans.length, 1));
 
 					session.setAttribute("fundName", fundBean.getName());
 					session.setAttribute("searched", true);
@@ -150,7 +150,7 @@ public class ResearchFund extends Action {
 						fundInfoBeans[i].setFundMaxPrice(maxPrice / 100.0);
 						fundInfoBeans[i].setFundMinPrice(minPrice / 100.0);
 						fundInfoBeans[i].setFundAvgPrice(avgPrice / 100.0
-								/ Math.min(fundPriceHistoryBeans.length, 1));
+								/ Math.max(fundPriceHistoryBeans.length, 1));
 
 					}
 
