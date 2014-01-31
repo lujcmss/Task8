@@ -67,7 +67,7 @@ public class CreateEmployeeForm extends FormBean{
 		}
 
 		if (email == null || email.length() == 0) {
-			errors.add("Email is required");
+			errors.add("Username is required");
 		}
 
 		if (psw == null || psw.length() == 0) {
@@ -85,23 +85,23 @@ public class CreateEmployeeForm extends FormBean{
 		if (!confirm.equals(psw))
 			errors.add("Password doesn't match password confirmation");
 
-		if (firstName.length()>100) {
+		if (firstName.length()>30) {
 			errors.add("Firstname is too long");
 		}
 
-		if (lastName.length()>100) {
+		if (lastName.length()>30) {
 			errors.add("Lastname is  too long");
 		}
 
-		if (confirm.length()>100) {
+		if (confirm.length()>30) {
 			errors.add("Confirm Password is too long");
 		}
 
-		if (email.length()>100) {
-			errors.add("Email is  too long");
+		if (email.length()>30) {
+			errors.add("Username is  too long");
 		}
 
-		if (psw.length()>100) {
+		if (psw.length()>30) {
 			errors.add("Password is too long");
 		}
 		

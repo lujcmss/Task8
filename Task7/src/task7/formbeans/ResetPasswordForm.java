@@ -31,7 +31,7 @@ public class ResetPasswordForm extends FormBean {
 		if (newpsw == null || newpsw.length() == 0) {
 			errors.add("New password is required");
 		}
-		if (newpsw.length()>100) {
+		if (newpsw.length()>30) {
 			errors.add("New password is too long");
 		}
 		

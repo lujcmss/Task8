@@ -8,7 +8,7 @@
 		<h1>Transaction History</h1>
 	</div>
 
-	<table class="table table-striped">
+	<table class="table table-striped" style="text-align:right">
 		<h3>Transaction Information</h3>
 		<jsp:include page="error-list.jsp" />
 		<colgroup>
@@ -23,14 +23,14 @@
 		</colgroup>
 		<thead>
 			<tr>
-				<th>#</th>
-				<th>Transaction Date</th>
-				<th>Fund Name</th>
-				<th>Operation</th>
-				<th>Status</th>
-				<th>Share Price</th>
-				<th>Shares</th>
-				<th>Total Value</th>
+				<th style="text-align:right">#</th>
+				<th style="text-align:right">Transaction Date</th>
+				<th style="text-align:right">Fund Name</th>
+				<th style="text-align:right">Operation</th>
+				<th style="text-align:right">Status</th>
+				<th style="text-align:right">Share Price</th>
+				<th style="text-align:right">Shares</th>
+				<th style="text-align:right">Total Value</th>
 			</tr>
 		</thead>
 		<tbody>

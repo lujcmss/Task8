@@ -104,7 +104,7 @@ public class DepositCheck extends Action {
 				transactionBean.setTransactionType("Deposit");
 				transactionBean.setStatus("Pending");
 				transactionDAO.insert(transactionBean);
-				success.add(form.getCustomerEmail() + " got a deposit for $");
+				success.add(form.getCustomerEmail() + " got a deposit.");
 			}
 
 			return "depositCheck.jsp";

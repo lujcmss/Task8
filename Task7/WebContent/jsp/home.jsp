@@ -87,16 +87,16 @@
 				</tbody>
 			</table>
 
-			<table class="table table-striped">
+			<table class="table table-striped" style="text-align:right">
 				<h3>Funds Information</h3>
 				<thead>
 					<tr>
-						<th>#</th>
-						<th>Fund Name</th>
-						<th>Fund Ticker</th>
-						<th>Fund Price</th>
-						<th>Share</th>
-						<th>Value</th>
+						<th style="text-align:right">#</th>
+						<th style="text-align:right">Fund Name</th>
+						<th style="text-align:right">Fund Ticker</th>
+						<th style="text-align:right">Fund Price</th>
+						<th style="text-align:right">Share</th>
+						<th style="text-align:right">Value</th>
 					</tr>
 				</thead>
 				<tbody>

@@ -113,7 +113,7 @@ public class CreateCustomerForm extends FormBean {
 		}
 
 		if (email == null || email.length() == 0) {
-			errors.add("Email is required");
+			errors.add("Username is required");
 		}
 
 		if (psw == null || psw.length() == 0) {
@@ -142,37 +142,37 @@ public class CreateCustomerForm extends FormBean {
 			errors.add("Password doesn't match password confirmation");
 		if (!zipCode.matches("^\\d{1,10}$"))
 			errors.add("Illegal Zipcode");
-		if (firstName.length()>100) {
+		if (firstName.length()>30) {
 			errors.add("Firstname  is too long");
 		}
 
-		if (lastName.length()>100) {
+		if (lastName.length()>30) {
 			errors.add("Lastname  is too long");
 		}
 
-		if (confirm.length()>100) {
-			errors.add("Confirm Password  is too long");
+		if (confirm.length()>30) {
+			errors.add("Confirm Password is too long");
 		}
 
-		if (email.length()>100) {
-			errors.add("Email  is too long");
+		if (email.length()>30) {
+			errors.add("Username is too long");
 		}
 
-		if (psw.length()>100) {
-			errors.add("Password  is too long");
+		if (psw.length()>30) {
+			errors.add("Password is too long");
 		}
 
 		if (addr1.length()>100) {
-			errors.add("Address1  is too long");
+			errors.add("Address1 is too long");
 		}
 		if (addr2.length()>100) {
-			errors.add("Address2  is too long");
+			errors.add("Address2 is too long");
 		}
-		if (city.length()>100) {
+		if (city.length()>30) {
 			errors.add("City is too long");
 		}
 	
-		if (state.length()>100) {
+		if (state.length()>30) {
 			errors.add("State is too long");
 		}
 

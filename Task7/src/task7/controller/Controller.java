@@ -14,9 +14,11 @@ import task7.databeans.CustomerBean;
 import task7.databeans.EmployeeBean;
 import task7.databeans.FundBean;
 import task7.databeans.DateBean;
+import task7.databeans.FundPriceHistoryBean;
 import task7.model.CustomerDAO;
 import task7.model.EmployeeDAO;
 import task7.model.FundDAO;
+import task7.model.FundPriceHistoryDAO;
 import task7.model.Model;
 import task7.model.DateDAO;
 
@@ -46,35 +48,67 @@ public class Controller extends HttpServlet {
 
 		CustomerDAO customerDAO = model.getCustomerDAO();
 		CustomerBean customerBean = new CustomerBean();
-		customerBean.setAddr1("penn Ave");
-		customerBean.setAddr2("Apt1");
-		customerBean.setCash(10000);
-		customerBean.setCity("Pitt");
-		customerBean.setCustomerEmail("c");
-		customerBean.setFirstName("customer");
-		customerBean.setLastName("CMU");
-		customerBean.setPassword("c");
+		customerBean.setAddr1("5869 northumberland St.");
+		customerBean.setAddr2("Apt 1");
+		customerBean.setCash(1000000);
+		customerBean.setCity("Pittsburgh");
+		customerBean.setCustomerEmail("jeff");
+		customerBean.setFirstName("Jeff");
+		customerBean.setLastName("Eppinger");
+		customerBean.setPassword("jeff");
 		customerBean.setState("PA");
 		customerBean.setZip("15213");
 		customerDAO.insert(customerBean);
 
 		EmployeeDAO employeeDAO = model.getEmployeeDAO();
 		EmployeeBean employeeBean = new EmployeeBean();
-		employeeBean.setEmail("e");
-		employeeBean.setFirstName("employee");
-		employeeBean.setLastName("CMU");
-		employeeBean.setPassword("e");
+		employeeBean.setEmail("root");
+		employeeBean.setFirstName("System");
+		employeeBean.setLastName("Admin");
+		employeeBean.setPassword("root");
 		employeeDAO.insert(employeeBean);
 
 		FundDAO fundDAO = model.getFundDAO();
 		FundBean fundBean = new FundBean();
-		fundBean.setName("Apple");
+		fundBean.setName("apple");
 		fundBean.setSymbol("APPL");
 		fundDAO.insert(fundBean);
-		fundBean.setName("Google");
+		fundBean.setName("google");
 		fundBean.setSymbol("GOOG");
 		fundDAO.insert(fundBean);
+		
+		FundPriceHistoryDAO fundPriceHistoryDAO = model.getFundPriceHistoryDAO();
+		FundPriceHistoryBean fundPriceHistoryBean = new FundPriceHistoryBean();
+		// apple
+		fundPriceHistoryBean.setFundBean(fundDAO.getFundByName("apple"));
+		fundPriceHistoryBean.setPrice(1000);
+		fundPriceHistoryBean.setPriceDate(Date.valueOf("2013-12-01"));
+		fundPriceHistoryDAO.insert(fundPriceHistoryBean);
+		fundPriceHistoryBean.setPrice(1500);
+		fundPriceHistoryBean.setPriceDate(Date.valueOf("2013-12-03"));
+		fundPriceHistoryDAO.insert(fundPriceHistoryBean);
+		fundPriceHistoryBean.setPrice(1452);
+		fundPriceHistoryBean.setPriceDate(Date.valueOf("2013-12-10"));
+		fundPriceHistoryDAO.insert(fundPriceHistoryBean);
+		fundPriceHistoryBean.setPrice(2048);
+		fundPriceHistoryBean.setPriceDate(Date.valueOf("2014-01-01"));
+		fundPriceHistoryDAO.insert(fundPriceHistoryBean);
 
+		// google
+		fundPriceHistoryBean.setFundBean(fundDAO.getFundByName("google"));
+		fundPriceHistoryBean.setPrice(900);
+		fundPriceHistoryBean.setPriceDate(Date.valueOf("2013-12-01"));
+		fundPriceHistoryDAO.insert(fundPriceHistoryBean);
+		fundPriceHistoryBean.setPrice(1350);
+		fundPriceHistoryBean.setPriceDate(Date.valueOf("2013-12-03"));
+		fundPriceHistoryDAO.insert(fundPriceHistoryBean);
+		fundPriceHistoryBean.setPrice(2193);
+		fundPriceHistoryBean.setPriceDate(Date.valueOf("2013-12-10"));
+		fundPriceHistoryDAO.insert(fundPriceHistoryBean);
+		fundPriceHistoryBean.setPrice(1839);
+		fundPriceHistoryBean.setPriceDate(Date.valueOf("2014-01-01"));
+		fundPriceHistoryDAO.insert(fundPriceHistoryBean);
+		
 		DateDAO dateDAO = model.getDateDAO();
 		DateBean dateBean = new DateBean();
 		dateBean.setOldDate(null);

@@ -76,7 +76,7 @@ public class RequestCheck extends Action {
 			transactionBean.setTransactionType("Request");
 			transactionBean.setStatus("Pending");
 			transactionDAO.insert(transactionBean);
-			success.add(" $"+form.getRequestAmount()+" has been requested for withdrawal");
+			success.add(" $"+form.getRequestAmount()+" has been requested for withdraw");
 			session.setAttribute("user",
 					customerDAO.getCustomerByEmail(customerBean.getEmail()));
 			return "requestCheck.jsp";

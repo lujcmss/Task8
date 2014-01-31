@@ -26,7 +26,7 @@ public class ViewForm extends FormBean {
 		List<String> errors = new ArrayList<String>();
 
 		if (customerEmail == null || customerEmail.length() == 0) {
-			errors.add("email is required");
+			errors.add("username is required");
 		}
 
 		//if (!customerEmail.matches("^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"))

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<jsp:include page="error-list.jsp" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="en">
 <head>
@@ -29,7 +28,7 @@
 </head>
 
 <body>
-
+	<jsp:include page="error-list.jsp" />
 	<div class="container">
 
 		<form class="form-signin" method="post" action="login.do">

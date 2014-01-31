@@ -6,7 +6,35 @@ public class FundInfoBean {
 	private String name;
 	private String symbol;
 	private double fundPrice;
+	private double fundMaxPrice;
+	private double fundMinPrice;
+	private double fundAvgPrice;
 	private double share;
+
+	
+	public double getFundMaxPrice() {
+		return fundMaxPrice;
+	}
+
+	public void setFundMaxPrice(double fundMaxPrice) {
+		this.fundMaxPrice = fundMaxPrice;
+	}
+
+	public double getFundMinPrice() {
+		return fundMinPrice;
+	}
+
+	public void setFundMinPrice(double fundMinPrice) {
+		this.fundMinPrice = fundMinPrice;
+	}
+
+	public double getFundAvgPrice() {
+		return fundAvgPrice;
+	}
+
+	public void setFundAvgPrice(double fundAvgPrice) {
+		this.fundAvgPrice = fundAvgPrice;
+	}
 
 	public int getFundId() {
 		return fundId;

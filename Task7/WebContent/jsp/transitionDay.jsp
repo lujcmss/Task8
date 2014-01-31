@@ -9,11 +9,11 @@
 	</div>
 	<jsp:include page="error-list.jsp" />
 	<jsp:include page="success-list.jsp" />
-	<table class="table table-striped">
+	<table class="table table-striped"  style="text-align:right">
 		<h3>Transition Information</h3>
 		<colgroup>
 			<col class="col-xs-1">
-			<col class="col-xs-3">
+			<col class="col-xs-1">
 			<col class="col-xs-2">
 			<col class="col-xs-1">
 			<col class="col-xs-2">
@@ -21,11 +21,11 @@
 		</colgroup>
 		<thead>
 			<tr>
-				<th>#</th>
-				<th>Last Day</th>
-				<th>Fund Name</th>
-				<th>Fund Ticker</th>
-				<th>Price Now</th>
+				<th style="text-align:right">#</th>
+				<th style="text-align:right">Last Day</th>
+				<th style="text-align:right">Fund Name</th>
+				<th style="text-align:right">Fund Ticker</th>
+				<th style="text-align:right">Price Now</th>
 				<th>New Price</th>
 			</tr>
 		</thead>

@@ -51,6 +51,18 @@ public class FundPriceHistoryDAO {
 		return fundHistoryBeans;
 	}
 
+	public FundPriceHistoryBean[] getHistoryByFundId(int fundId) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Query query = session.createQuery("from FundPriceHistoryBean where fundBean_fundId = :fundId");
+		query.setParameter("fundId", fundId);
+		List<?> list = (List<?>) query.list();
+		FundPriceHistoryBean[] fundHistoryBeans = list
+				.toArray(new FundPriceHistoryBean[list.size()]);
+		session.close();
+
+		return fundHistoryBeans;
+	}
+	
 	public long getPriceByFundAndDate(int fundId, Date date) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Query query = session

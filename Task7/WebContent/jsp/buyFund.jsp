@@ -21,7 +21,7 @@
 				value="search">Search</button>
 		</form>
 
-		<table class="table table-striped">
+		<table class="table table-striped" style="text-align:right">
 			<h3>Funds Information</h3>
 			<colgroup>
 				<col class="col-xs-1">
@@ -34,13 +34,13 @@
 			</colgroup>
 			<thead>
 				<tr>
-					<th>#</th>
-					<th>Fund Name</th>
-					<th>Fund Ticker</th>
-					<th>Previous Price</th>
-					<th>Owned Shares</th>
-					<th>Amount to buy ($)</th>
-					<th></th>
+					<th style="text-align:right">#</th>
+					<th style="text-align:right">Fund Name</th>
+					<th style="text-align:right">Fund Ticker</th>
+					<th style="text-align:right">Previous Price</th>
+					<th style="text-align:right">Owned Shares</th>
+					<th style="text-align:right">Amount to buy ($)</th>
+					<th style="text-align:right"></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -54,7 +54,7 @@
 							<td><c:out value="${fundInfo.name}" /></td>
 							<td><c:out value="${fundInfo.symbol}" /></td>
 							<td>$<fmt:formatNumber type="number" maxFractionDigits="2"
-									minFractionDigits="2" value="${fundInfo.fundPrice}" /></td>
+									minFractionDigits="2" value="${fundInfo.fundPrice/100.0}" /></td>
 							<td><fmt:formatNumber type="number" maxFractionDigits="3"
 									minFractionDigits="3" value="${fundInfo.share}" /></td>
 							<td><input type="text" class="form-control" placeholder="0"

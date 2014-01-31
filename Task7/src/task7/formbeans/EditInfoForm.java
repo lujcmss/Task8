@@ -85,12 +85,12 @@ public class EditInfoForm extends FormBean {
 			errors.add("Illegal Zipcode");
 
 
-		if (firstName.length()>100) {
+		if (firstName.length()>30) {
 			errors.add("Firstname is too long");
 		}
 
-		if (lastName.length()>100) {
-			errors.add("Lastname is required");
+		if (lastName.length()>30) {
+			errors.add("Lastname is too long");
 		}
 		
 		return errors;
