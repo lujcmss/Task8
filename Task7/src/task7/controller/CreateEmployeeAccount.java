@@ -35,6 +35,10 @@ public class CreateEmployeeAccount extends Action {
 		session.setAttribute("curPage", "manageAccounts.do");
 
 		try {
+			String userType = (String) session.getAttribute("userType");
+			if (!userType.equals("Employee")) {
+				return "logout.do";
+			}
 			CreateEmployeeForm form = formBeanFactory.create(request);
 			session.setAttribute("form", form);
 			if (!form.isPresent()) {

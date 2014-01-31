@@ -54,6 +54,11 @@ public class ViewCustomerInformation extends Action {
 		session.setAttribute("curPage", "manageAccount.do");
 
 		try {
+			String userType = (String) session.getAttribute("userType");
+			if (!userType.equals("Employee")) {
+				return "logout.do";
+			}
+			
 			ViewForm form = formBeanFactory.create(request);
 
 			if (!form.isPresent()) {

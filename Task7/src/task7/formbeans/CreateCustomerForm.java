@@ -134,10 +134,22 @@ public class CreateCustomerForm extends FormBean {
 		}
 
 
-		//if (!email.matches("^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"))
-		//	errors.add("Illegal email");
+		if (email.matches(".*[<>\"].*"))
+			errors.add("Username may not contain angle brackets or quotes");
 		if (psw.matches(".*[<>\"].*"))
 			errors.add("Password may not contain angle brackets or quotes");
+		if (firstName.matches(".*[<>\"].*"))
+			errors.add("First Name may not contain angle brackets or quotes");
+		if (lastName.matches(".*[<>\"].*"))
+			errors.add("Last Name may not contain angle brackets or quotes");
+		if (addr1.matches(".*[<>\"].*"))
+			errors.add("Address1 may not contain angle brackets or quotes");
+		if (addr2.matches(".*[<>\"].*"))
+			errors.add("Address2 may not contain angle brackets or quotes");
+		if (city.matches(".*[<>\"].*"))
+			errors.add("City may not contain angle brackets or quotes");
+		if (state.matches(".*[<>\"].*"))
+			errors.add("State may not contain angle brackets or quotes");
 		if (!confirm.equals(psw))
 			errors.add("Password doesn't match password confirmation");
 		if (!zipCode.matches("^\\d{1,10}$"))

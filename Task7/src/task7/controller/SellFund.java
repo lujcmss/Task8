@@ -51,6 +51,10 @@ public class SellFund extends Action {
 		session.setAttribute("sellFundInfo", null);
 
 		try {
+			String userType = (String) session.getAttribute("userType");
+			if (!userType.equals("Customer")) {
+				return "logout.do";
+			}
 			SellFundForm form = formBeanFactory.create(request);
 
 			CustomerBean customerBean = (CustomerBean) session

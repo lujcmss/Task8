@@ -44,12 +44,16 @@ public class EditInfo extends Action {
 			if (!form.isPresent()) {
 				return "editInfo.jsp";
 			}
-
+			
+			System.out.println("...........");
+			
 			errors.addAll(form.getValidationErrors());
 			if (errors.size() != 0) {
 				return "editInfo.jsp";
 			}
 
+			System.out.println("...........");
+			
 			String userType = (String) session.getAttribute("userType");
 			if (userType.equals("Employee")) {
 				EmployeeBean employeeBean = (EmployeeBean) session

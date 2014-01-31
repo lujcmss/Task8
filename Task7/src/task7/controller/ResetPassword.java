@@ -37,6 +37,10 @@ public class ResetPassword extends Action {
 		session.setAttribute("curPage", "manageAccounts.do");
 
 		try {
+			String userType = (String) session.getAttribute("userType");
+			if (!userType.equals("Employee")) {
+				return "logout.do";
+			}
 			ResetPasswordForm form = formBeanFactory.create(request);
 
 			if (!form.isPresent()) {

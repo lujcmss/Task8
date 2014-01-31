@@ -58,6 +58,10 @@ public class TransitionDay extends Action {
 		Random random = new Random();
 
 		try {
+			String userType = (String) session.getAttribute("userType");
+			if (!userType.equals("Employee")) {
+				return "logout.do";
+			}
 			if (request.getParameter("button") != null
 					&& request.getParameter("button").equals("Transition")) {
 				int num = (Integer) session.getAttribute("fundNum");

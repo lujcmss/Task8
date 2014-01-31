@@ -41,6 +41,10 @@ public class DepositCheck extends Action {
 		session.setAttribute("curPage", "depositCheck.do");
 
 		try {
+			String userType = (String) session.getAttribute("userType");
+			if (!userType.equals("Employee")) {
+				return "logout.do";
+			}
 			DepositForm form = formBeanFactory.create(request);
 
 			if (!form.isPresent()) {
@@ -76,6 +80,7 @@ public class DepositCheck extends Action {
 							.getFirstName());
 					customerListBean[0].setLastName(customerBean.getLastName());
 
+					success.add(customerListBean[0].getEmail() + " got a deposit.");
 					session.setAttribute("customerList", customerListBean);
 				} else {
 					CustomerBean[] customerBeans = customerDAO
@@ -104,7 +109,6 @@ public class DepositCheck extends Action {
 				transactionBean.setTransactionType("Deposit");
 				transactionBean.setStatus("Pending");
 				transactionDAO.insert(transactionBean);
-				success.add(form.getCustomerEmail() + " got a deposit.");
 			}
 
 			return "depositCheck.jsp";

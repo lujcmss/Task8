@@ -48,6 +48,10 @@ public class ResearchFund extends Action {
 		session.setAttribute("searched", false);
 
 		try {
+			String userType = (String) session.getAttribute("userType");
+			if (!userType.equals("Customer")) {
+				return "logout.do";
+			}
 			CustomerBean customerBean = (CustomerBean) session
 					.getAttribute("user");
 			session.setAttribute("user",

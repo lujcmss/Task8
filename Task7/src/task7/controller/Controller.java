@@ -76,8 +76,9 @@ public class Controller extends HttpServlet {
 		fundBean.setName("google");
 		fundBean.setSymbol("GOOG");
 		fundDAO.insert(fundBean);
-		
-		FundPriceHistoryDAO fundPriceHistoryDAO = model.getFundPriceHistoryDAO();
+
+		FundPriceHistoryDAO fundPriceHistoryDAO = model
+				.getFundPriceHistoryDAO();
 		FundPriceHistoryBean fundPriceHistoryBean = new FundPriceHistoryBean();
 		// apple
 		fundPriceHistoryBean.setFundBean(fundDAO.getFundByName("apple"));
@@ -108,7 +109,7 @@ public class Controller extends HttpServlet {
 		fundPriceHistoryBean.setPrice(1839);
 		fundPriceHistoryBean.setPriceDate(Date.valueOf("2014-01-01"));
 		fundPriceHistoryDAO.insert(fundPriceHistoryBean);
-		
+
 		DateDAO dateDAO = model.getDateDAO();
 		DateBean dateBean = new DateBean();
 		dateBean.setOldDate(null);
@@ -140,7 +141,8 @@ public class Controller extends HttpServlet {
 		String servletPath = request.getServletPath();
 		Object user = (Object) session.getAttribute("user");
 		String action = getActionName(servletPath);
-
+		String userType = (String) session.getAttribute("userType");
+		
 		if (action.equals("login.do")) {
 			// Allow these actions without logging in
 			return Action.perform(action, request);
@@ -150,8 +152,7 @@ public class Controller extends HttpServlet {
 			// If the user hasn't logged in, direct him to the login page
 			return Action.perform("login.do", request);
 		}
-
-		// Let the logged in user run his chosen action
+		
 		return Action.perform(action, request);
 	}
 

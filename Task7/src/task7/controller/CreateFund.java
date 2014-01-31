@@ -39,6 +39,10 @@ public class CreateFund extends Action {
 		session.setAttribute("curPage", "createFund.do");
 
 		try {
+			String userType = (String) session.getAttribute("userType");
+			if (!userType.equals("Employee")) {
+				return "logout.do";
+			}
 			CreateFundForm form = formBeanFactory.create(request);
 
 			if (!form.isPresent()) {

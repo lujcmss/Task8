@@ -109,7 +109,7 @@
 			</c:when>
 			<c:otherwise>
 				<input type="text" class="form-control" placeholder="Zip Code"
-					value="${form.state}" required name="zipCode">
+					value="${form.zipCode}" required name="zipCode">
 			</c:otherwise>
 		</c:choose>
 

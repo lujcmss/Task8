@@ -41,6 +41,10 @@ public class RequestCheck extends Action {
 		session.setAttribute("curPage", "requestCheck.do");
 
 		try {
+			String userType = (String) session.getAttribute("userType");
+			if (!userType.equals("Customer")) {
+				return "logout.do";
+			}
 			RequestForm form = formBeanFactory.create(request);
 			CustomerBean customerBean = (CustomerBean) session
 					.getAttribute("user");

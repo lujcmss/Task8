@@ -78,10 +78,14 @@ public class CreateEmployeeForm extends FormBean{
 		if (errors.size() > 0)
 			return errors;
 
-		//if (!email.matches("^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"))
-		//	errors.add("Illegal email");
+		if (email.matches(".*[<>\"].*"))
+			errors.add("Username may not contain angle brackets or quotes");
 		if (psw.matches(".*[<>\"].*"))
 			errors.add("Password may not contain angle brackets or quotes");
+		if (firstName.matches(".*[<>\"].*"))
+			errors.add("First Name may not contain angle brackets or quotes");
+		if (lastName.matches(".*[<>\"].*"))
+			errors.add("Last Name may not contain angle brackets or quotes");
 		if (!confirm.equals(psw))
 			errors.add("Password doesn't match password confirmation");
 

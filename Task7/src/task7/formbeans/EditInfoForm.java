@@ -81,6 +81,19 @@ public class EditInfoForm extends FormBean {
 			errors.add("Lastname is required");
 		}
 		
+		if (firstName.matches(".*[<>\"].*"))
+			errors.add("First Name may not contain angle brackets or quotes");
+		if (lastName.matches(".*[<>\"].*"))
+			errors.add("Last Name may not contain angle brackets or quotes");
+		if (addr1 != null && addr1.matches(".*[<>\"].*"))
+			errors.add("Address1 may not contain angle brackets or quotes");
+		if (addr2 != null && addr2.matches(".*[<>\"].*"))
+			errors.add("Address2 may not contain angle brackets or quotes");
+		if (city != null && city.matches(".*[<>\"].*"))
+			errors.add("City may not contain angle brackets or quotes");
+		if (state != null && state.matches(".*[<>\"].*"))
+			errors.add("State may not contain angle brackets or quotes");
+		
 		if (zipCode != null && !zipCode.matches("^\\d{1,10}$"))
 			errors.add("Illegal Zipcode");
 

@@ -37,6 +37,10 @@ public class TransactionHistory extends Action {
 		session.setAttribute("curPage", "transactionHistory.do");
 
 		try {
+			String userType = (String) session.getAttribute("userType");
+			if (!userType.equals("Customer")) {
+				return "logout.do";
+			}
 			CustomerBean customerBean = (CustomerBean) session
 					.getAttribute("user");
 			session.setAttribute("user",
