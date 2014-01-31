@@ -45,14 +45,10 @@ public class EditInfo extends Action {
 				return "editInfo.jsp";
 			}
 			
-			System.out.println("...........");
-			
 			errors.addAll(form.getValidationErrors());
 			if (errors.size() != 0) {
 				return "editInfo.jsp";
 			}
-
-			System.out.println("...........");
 			
 			String userType = (String) session.getAttribute("userType");
 			if (userType.equals("Employee")) {
@@ -64,6 +60,7 @@ public class EditInfo extends Action {
 					employeeBean.setLastName(form.getLastName());
 
 					employeeDAO.update(employeeBean);
+					session.setAttribute("user", employeeBean);
 				}
 			} else {
 				CustomerBean customerBean = (CustomerBean) session
@@ -77,7 +74,9 @@ public class EditInfo extends Action {
 					customerBean.setLastName(form.getLastName());
 					customerBean.setState(form.getState());
 					customerBean.setZip(form.getZipCode());
+					
 					customerDAO.update(customerBean);
+					session.setAttribute("user", customerBean);
 				}
 			}
 

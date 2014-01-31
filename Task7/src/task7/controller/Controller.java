@@ -48,9 +48,9 @@ public class Controller extends HttpServlet {
 
 		CustomerDAO customerDAO = model.getCustomerDAO();
 		CustomerBean customerBean = new CustomerBean();
-		customerBean.setAddr1("5869 northumberland St.");
-		customerBean.setAddr2("Apt 1");
-		customerBean.setCash(1000000);
+		customerBean.setAddr1("S. Craig");
+		customerBean.setAddr2("417");
+		customerBean.setCash(1020000);
 		customerBean.setCity("Pittsburgh");
 		customerBean.setCustomerEmail("jeff");
 		customerBean.setFirstName("Jeff");
@@ -63,18 +63,21 @@ public class Controller extends HttpServlet {
 		EmployeeDAO employeeDAO = model.getEmployeeDAO();
 		EmployeeBean employeeBean = new EmployeeBean();
 		employeeBean.setEmail("root");
-		employeeBean.setFirstName("System");
-		employeeBean.setLastName("Admin");
+		employeeBean.setFirstName("Admin");
+		employeeBean.setLastName("eBiz");
 		employeeBean.setPassword("root");
 		employeeDAO.insert(employeeBean);
 
 		FundDAO fundDAO = model.getFundDAO();
 		FundBean fundBean = new FundBean();
 		fundBean.setName("apple");
-		fundBean.setSymbol("APPL");
+		fundBean.setSymbol("AAPL");
 		fundDAO.insert(fundBean);
 		fundBean.setName("google");
 		fundBean.setSymbol("GOOG");
+		fundDAO.insert(fundBean);
+		fundBean.setName("facebook");
+		fundBean.setSymbol("FB");
 		fundDAO.insert(fundBean);
 
 		FundPriceHistoryDAO fundPriceHistoryDAO = model
@@ -110,6 +113,20 @@ public class Controller extends HttpServlet {
 		fundPriceHistoryBean.setPriceDate(Date.valueOf("2014-01-01"));
 		fundPriceHistoryDAO.insert(fundPriceHistoryBean);
 
+		// facebook
+		fundPriceHistoryBean.setFundBean(fundDAO.getFundByName("facebook"));
+		fundPriceHistoryBean.setPrice(1849);
+		fundPriceHistoryBean.setPriceDate(Date.valueOf("2013-12-01"));
+		fundPriceHistoryDAO.insert(fundPriceHistoryBean);
+		fundPriceHistoryBean.setPrice(2902);
+		fundPriceHistoryBean.setPriceDate(Date.valueOf("2013-12-03"));
+		fundPriceHistoryDAO.insert(fundPriceHistoryBean);
+		fundPriceHistoryBean.setPrice(1928);
+		fundPriceHistoryBean.setPriceDate(Date.valueOf("2013-12-10"));
+		fundPriceHistoryDAO.insert(fundPriceHistoryBean);
+		fundPriceHistoryBean.setPrice(1839);
+		fundPriceHistoryBean.setPriceDate(Date.valueOf("2014-01-01"));
+		fundPriceHistoryDAO.insert(fundPriceHistoryBean);
 		DateDAO dateDAO = model.getDateDAO();
 		DateBean dateBean = new DateBean();
 		dateBean.setOldDate(null);
@@ -141,7 +158,6 @@ public class Controller extends HttpServlet {
 		String servletPath = request.getServletPath();
 		Object user = (Object) session.getAttribute("user");
 		String action = getActionName(servletPath);
-		String userType = (String) session.getAttribute("userType");
 		
 		if (action.equals("login.do")) {
 			// Allow these actions without logging in
