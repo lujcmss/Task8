@@ -23,6 +23,7 @@ public class Logout extends Action {
 		request.setAttribute("errors", errors);
 
 		HttpSession session = request.getSession(false);
+		session.setAttribute("user", null);
 		session.setAttribute("accessToken", null);
 
 		return "home.do";

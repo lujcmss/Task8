@@ -7,14 +7,9 @@
 	</c:when>
 	<c:otherwise>
 		<c:forEach var="item" items="${errors}">
-			<p>
-       
-   <h5><font color="red"><c:out value=" Error  : ${ item}" /></font></h5>
-  
-			</p>
-		
-			
-			
+			<h5>
+				<font color="red"><c:out value=" Error  : ${ item}" /></font>
+			</h5>
 		</c:forEach>
 	</c:otherwise>
 </c:choose>

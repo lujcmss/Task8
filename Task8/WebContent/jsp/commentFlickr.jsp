@@ -40,7 +40,5 @@
     ================================================== -->
 <jsp:include page="flickrPics.jsp" />
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="/Task8/js/bootstrap.min.js"></script>
 </body>
 </html>

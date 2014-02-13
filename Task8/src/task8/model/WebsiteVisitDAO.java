@@ -1,34 +1,19 @@
 package task8.model;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Query;
 
-import task8.databeans.UserBean;
+import task8.databeans.WebsiteVisitBean;
 
-public class UserDAO {
-	public void insert(UserBean userBean) {
+public class WebsiteVisitDAO {
+	public void insert(WebsiteVisitBean websiteVisitBean) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			session.beginTransaction();
-			session.save(userBean);
-			session.getTransaction().commit();
-		} catch (Exception e) {
-			System.out.println(e);
-			if (session.getTransaction() != null) {
-				session.getTransaction().rollback();
-			}
-		} finally {
-			session.close();
-		}
-	}
-
-	public void update(UserBean userBean) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		try {
-			session.beginTransaction();
-			session.merge(userBean);
+			session.save(websiteVisitBean);
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			if (session.getTransaction() != null) {
@@ -39,27 +24,31 @@ public class UserDAO {
 		}
 	}
 
-	public UserBean getUserByUsername(String username) {
+	public void update(WebsiteVisitBean websiteVisitBean) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			session.beginTransaction();
+			session.merge(websiteVisitBean);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			if (session.getTransaction() != null) {
+				session.getTransaction().rollback();
+			}
+		} finally {
+			session.close();
+		}
+	}
+
+	public WebsiteVisitBean[] getVisitBefore(Date date) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Query query = session
-				.createQuery("from UserBean where screen_name = :screen_name");
-		query.setParameter("screen_name", username);
+				.createQuery("from WebsiteVisitBean where date >= :date");
+		query.setParameter("date", date);
 		List<?> list = (List<?>) query.list();
+		WebsiteVisitBean[] websiteVisitBeans = list
+				.toArray(new WebsiteVisitBean[list.size()]);
 		session.close();
 
-		if (list.size() == 0)
-			return null;
-		UserBean userBean = (UserBean) list.get(0);
-		return userBean;
-	}
-
-	public UserBean[] getAllUsers() {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Query query = session.createQuery("from UserBean");
-		List<?> list = (List<?>) query.list();
-		UserBean[] userBeans = list.toArray(new UserBean[list.size()]);
-		session.close();
-
-		return userBeans;
+		return websiteVisitBeans;
 	}
 }

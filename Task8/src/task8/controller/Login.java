@@ -5,25 +5,14 @@ import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.mybeans.form.FormBeanFactory;
 import org.scribe.model.Token;
-import org.scribe.model.Verifier;
 
-import task8.databeans.UserBean;
-import task8.formbeans.LoginForm;
-import task8.formbeans.CommentFlickerForm;
 import task8.model.Twitter;
-import task8.model.UserDAO;
 import task8.model.Model;
 
 public class Login extends Action {
-	private FormBeanFactory<LoginForm> formBeanFactory = FormBeanFactory
-			.getInstance(LoginForm.class);
-
-	private UserDAO userDAO;
-
+	
 	public Login(Model model) {
-		userDAO = model.getCustomerDAO();
 	}
 
 	public String getName() {

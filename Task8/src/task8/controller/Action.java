@@ -5,10 +5,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Action Class updated Jan.16 updated again
- */
-
 public abstract class Action {
 	// Returns the name of the action, used to match the request in the hash
 	// table

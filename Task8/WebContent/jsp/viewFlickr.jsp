@@ -3,45 +3,46 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page contentType="text/html;charset=utf-8" language="java"%>
-<%@ page pageEncoding="UTF-8" %>
+<%@ page pageEncoding="UTF-8"%>
 
 <div class="container">
 	<div class="page-header">
-		<h1>
-			Top tags from twitter
-		</h1>
+		<h1>Google Map with Flicker</h1>
 	</div>
 	<jsp:include page="success-list.jsp" />
-	
+
 	<form method="POST" action="viewFlickr.do">
-		<table style="align:center">
+		<table style="align: center">
 			<tr>
-				<td>
-					<input type="text" name="tags" placeholder="Search for Tags" />
-				</td>
+				<td><input type="text" name="tags"
+					placeholder="Search for Tags" /></td>
 			</tr>
 			<tr>
-				<td>
-					<input type="submit" name="button" value="Search Tags"/>
-				</td>
+				<td><input type="submit" name="button" value="Search Tags" /></td>
 			</tr>
 		</table>
 	</form>
-	<h4>
-		<label id="tags"><c:out value="${ SearchTagReturn }" /></label>
-	</h4>
-	<form id="imagecontainer" method="get" action="">
-		<input style="display: none" name="urlClicked" />
-	</form>
+
+	<table align="center">
+		<tr valign="top">
+			<td style="width: 50%;">
+				<div id="map_div" style="width: 400px; height: 300;"></div>
+			</td>
+			<td style="width: 50%;">
+				<div id="table_div"></div>
+			</td>
+		</tr>
+
+	</table>
+
+	<div class="clase1"></div>
 </div>
 <!-- /container -->
 
 
 <!-- Bootstrap core JavaScript
     ================================================== -->
-<jsp:include page="flickrPics.jsp" />
+<jsp:include page="googleWithFlickr.jsp" />
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="/Task8/js/bootstrap.min.js"></script>
 </body>
 </html>

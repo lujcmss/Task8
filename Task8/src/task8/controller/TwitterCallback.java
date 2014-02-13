@@ -10,7 +10,7 @@ import org.mybeans.form.FormBeanFactory;
 import org.scribe.model.Token;
 import org.scribe.model.Verifier;
 
-import task8.formbeans.LoginForm;
+import task8.databeans.UserBean;
 import task8.formbeans.TwitterCallbackForm;
 import task8.model.Model;
 import task8.model.Twitter;
@@ -23,7 +23,7 @@ public class TwitterCallback extends Action {
 	private UserDAO userDAO;
 
 	public TwitterCallback(Model model) {
-		userDAO = model.getCustomerDAO();
+		userDAO = model.getUserDAO();
 	}
 
 	public String getName() {
@@ -38,20 +38,28 @@ public class TwitterCallback extends Action {
 
 		try {
 			TwitterCallbackForm form = formBeanFactory.create(request);
-			
+
 			Twitter twitter = Twitter.getTwitter();
 			Token requestToken = (Token) session.getAttribute("requestToken");
-			//System.out.println(requestToken);
-			
+			// System.out.println(requestToken);
+
 			if (!requestToken.getToken().equals(form.getOauth_token())) {
 				errors.add("Invalid Request Token");
 				return "login.jsp";
 			}
-			
+
 			Verifier verifier = new Verifier(form.getOauth_verifier());
 			Token accessToken = twitter.getAccessToken(requestToken, verifier);
-			//session.setAttribute("requestToken", null);
-			
+			String username = twitter.getUsername(accessToken);
+			UserBean userBean = userDAO.getUserByUsername(username);
+
+			if (userBean == null) {
+				userBean = new UserBean();
+				userBean.setScreen_name(username);
+				userDAO.insert(userBean);
+			}
+
+			session.setAttribute("user", userBean);
 			session.setAttribute("accessToken", accessToken);
 			return "commentFlickr.do";
 		} catch (Exception e) {

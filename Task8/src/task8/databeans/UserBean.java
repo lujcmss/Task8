@@ -15,35 +15,18 @@ public class UserBean implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private int customerId;
+	private int userId;
 
 	@Column(nullable = false)
-	private String username;
+	private String screen_name;
 
-	private String firstName;
-	private String lastName;
-	public int getCustomerId() {
-		return customerId;
+	public int getUserId() {
+		return userId;
 	}
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+	public String getScreen_name() {
+		return screen_name;
 	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public String getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setScreen_name(String screen_name) {
+		this.screen_name = screen_name;
 	}
 }

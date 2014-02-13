@@ -7,23 +7,24 @@ import javax.servlet.http.HttpSession;
 
 import org.scribe.model.Token;
 
+import task8.databeans.CommentBean;
+import task8.databeans.UserBean;
 import task8.databeans.WebsiteVisitBean;
+import task8.model.CommentHistoryDAO;
 import task8.model.Model;
 import task8.model.WebsiteVisitDAO;
 
-public class Home extends Action {
-	
-	private String myAccessToken = "155593232-KEVzHH7BIv8zQ4t8Xvk5xuiTzUXFsv2mMIFKQMyF";
-	private String myAccessTokenSecret = "d88KpbVh4rgMuCLjbcxhw6EpCUDCBROqpGNAZvU8yDoQI";
-	
+public class CommentHistory extends Action {
 	private WebsiteVisitDAO websiteVisitDAO;
+	private CommentHistoryDAO commentHistoryDAO;
 
-	public Home(Model model) {
+	public CommentHistory(Model model) {
 		websiteVisitDAO = model.getWebsiteVisitDAO();
+		commentHistoryDAO = model.getCommentHistoryDAO();
 	}
 
 	public String getName() {
-		return "home.do";
+		return "commentHistory.do";
 	}
 
 	public String perform(HttpServletRequest request) {
@@ -31,25 +32,27 @@ public class Home extends Action {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 		HttpSession session = request.getSession();
-		session.setAttribute("curPage", "home.do");
+		session.setAttribute("curPage", "commentHistory.do");
 		WebsiteVisitBean websiteVisitBean = new WebsiteVisitBean();
-		websiteVisitBean.setPage("Home");
+		websiteVisitBean.setPage("User History");
 		websiteVisitBean.setDate(new Date(System.currentTimeMillis()));
 		websiteVisitDAO.insert(websiteVisitBean);
 
 		try {
-			Token apponlyAccessToken = new Token(myAccessToken, myAccessTokenSecret);
-			session.setAttribute("apponlyAccessToken", apponlyAccessToken);
+			Token accessToken = (Token) session.getAttribute("accessToken");
+
+			if (accessToken == null) {
+				return "login.do";
+			}
 			
-			List<String> pages = new ArrayList<String>();
-			pages.add("Home"); pages.add("Flick&Map"); pages.add("Search&Tweet");
-			pages.add("User History"); pages.add("Statistics");
-			session.setAttribute("pages", pages);
-			
-			return "home.jsp";
+			UserBean userBean = (UserBean) session.getAttribute("user");
+			CommentBean[] commentBeans = commentHistoryDAO.getCommentsByUser(userBean);
+			request.setAttribute("commentHistory", commentBeans);
+			return "commentHistory.jsp";
 		} catch (Exception e) {
 			errors.add(e.getMessage());
-			return "home.jsp";
+			System.out.println(e);
+			return "commentHistory.jsp";
 		}
 	}
 }

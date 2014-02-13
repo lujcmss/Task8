@@ -74,7 +74,7 @@
 							<li>
 						</c:otherwise>
 					</c:choose>
-					<a href="viewFlickr.do">View Picture from Flicker</a>
+					<a href="viewFlickr.do">Flick &amp; Map</a>
 					</li>
 
 					<c:choose>
@@ -85,12 +85,34 @@
 							<li>
 						</c:otherwise>
 					</c:choose>
-					<a href="commentFlickr.do">Comment Picture to Twitter</a>
+					<a href="commentFlickr.do">Search &amp; Tweet</a>
+					</li>
+					
+					<c:choose>
+						<c:when test="${curPage=='commentHistory.do'}">
+							<li class="active">
+						</c:when>
+						<c:otherwise>
+							<li>
+						</c:otherwise>
+					</c:choose>
+					<a href="commentHistory.do">User History</a>
+					</li>
+					
+					<c:choose>
+						<c:when test="${curPage=='websiteStatistics.do'}">
+							<li class="active">
+						</c:when>
+						<c:otherwise>
+							<li>
+						</c:otherwise>
+					</c:choose>
+					<a href="websiteStatistics.do">Statistics</a>
 					</li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
-					<li><a> Hello, ${user.firstName}. </a></li>
+					<li><a> Hello ${user.screen_name} </a></li>
 					<li><a href="logout.do">Logout</a></li>
 				</ul>
 			</div>

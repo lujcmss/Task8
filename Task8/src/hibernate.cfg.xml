@@ -12,5 +12,7 @@
         
         <property name="hbm2ddl.auto">create</property>
         <mapping class="task8.databeans.UserBean"></mapping>
+        <mapping class="task8.databeans.CommentBean"></mapping>
+        <mapping class="task8.databeans.WebsiteVisitBean"></mapping>
     </session-factory>
 </hibernate-configuration>
