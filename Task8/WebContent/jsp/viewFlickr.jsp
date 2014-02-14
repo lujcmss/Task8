@@ -12,32 +12,44 @@
 	<jsp:include page="success-list.jsp" />
 	<jsp:include page="error-list.jsp" />
 
-	<form method="POST" action="viewFlickr.do">
-		<table style="align: center">
-			<tr>
-				<td><input type="text" name="tags"
-					placeholder="Search for Tags" /></td>
-			</tr>
-			<tr>
-				<td><input type="submit" name="button" value="Search Tags" /></td>
-			</tr>
-		</table>
-	</form>
-	<h4>
-		Tags : <label id="tags"><c:out value="${ SearchTagReturn }" /></label>
-	</h4>
-	
-	<table align="center">
-		<tr valign="top">
-			<td style="width: 50%;">
-				<div id="map_div" style="width: 400px; height: 300;"></div>
-			</td>
-			<td style="width: 50%;">
-				<div id="table_div"></div>
-			</td>
-		</tr>
+	<div class="container" onload="imageFunction();">
+		<h3>Get the Latitude and Longitude of a Point</h3>
 
-	</table>
+
+
+
+		<form>
+			Latitude:<input size="15" type="text" id="latbox" name="lat" value="">
+			Longitude:<input size="15" type="text" id="lonbox" name="lon"
+				value="">
+			<table style="align: center">
+				<tr>
+					<td><input type="text" name="tags" id="tags"
+						placeholder="Search for Tags" /></td>
+				</tr>
+				<tr>
+					<td></td>
+				</tr>
+			</table>
+
+
+
+
+			<input type="button" id="theButton"
+				onclick="imageFunction(this.form.lat.value,this.form.lon.value,this.form.tags.value)"
+				value="search" />
+		</form>
+
+		<input type="button" value="Clear / Reset" id="reset"
+			onclick="reset()">
+
+
+		<h1>Latitude and Longitude of a Point</h1>
+		<div id="wrapper" style="margin: 5px">
+			<div id="map" style="width: 800px; height: 450px"></div>
+		</div>
+	</div>
+	
 	<div class="clase1"></div>
 </div>
 <!-- /container -->

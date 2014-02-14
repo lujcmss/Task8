@@ -48,12 +48,12 @@ public class ViewFlickerForm extends FormBean{
 		if (tags == null || tags.equals("")) {
 			errors.add("Tags cannot be empty.");
 		}
-		if (lat == null || lat.equals("") || !lat.matches("^(([0-9]+[\\.]?[0-9]+)|[1-9])$")) {
+		if (lat == null || lat.equals("")) {
 			errors.add("Latitude cannot be empty, and must be a number between -90 to 90.");
 		} else if (Double.parseDouble(lat) > 90 || Double.parseDouble(lat) < -90) {
 			errors.add("Latitude must be a number between -90 to 90.");
 		}
- 		if (lon == null || lon.equals("") || !lon.matches("^(([0-9]+[\\.]?[0-9]+)|[1-9])$")) {
+ 		if (lon == null || lon.equals("")) {
 			errors.add("Longitude cannot be empty, and must be a number between -180 and 180.");
 		} else if (Double.parseDouble(lon) > 180 || Double.parseDouble(lon) < -180) {
 			errors.add("Longitude must be a number between -180 and 180.");

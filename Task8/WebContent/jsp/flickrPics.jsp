@@ -55,8 +55,8 @@
 			mybutton.attr("value", "Comment");
 
 			$("#imagecontainer").append(myform);
-			$("#" + photo.id).append(mya).append(myinput).append(myhidden)
-					.append(mybutton);
+			$("#" + photo.id).append(mya).append(myinput)
+				.append(myhidden).append(myhidden1).append(mybutton);
 			$("#a" + photo.id).append(image);
 		});
 	}

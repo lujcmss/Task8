@@ -21,6 +21,8 @@
 		<c:forEach var="item" items="${ topComment }" >
 			<form method="POST" action="commentHistory.do">
 				<tr>
+					<input type="hidden" name="imageSource" value="${ item.imageSource }" />
+					<input type="hidden" name="imageSourceOri" value="${ item.imageSourceOri }" />
 					<td><a class="top_up" href="${ item.imageSourceOri }"><img src="${ item.imageSource }" /></a></td>
 					<td>Commented times: <c:out value="${ item.count }" /></td>
 					<td><input type="text" name="comment" /></td>

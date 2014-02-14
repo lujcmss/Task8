@@ -61,7 +61,7 @@ public class CommentFlickr extends Action {
 				Token accessToken = (Token) session.getAttribute("apponlyAccessToken");
 				searchTagReturn = twitter.getPopularTags(accessToken);
 				*/
-				if (searchTagReturn != null) {
+				if (searchTagReturn == null || searchTagReturn.equals("")) {
 					searchTagReturn = "Pittsburgh"; 
 				}
 			} else if (form.getButton().equals("Search Tags")) {

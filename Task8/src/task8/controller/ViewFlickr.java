@@ -6,11 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.mybeans.form.FormBeanFactory;
-import org.scribe.model.Token;
 
 import task8.databeans.WebsiteVisitBean;
 import task8.formbeans.ViewFlickerForm;
-import task8.model.Twitter;
 import task8.model.Model;
 import task8.model.WebsiteVisitDAO;
 
@@ -42,22 +40,26 @@ public class ViewFlickr extends Action {
 		try {
 			ViewFlickerForm form = formBeanFactory.create(request);
 
-			String searchTagReturn = null;
+			String mapTag = null;
 			if (!form.isPresent() || form.getButton() == null) {
+				/*
 				Twitter twitter = Twitter.getTwitter();
-				Token apponlyAccessToken = (Token) session
-						.getAttribute("apponlyAccessToken");
-				searchTagReturn = twitter.getPopularTags(apponlyAccessToken);
+				Token accessToken = (Token) session.getAttribute("apponlyAccessToken");
+				searchTagReturn = twitter.getPopularTags(accessToken);
+				*/
+				if (mapTag == null || mapTag.equals("")) {
+					mapTag = "Restaurant";
+				}
 			} else if (form.getValidationErrors().size() != 0) {
 				errors = form.getValidationErrors();
 				return "viewFlickr.jsp";
 			} else {
-				searchTagReturn = form.getTags();
-				request.setAttribute("lat", form.getLat());
-				request.setAttribute("lon", form.getLon());
+				mapTag = form.getTags();
+				session.setAttribute("lat", form.getLat());
+				session.setAttribute("lon", form.getLon());
 			}
 
-			request.setAttribute("SearchTagReturn", searchTagReturn);
+			request.setAttribute("mapTag", mapTag);
 			return "viewFlickr.jsp";
 		} catch (Exception e) {
 			errors.add(e.getMessage());

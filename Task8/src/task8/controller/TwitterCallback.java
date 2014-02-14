@@ -61,7 +61,7 @@ public class TwitterCallback extends Action {
 
 			session.setAttribute("user", userBean);
 			session.setAttribute("accessToken", accessToken);
-			return "commentFlickr.do";
+			return (String) session.getAttribute("curPage");
 		} catch (Exception e) {
 			errors.add(e.getMessage());
 			System.out.println(e);

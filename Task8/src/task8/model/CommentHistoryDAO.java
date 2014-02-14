@@ -87,9 +87,9 @@ public class CommentHistoryDAO {
 
 		int tot = 0;
 		for (int i = mapValues.size() - 1; i >= 0; i--) {
-			if (tot < top) {
+			if (tot < top && (i == mapValues.size() - 1 || mapValues.get(i) != mapValues.get(i+1))) {
 				for (String key : count.keySet()) {
-					if (count.get(key) == mapValues.get(i)) {
+					if (count.get(key) == mapValues.get(i) && tot < top) {
 						TopCommentBean tmp = new TopCommentBean();
 						tmp.setCount(count.get(key));
 						tmp.setImageSource(key);
@@ -130,7 +130,7 @@ public class CommentHistoryDAO {
 
 		int tot = 0;
 		for (int i = mapValues.size() - 1; i >= 0; i--) {
-			if (tot >= top) {
+			if (tot >= top && (i == mapValues.size() - 1 || mapValues.get(i) != mapValues.get(i+1))) {
 				for (String key : count.keySet()) {
 					if (count.get(key) == mapValues.get(i)) {
 						if (commentGraphBeans.size() != tot) {
