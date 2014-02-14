@@ -40,7 +40,7 @@
 				.draw(data, {
 					title : "Page Viewed per Day",
 					curveType: "function",
-					width : 800,
+					width : 1000,
 					height : 400,
 					vAxis : {
 						title : "Pages & Dates"
@@ -75,7 +75,7 @@
 		new google.visualization.PieChart(document
 				.getElementById('TopCommentUsers')).draw(data, {
 			title : "Top Comment Users",
-			width : 800,
+			width : 1000,
 			height : 400,
 		});
 	}
@@ -106,7 +106,7 @@
 				.getElementById('chart_div'));
 		chart.draw(ticketsData, {
 			title : "task 8 Consumption by person",
-			width : 800,
+			width : 1000,
 			height : 400,
 			vAxis : {
 				title : "Year"

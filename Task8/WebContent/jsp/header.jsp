@@ -50,7 +50,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">T-F</a>
+				<a class="navbar-brand" href="#">Geo-WoW</a>
 			</div>
 			<div class="navbar-collapse collapse">
 

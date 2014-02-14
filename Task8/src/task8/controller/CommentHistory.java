@@ -76,7 +76,6 @@ public class CommentHistory extends Action {
 			}
 
 			List<TopCommentBean> topCommentBeans = commentHistoryDAO.getTopPictures(5);
-			System.out.println(topCommentBeans);
 			request.setAttribute("topComment", topCommentBeans);
 			return "commentHistory.jsp";
 		} catch (Exception e) {
