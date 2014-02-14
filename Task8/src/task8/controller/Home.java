@@ -43,7 +43,7 @@ public class Home extends Action {
 			
 			List<String> pages = new ArrayList<String>();
 			pages.add("Home"); pages.add("Flick&Map"); pages.add("Search&Tweet");
-			pages.add("User History"); pages.add("Statistics");
+			pages.add("Popular Pictures"); pages.add("Statistics");
 			session.setAttribute("pages", pages);
 			
 			return "home.jsp";

@@ -43,14 +43,18 @@ public class ViewFlickr extends Action {
 			ViewFlickerForm form = formBeanFactory.create(request);
 
 			String searchTagReturn = null;
-			if (!form.isPresent() || form.getButton() == null
-					|| form.getTags().equals("")) {
+			if (!form.isPresent() || form.getButton() == null) {
 				Twitter twitter = Twitter.getTwitter();
 				Token apponlyAccessToken = (Token) session
 						.getAttribute("apponlyAccessToken");
 				searchTagReturn = twitter.getPopularTags(apponlyAccessToken);
+			} else if (form.getValidationErrors().size() != 0) {
+				errors = form.getValidationErrors();
+				return "viewFlickr.jsp";
 			} else {
 				searchTagReturn = form.getTags();
+				request.setAttribute("lat", form.getLat());
+				request.setAttribute("lon", form.getLon());
 			}
 
 			request.setAttribute("SearchTagReturn", searchTagReturn);

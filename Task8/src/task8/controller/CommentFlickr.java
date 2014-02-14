@@ -56,7 +56,14 @@ public class CommentFlickr extends Action {
 					|| form.getButton() == null
 					|| (form.getButton().equals("Search Tags") && form
 							.getTags() == null)) {
-				searchTagReturn = "great wall";
+				/*
+				Twitter twitter = Twitter.getTwitter();
+				Token accessToken = (Token) session.getAttribute("apponlyAccessToken");
+				searchTagReturn = twitter.getPopularTags(accessToken);
+				*/
+				if (searchTagReturn != null) {
+					searchTagReturn = "Pittsburgh"; 
+				}
 			} else if (form.getButton().equals("Search Tags")) {
 				searchTagReturn = form.getTags();
 			} else {
@@ -71,6 +78,7 @@ public class CommentFlickr extends Action {
 				commentBean
 						.setUserBean((UserBean) session.getAttribute("user"));
 				commentBean.setImageSource(form.getImageSource());
+				commentBean.setImageSourceOri(form.getImageSourceOri());
 				commentBean.setDate(new Date(System.currentTimeMillis()));
 				commentHistoryDAO.insert(commentBean);
 

@@ -10,7 +10,8 @@
 		<h1>Website Statistics</h1>
 	</div>
 	<jsp:include page="success-list.jsp" />
-
+	<jsp:include page="error-list.jsp" />
+	
 	<table>
 		<tr>
 			<td><div id="ViewPerDay" style="width: 600px; height: 400px;"></div></td>

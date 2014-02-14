@@ -35,7 +35,7 @@
 			mya.attr("href", photoURLori);
 
 			mydiv.append("<tr><td>title :</td><td>" + photo.title
-					+ "</td></tr><tr><td>views: </td><td>" + photo.view
+					+ "</td></tr><tr><td>views: </td><td>" + photo.views
 					+ "</td></tr><tr><td>description :</td><td>"
 					+ photo.description._content + "</td></tr>");
 			

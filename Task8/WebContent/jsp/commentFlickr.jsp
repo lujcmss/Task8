@@ -12,6 +12,7 @@
 		</h1>
 	</div>
 	<jsp:include page="success-list.jsp" />
+	<jsp:include page="error-list.jsp" />
 	
 	<form method="POST" action="commentFlickr.do">
 		<table style="align:center">
@@ -28,7 +29,7 @@
 		</table>
 	</form>
 	<h4>
-		Here's top 10 images for : <label id="tags"><c:out value="${ SearchTagReturn }" /></label>
+		Here's top images for : <label id="tags"><c:out value="${ SearchTagReturn }" /></label>
 	</h4>
 	<div id="imagecontainer">
 	</div>

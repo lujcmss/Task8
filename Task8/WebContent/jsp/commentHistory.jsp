@@ -12,15 +12,22 @@
 		</h1>
 	</div>
 	<jsp:include page="success-list.jsp" />
+	<jsp:include page="error-list.jsp" />
 	
+	<h4>
+		Here's most popular pictures in our website:
+	</h4>
 	<table>
-		<tr>
-		<c:forEach var="item" items="${ commentHistory }" >
-			<td><img src="${ item.imageSource }" /></td>
-			<td><c:out value="${ item.date }" /></td>
-			<td><c:out value="${ item.comment }" /></td>
+		<c:forEach var="item" items="${ topComment }" >
+			<form method="POST" action="commentHistory.do">
+				<tr>
+					<td><a class="top_up" href="${ item.imageSourceOri }"><img src="${ item.imageSource }" /></a></td>
+					<td>Commented times: <c:out value="${ item.count }" /></td>
+					<td><input type="text" name="comment" /></td>
+					<td><input type="submit" name="button" value="Comment" /></td>
+				</tr>
+			</form>
 		</c:forEach>
-		</tr>
 	</table>
 </div>
 <!-- /container -->
@@ -29,6 +36,7 @@
 <!-- Bootstrap core JavaScript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript"
+	src="http://gettopup.com/releases/latest/top_up-min.js"></script>
 </body>
 </html>

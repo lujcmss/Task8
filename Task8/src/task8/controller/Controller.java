@@ -51,20 +51,26 @@ public class Controller extends HttpServlet {
 		CommentBean commentBean = new CommentBean();
 		commentBean.setUserBean(userDAO.getUserByUsername("Trey Lu"));
 		commentBean.setComment("Perfect!");
+		commentBean.setImageSource("http://farm4.staticflickr.com/3785/11012730793_e23508d9d8_q.jpg");
+		commentBean.setImageSourceOri("http://farm4.staticflickr.com/3785/11012730793_e23508d9d8_b.jpg");
 		for (int i = 0; i < 10; i++) {
 			commentBean.setDate(new Date(System.currentTimeMillis() - 1*86400*1000));
 			commentHistoryDAO.insert(commentBean);
 		}
 		
 		commentBean.setUserBean(userDAO.getUserByUsername("Patricio"));
-		commentBean.setComment("Nice.");
+		commentBean.setComment("A Cat.");
+		commentBean.setImageSource("http://farm4.staticflickr.com/3701/9776671056_c0e9303c5a_q.jpg");
+		commentBean.setImageSourceOri("http://farm4.staticflickr.com/3701/9776671056_c0e9303c5a_b.jpg");
 		for (int i = 0; i < 5; i++) {
 			commentBean.setDate(new Date(System.currentTimeMillis() - 3*86400*1000));
 			commentHistoryDAO.insert(commentBean);
 		}
 
 		commentBean.setUserBean(userDAO.getUserByUsername("David Wu"));
-		commentBean.setComment("Well Done!");
+		commentBean.setComment("Cute Bird!");
+		commentBean.setImageSource("http://farm9.staticflickr.com/8176/8030445741_683f876df9_q.jpg");
+		commentBean.setImageSourceOri("http://farm9.staticflickr.com/8176/8030445741_683f876df9_b.jpg");
 		for (int i = 0; i < 9; i++) {
 			commentBean.setDate(new Date(System.currentTimeMillis() - 2*86400*1000));
 			commentHistoryDAO.insert(commentBean);
@@ -72,6 +78,8 @@ public class Controller extends HttpServlet {
 
 		commentBean.setUserBean(userDAO.getUserByUsername("Yi Li"));
 		commentBean.setComment("Good!");
+		commentBean.setImageSource("http://farm4.staticflickr.com/3675/11208768286_8e24e7d6af_q.jpg");
+		commentBean.setImageSourceOri("http://farm4.staticflickr.com/3675/11208768286_8e24e7d6af_b.jpg");
 		for (int i = 0; i < 6; i++) {
 			commentBean.setDate(new Date(System.currentTimeMillis() - i*86400*1000));
 			commentHistoryDAO.insert(commentBean);
@@ -79,6 +87,8 @@ public class Controller extends HttpServlet {
 		
 		commentBean.setUserBean(userDAO.getUserByUsername("Akshata"));
 		commentBean.setComment("Excellent!");
+		commentBean.setImageSource("http://farm7.staticflickr.com/6058/6368881029_0145030234_q.jpg");
+		commentBean.setImageSourceOri("http://farm7.staticflickr.com/6058/6368881029_0145030234_b.jpg");
 		for (int i = 0; i < 2; i++) {
 			commentBean.setDate(new Date(System.currentTimeMillis() - 2*86400*1000));
 			commentHistoryDAO.insert(commentBean);
@@ -104,7 +114,7 @@ public class Controller extends HttpServlet {
 			websiteVisitDAO.insert(websiteVisitBean);
 		}
 		
-		websiteVisitBean.setPage("User History");
+		websiteVisitBean.setPage("Popular Pictures");
 		for (int i = 0; i < 40; i++) {
 			websiteVisitBean.setDate(new Date(System.currentTimeMillis() - i*10640*1000));
 			websiteVisitDAO.insert(websiteVisitBean);

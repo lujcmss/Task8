@@ -10,6 +10,7 @@
 		<h1>Google Map with Flicker</h1>
 	</div>
 	<jsp:include page="success-list.jsp" />
+	<jsp:include page="error-list.jsp" />
 
 	<form method="POST" action="viewFlickr.do">
 		<table style="align: center">
@@ -22,7 +23,10 @@
 			</tr>
 		</table>
 	</form>
-
+	<h4>
+		Tags : <label id="tags"><c:out value="${ SearchTagReturn }" /></label>
+	</h4>
+	
 	<table align="center">
 		<tr valign="top">
 			<td style="width: 50%;">
@@ -34,7 +38,6 @@
 		</tr>
 
 	</table>
-
 	<div class="clase1"></div>
 </div>
 <!-- /container -->

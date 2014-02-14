@@ -96,7 +96,7 @@
 							<li>
 						</c:otherwise>
 					</c:choose>
-					<a href="commentHistory.do">User History</a>
+					<a href="commentHistory.do">Popular Pictures</a>
 					</li>
 					
 					<c:choose>

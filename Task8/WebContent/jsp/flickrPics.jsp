@@ -32,6 +32,7 @@
 			var myform = $('<form></form>');
 			var myinput = $('<input/>');
 			var myhidden = $('<input/>');
+			var myhidden1 = $('<input/>');
 			var mybutton = $('<input/>');
 
 			image.attr("src", photoURL);
@@ -44,8 +45,11 @@
 			myinput.attr("type", "text");
 			myinput.attr("name", "comment");
 			myhidden.attr("type", "hidden");
-			myhidden.attr("name", "imageSource");
+			myhidden.attr("name", "imageSourceOri");
 			myhidden.attr("value", photoURLori);
+			myhidden1.attr("type", "hidden");
+			myhidden1.attr("name", "imageSource");
+			myhidden1.attr("value", photoURL);
 			mybutton.attr("type", "submit");
 			mybutton.attr("name", "button");
 			mybutton.attr("value", "Comment");

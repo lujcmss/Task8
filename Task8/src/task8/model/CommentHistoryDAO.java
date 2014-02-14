@@ -11,6 +11,7 @@ import org.hibernate.Query;
 
 import task8.databeans.CommentBean;
 import task8.databeans.CommentGraphBean;
+import task8.databeans.TopCommentBean;
 import task8.databeans.UserBean;
 
 public class CommentHistoryDAO {
@@ -55,7 +56,54 @@ public class CommentHistoryDAO {
 
 		return commentBeans;
 	}
+	
+	public List<TopCommentBean> getTopPictures(int top) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Query query = session.createQuery("from CommentBean");
+		List<?> list = (List<?>) query.list();
+		CommentBean[] commentBeans = list.toArray(new CommentBean[list.size()]);
+		session.close();
 
+		Map<String, Integer> count = new HashMap<String, Integer>();
+		Map<String, String> url = new HashMap<String, String>();
+		count.clear();
+		url.clear();
+
+		for (int i = 0; i < commentBeans.length; i++) {
+			String pic = commentBeans[i].getImageSource();
+			String picOri = commentBeans[i].getImageSourceOri();
+			if (count.containsKey(pic)) {
+				count.put(pic, count.get(pic) + 1);
+			} else {
+				count.put(pic, 1);
+				url.put(pic,  picOri);
+			}
+		}
+
+		List<Integer> mapValues = new ArrayList<Integer>(count.values());
+		Collections.sort(mapValues);
+		
+		List<TopCommentBean> topCommentBeans = new ArrayList<TopCommentBean>();
+
+		int tot = 0;
+		for (int i = mapValues.size() - 1; i >= 0; i--) {
+			if (tot < top) {
+				for (String key : count.keySet()) {
+					if (count.get(key) == mapValues.get(i)) {
+						TopCommentBean tmp = new TopCommentBean();
+						tmp.setCount(count.get(key));
+						tmp.setImageSource(key);
+						tmp.setImageSourceOri(url.get(key));
+						topCommentBeans.add(tmp);
+						tot++;
+					}
+				}
+			}
+		}
+
+		return topCommentBeans;
+	}
+	
 	public List<CommentGraphBean> getTopComments(int top) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Query query = session.createQuery("from CommentBean");

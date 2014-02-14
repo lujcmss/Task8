@@ -12,6 +12,7 @@ import org.scribe.model.Verb;
 import org.scribe.model.Verifier;
 import org.scribe.oauth.OAuthService;
 
+import task8.databeans.TopicBean;
 import task8.databeans.UserBean;
 
 import com.google.gson.Gson;
@@ -111,6 +112,8 @@ public class Twitter {
 		service.signRequest(accessToken, request);
 		Response response = request.send();
 
-		return response.getBody();
+		Gson gson = new Gson();
+		TopicBean[] topicBeans = gson.fromJson(response.getBody(), TopicBean[].class);
+		return topicBeans[0].getTrends().get(0).getName();
 	}
 }
