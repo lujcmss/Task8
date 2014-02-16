@@ -6,9 +6,9 @@
 		<meta charset="utf-8">
 
 <style class="cssdeck">.container{
-	width:800px;
-	height:400px;
-	padding:20px;
+	width:1024px;
+	height:450px;
+	padding:15px;
 	border:1px solid gray;
 	-webkit-box-sizing:border-box;
 	-moz-box-sizing:border-box;
