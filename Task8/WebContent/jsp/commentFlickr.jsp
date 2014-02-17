@@ -1,41 +1,39 @@
 <jsp:include page="header.jsp" />
 
+</div>
+</header>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page contentType="text/html;charset=utf-8" language="java"%>
 <%@ page pageEncoding="UTF-8" %>
 
-<div class="container">
-	<div class="page-header">
-		<h1>
-			Search for Tags and Comment
-		</h1>
-	</div>
+
 	<jsp:include page="success-list.jsp" />
 	<jsp:include page="error-list.jsp" />
-	
-	<form method="POST" action="commentFlickr.do">
-		<table style="align:center">
-			<tr>
-				<td>
-					<input type="text" name="tags" placeholder="Search for Tags" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<input type="submit" name="button" value="Search Tags" />
-				</td>
-			</tr>
-		</table>
-	</form>
-	<h4>
-		Here's top images for : <label id="tags"><c:out value="${ SearchTagReturn }" /></label>
-	</h4>
-	<div id="imagecontainer">
-	</div>
-</div>
-<!-- /container -->
 
+
+<form id="contactForm" width="20%">
+
+	<h3>Search Tag</h3>
+	<input type="text" name="tags" id="tags" value="${ SearchTagReturn }"/>
+
+	<h3>Search It!</h3>
+	<input type="button" id="theButton"
+		onclick="imageFunction(this.form.tags.value)"></input>
+</form>
+
+<!-- MAIN -->
+<div id="main">
+	<div class="wrapper cf">
+
+		<!-- Filter container -->
+		<div id="filter-container" class="cf"></div>
+		<!-- ENDS Filter container -->
+	</div>
+	<!-- ENDS featured -->
+</div>
+<!-- ENDS MAIN -->
 
 <!-- Bootstrap core JavaScript
     ================================================== -->

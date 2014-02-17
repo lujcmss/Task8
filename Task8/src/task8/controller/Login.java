@@ -35,12 +35,11 @@ public class Login extends Action {
 			session.setAttribute("requestToken", requestToken);
 			
 			String url = twitter.getURL(requestToken);
-			request.setAttribute("TwitterRedirect", url);
-			return "login.jsp";
+			return url;
 		} catch (Exception e) {
 			errors.add(e.getMessage());
 			System.out.println(e);
-			return "login.jsp";
+			return "home.jsp";
 		}
 	}
 }

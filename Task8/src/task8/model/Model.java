@@ -5,6 +5,8 @@ import javax.servlet.ServletException;
 
 public class Model {
 	private UserDAO userDAO;
+	private LikeDAO likeDAO;
+	private DislikeDAO dislikeDAO;
 	private CommentHistoryDAO commentHistoryDAO;
 	private WebsiteVisitDAO websiteVisitDAO;
 
@@ -15,6 +17,8 @@ public class Model {
 
 			// ConnectionPool pool = new ConnectionPool(jdbcDriver, jdbcURL);
 			userDAO = new UserDAO();
+			likeDAO = new LikeDAO();
+			dislikeDAO = new DislikeDAO();
 			commentHistoryDAO = new CommentHistoryDAO();
 			websiteVisitDAO = new WebsiteVisitDAO();
 		} catch (Exception e) {
@@ -26,6 +30,14 @@ public class Model {
 		return userDAO;
 	}
 
+	public LikeDAO getLikeDAO() {
+		return likeDAO;
+	}
+	
+	public DislikeDAO getDislikeDAO() {
+		return dislikeDAO;
+	}
+	
 	public CommentHistoryDAO getCommentHistoryDAO() {
 		return commentHistoryDAO;
 	}

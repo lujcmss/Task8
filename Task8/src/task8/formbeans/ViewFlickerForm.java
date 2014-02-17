@@ -10,6 +10,11 @@ public class ViewFlickerForm extends FormBean{
 	private String button;
 	private String lat;
 	private String lon;
+	private String photoId;
+	private String title;
+	private String imageSource;
+	private String imageSourceOri;
+	private String comment;
 
 	public String getTags() {
 		return tags;
@@ -26,6 +31,15 @@ public class ViewFlickerForm extends FormBean{
 	public void setButton(String button) {
 		this.button = button;
 	}
+	
+	public String getPhotoId() {
+		return photoId;
+	}
+
+	public void setPhotoId(String photoId) {
+		this.photoId = photoId;
+	}
+
 	public String getLat() {
 		return lat;
 	}
@@ -40,6 +54,38 @@ public class ViewFlickerForm extends FormBean{
 
 	public void setLon(String lon) {
 		this.lon = lon;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getImageSource() {
+		return imageSource;
+	}
+
+	public void setImageSource(String imageSource) {
+		this.imageSource = imageSource;
+	}
+
+	public String getImageSourceOri() {
+		return imageSourceOri;
+	}
+
+	public void setImageSourceOri(String imageSourceOri) {
+		this.imageSourceOri = imageSourceOri;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 	public List<String> getValidationErrors() {

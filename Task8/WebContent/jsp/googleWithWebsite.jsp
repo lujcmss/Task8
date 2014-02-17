@@ -16,7 +16,7 @@
 			data.addColumn('number', '${item}');
 			pageslength += 1;
 		</c:forEach>
-
+		
 		var visits = new Array();
 		<c:forEach var="item" items='${visits}'>
 			visits.push('${item}');
@@ -100,20 +100,5 @@
 		if (response.isError()) {
 			alert('Error in query');
 		}
-
-		var ticketsData = response.getDataTable();
-		var chart = new google.visualization.ColumnChart(document
-				.getElementById('chart_div'));
-		chart.draw(ticketsData, {
-			title : "task 8 Consumption by person",
-			width : 1000,
-			height : 400,
-			vAxis : {
-				title : "Year"
-			},
-			hAxis : {
-				title : "Consumption"
-			}
-		});
 	}
 </script>

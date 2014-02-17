@@ -10,6 +10,8 @@ public class CommentFlickerForm extends FormBean{
 	private String comment;
 	private String imageSource;
 	private String imageSourceOri;
+	private String photoId;
+	private String title;
 	private String button;
 
 	public String getImageSource() {
@@ -42,6 +44,22 @@ public class CommentFlickerForm extends FormBean{
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	public String getPhotoId() {
+		return photoId;
+	}
+
+	public void setPhotoId(String photoId) {
+		this.photoId = photoId;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getButton() {

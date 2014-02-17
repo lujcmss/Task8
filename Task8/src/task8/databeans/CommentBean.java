@@ -23,6 +23,8 @@ public class CommentBean implements Serializable {
 	
 	private String comment;
 	private Date date;
+	private String photoId;
+	private String title;
 	private String imageSource;
 	private String imageSourceOri;
 	
@@ -46,6 +48,18 @@ public class CommentBean implements Serializable {
 	}
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	public String getPhotoId() {
+		return photoId;
+	}
+	public void setPhotoId(String photoId) {
+		this.photoId = photoId;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	public String getImageSource() {
 		return imageSource;

@@ -11,7 +11,7 @@ import org.hibernate.Query;
 
 import task8.databeans.CommentBean;
 import task8.databeans.CommentGraphBean;
-import task8.databeans.TopCommentBean;
+import task8.databeans.TopBean;
 import task8.databeans.UserBean;
 
 public class CommentHistoryDAO {
@@ -57,7 +57,7 @@ public class CommentHistoryDAO {
 		return commentBeans;
 	}
 	
-	public List<TopCommentBean> getTopPictures(int top) {
+	public List<TopBean> getTopPictures(int top) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Query query = session.createQuery("from CommentBean");
 		List<?> list = (List<?>) query.list();
@@ -65,43 +65,47 @@ public class CommentHistoryDAO {
 		session.close();
 
 		Map<String, Integer> count = new HashMap<String, Integer>();
-		Map<String, String> url = new HashMap<String, String>();
+		Map<String, String> imageSource = new HashMap<String, String>();
+		Map<String, String> imageSourceOri = new HashMap<String, String>();
+		Map<String, String> title = new HashMap<String, String>();
 		count.clear();
-		url.clear();
 
 		for (int i = 0; i < commentBeans.length; i++) {
-			String pic = commentBeans[i].getImageSource();
-			String picOri = commentBeans[i].getImageSourceOri();
-			if (count.containsKey(pic)) {
-				count.put(pic, count.get(pic) + 1);
+			String photo = commentBeans[i].getPhotoId();
+			if (count.containsKey(photo)) {
+				count.put(photo, count.get(photo) + 1);
 			} else {
-				count.put(pic, 1);
-				url.put(pic,  picOri);
+				count.put(photo, 1);
+				imageSource.put(photo, commentBeans[i].getImageSource());
+				imageSourceOri.put(photo, commentBeans[i].getImageSourceOri());
+				title.put(photo, commentBeans[i].getTitle());
 			}
 		}
 
 		List<Integer> mapValues = new ArrayList<Integer>(count.values());
 		Collections.sort(mapValues);
 		
-		List<TopCommentBean> topCommentBeans = new ArrayList<TopCommentBean>();
+		List<TopBean> topBeans = new ArrayList<TopBean>();
 
 		int tot = 0;
 		for (int i = mapValues.size() - 1; i >= 0; i--) {
 			if (tot < top && (i == mapValues.size() - 1 || mapValues.get(i) != mapValues.get(i+1))) {
 				for (String key : count.keySet()) {
 					if (count.get(key) == mapValues.get(i) && tot < top) {
-						TopCommentBean tmp = new TopCommentBean();
+						TopBean tmp = new TopBean();
 						tmp.setCount(count.get(key));
-						tmp.setImageSource(key);
-						tmp.setImageSourceOri(url.get(key));
-						topCommentBeans.add(tmp);
+						tmp.setPhotoId(key);
+						tmp.setImageSource(imageSource.get(key));
+						tmp.setImageSourceOri(imageSourceOri.get(key));
+						tmp.setTitle(title.get(key));
+						topBeans.add(tmp);
 						tot++;
 					}
 				}
 			}
 		}
 
-		return topCommentBeans;
+		return topBeans;
 	}
 	
 	public List<CommentGraphBean> getTopComments(int top) {

@@ -1,25 +1,30 @@
 <jsp:include page="header.jsp" />
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-<div class="container">
-	<div class="page-header">
-		<h1>
-			Welcome
-			<c:out value="${user.screen_name}" />
-		</h1>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- SLIDER -->
+<div id="home-slider" class="lof-slidecontent">
+	<div>
+		<div></div>
 	</div>
-	<jsp:include page="success-list.jsp" />
-	
-	<div id="imagecontainer">
+
+	<div class="container">
+		<div class="image-slider-wrapper">
+			<ul style="width: 4560px; left: -2531px;" id="image_slider">
+
+
+			</ul>
+
+		</div>
 	</div>
+	<!-- ENDS slider content -->
+
 </div>
-<!-- /container -->
+<!-- ENDS SLIDER -->
+<!-- ENDS SLIDER -->
 
+</div>
+</header>
+<!-- ENDS HEADER -->
 
-<!-- Bootstrap core JavaScript
-    ================================================== -->
 <jsp:include page="flickrPicsforHome.jsp" />
 <!-- Placed at the end of the document so the pages load faster -->
 </body>

@@ -1,63 +1,46 @@
 <jsp:include page="header.jsp" />
 
+</div>
+</header>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page contentType="text/html;charset=utf-8" language="java"%>
 <%@ page pageEncoding="UTF-8"%>
 
-<div class="container">
-	<div class="page-header">
-		<h1>Google Map with Flicker</h1>
+<jsp:include page="success-list.jsp" />
+<jsp:include page="error-list.jsp" />
+
+<form id="contactForm" width="20%">
+	<h3>Latitude:</h3>
+	<input size="7" width="20%" type="text" id="latbox" name="lat" value="${ lat }"
+		class="form-poshytip">
+	<h3>Longitude:</h3>
+	<input size="7" type="text" id="lonbox" name="lon" value="${ lon }">
+
+	<h3>Search Tag</h3>
+	<input type="text" name="tags" id="tags" value="${ mapTag }"/>
+
+	<h3>Search It!</h3>
+	<input type="button" id="theButton"
+		onclick="imageFunction(this.form.lat.value,this.form.lon.value,this.form.tags.value)"></input>
+</form>
+
+<input id="pac-input" class="controls" type="text"
+	placeholder="Search Box">
+<div id="map-canvas"></div>
+
+<!-- MAIN -->
+<div id="main">
+	<div class="wrapper cf">
+		<!-- Filter container -->
+		<div id="filter-container" class="cf"></div>
+		<!-- ENDS Filter container -->
 	</div>
-	<jsp:include page="success-list.jsp" />
-	<jsp:include page="error-list.jsp" />
-
-	<div class="container" onload="imageFunction();">
-		<h3>Get the Latitude and Longitude of a Point</h3>
-
-
-
-
-		<form>
-			Latitude:<input size="15" type="text" id="latbox" name="lat" value="">
-			Longitude:<input size="15" type="text" id="lonbox" name="lon"
-				value="">
-			<table style="align: center">
-				<tr>
-					<td><input type="text" name="tags" id="tags"
-						placeholder="Search for Tags" /></td>
-				</tr>
-				<tr>
-					<td></td>
-				</tr>
-			</table>
-
-
-
-
-			<input type="button" id="theButton"
-				onclick="imageFunction(this.form.lat.value,this.form.lon.value,this.form.tags.value)"
-				value="search" />
-		</form>
-
-		<input type="button" value="Clear / Reset" id="reset"
-			onclick="reset()">
-
-
-		<h1>Latitude and Longitude of a Point</h1>
-		<div id="wrapper" style="margin: 5px">
-			<div id="map" style="width: 800px; height: 450px"></div>
-		</div>
-	</div>
-	
-	<div class="clase1"></div>
+	<!-- ENDS featured -->
 </div>
-<!-- /container -->
+<!-- ENDS MAIN -->
 
-
-<!-- Bootstrap core JavaScript
-    ================================================== -->
 <jsp:include page="googleWithFlickr.jsp" />
-<!-- Placed at the end of the document so the pages load faster -->
 </body>
 </html>
