@@ -42,6 +42,9 @@
 					curveType: "function",
 					width : 1000,
 					height : 400,
+					is3D: true,
+					backgroundColor : 'transparent',
+					fontName: 'Voltaire, sans-serif',
 					vAxis : {
 						title : "Pages & Dates"
 					},
@@ -77,6 +80,9 @@
 			title : "Top Comment Users",
 			width : 1000,
 			height : 400,
+			is3D: true,
+			backgroundColor : 'transparent',
+			fontName: 'Voltaire, sans-serif',
 		});
 	}
 

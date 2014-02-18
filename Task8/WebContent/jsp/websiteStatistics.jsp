@@ -11,19 +11,19 @@
 <jsp:include page="success-list.jsp" />
 <jsp:include page="error-list.jsp" />
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
+<div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-left:139px;">
 	<!-- Indicators -->
 	<ol class="carousel-indicators">
 		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 		<li data-target="#myCarousel" data-slide-to="1"></li>
 		<li data-target="#myCarousel" data-slide-to="2"></li>
 	</ol>
-	<div class="carousel-inner">
+	<div class="carousel-inner" >
 		<div class="item active">
-			<div id="ViewPerDay" style="width: 600px; height: 400px;"></div>
+			<div id="ViewPerDay" style="width: 600px; height: 400px;" ></div>
 		</div>
 		<div class="item">
-			<div id="TopCommentUsers" style="width: 600px; height: 400px;"></div>
+			<div id="TopCommentUsers" style="width: 600px; height: 400px;" ></div>
 		</div>
 	</div>
 	<a class="left carousel-control" href="#myCarousel" data-slide="prev"><span
