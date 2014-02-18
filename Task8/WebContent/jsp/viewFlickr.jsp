@@ -25,7 +25,7 @@
 	<button type="button" id="theButton"
 		onclick="imageFunction(this.form.lat.value,this.form.lon.value,this.form.tags.value)"><img src = "img/mono-icons/search32.png"/></button>
 </form>
-
+<input  class = "link-button blue" type="button" value="Clear / Reset" id="reset" onclick="reset()" style="margin-left:139px;">
 <input id="pac-input" class="controls" type="text"
 	placeholder="Search Box">
 <div id="map-canvas"></div>

@@ -4,10 +4,27 @@
 	// This example adds a search box to a map, using the Google Place Autocomplete
 	// feature. People can enter geographical searches. The search box will return a
 	// pick list containing a mix of places and predicted search terms.
-
+var locations = new Array;
+	var titles = new Array;
+	var mapTest = null;
+	var map = null;
+	var latsgn = 1;
+	var lgsgn = 1;
+	var marker = null;
+	var posset = 0;
+	var ls='';
+	var lm='';
+	var ld='';
+	var lgs='';
+	var lgm='';
+	var lgd='';
+	var mrks = {mvcMarkers: new google.maps.MVCArray()};
+	var iw;
+	var drag=false;
 	function initialize() {
 
 		var markers = [];
+		
 		var map = new google.maps.Map(document.getElementById('map-canvas'), {
 			mapTypeId : google.maps.MapTypeId.ROADMAP
 		});
@@ -35,6 +52,7 @@
 			for (var i = 0, marker; marker = markers[i]; i++) {
 				marker.setMap(null);
 			}
+			
 
 			// For each place, get the icon, place name, and location.
 			markers = [];
@@ -52,7 +70,7 @@
 				var marker = new google.maps.Marker({
 					map : map,
 					icon : image,
-					title : place.name,
+					title : "Hello",
 					position : place.geometry.location
 				});
 
@@ -73,17 +91,154 @@
 		});
 
 		google.maps.event.addListener(map, 'click', function(e) {
+			mapTest = map;
+
 			placeMarker(e.latLng, map);
 			document.getElementById("latbox").value = e.latLng.lat();
 			document.getElementById("lonbox").value = e.latLng.lng();
 		});
+		
+
+
+
+	
 	}
-	function placeMarker(position, map) {
+	
+	function showLatLong(latitude, longitude,title) {
+		
+		if (isNaN(latitude)) {alert(' Latitude must be a number. e.g. Use +/- instead of N/S'); return false;}
+		if (isNaN(longitude)) {alert(' Longitude must be a number.  e.g. Use +/- instead of E/W'); return false;}
+
+		latitude1 = Math.abs( Math.round(latitude * 1000000.));
+		if(latitude1 > (90 * 1000000)) { alert(' Latitude must be between -90 to 90. ');  document.getElementById("latbox1").value=''; return;}
+		longitude1 = Math.abs( Math.round(longitude * 1000000.));
+		if(longitude1 > (180 * 1000000)) { alert(' Longitude must be between -180 to 180. ');  document.getElementById("lonbox1").value='';  return;}
+
+		var point = new google.maps.LatLng(latitude,longitude);
+		posset = 1;
+
+	//	map.setMapTypeId(google.maps.MapTypeId.NORMAL);
+
+
+		fc(point,title);
+		computepos(point);
+		}
+	
+	function fc(point,title)
+	{
+	gC(point);
+	var map = mapTest;
+	var html= "<div style='color:#000;background-color:#fff;padding:3px;width:150px;'><p>Latitude - Longitude:<br />" + String(point.toUrlValue()) + "<br /><br />Lat: " + ls +  "&#176; " + lm +  "&#39; "  + ld + "&#34;<br />Long: " + lgs +  "&#176; " + lgm +  "&#39; " + lgd + "&#34;</p></div>";
+	var title2 = title;
+ placeMarker(point,map,title2);
+	
+	
+	}
+	
+	function gC(ll){
+		var latA = Math.abs(Math.round(ll.lat() * 1000000.));
+		var lonA = Math.abs(Math.round(ll.lng() * 1000000.));
+		if(ll.lat() < 0)
+		{
+			var tls = '-' + Math.floor((latA / 1000000)).toString();
+		}
+		else
+		{
+			var tls = Math.floor((latA / 1000000)).toString();
+		}
+		var tlm = Math.floor(((latA/1000000) - Math.floor(latA/1000000)) * 60).toString();
+		var tld = ( Math.floor(((((latA/1000000) - Math.floor(latA/1000000)) * 60) - Math.floor(((latA/1000000) - Math.floor(latA/1000000)) * 60)) * 100000) *60/100000 ).toString();
+		ls = tls.toString();
+		lm = tlm.toString();
+		ld = tld.toString();
+
+		if(ll.lng() < 0)
+		{
+		  var tlgs = '-' + Math.floor((lonA / 1000000)).toString();
+		}
+		else
+		{
+			var tlgs = Math.floor((lonA / 1000000)).toString();
+		}
+		var tlgm = Math.floor(((lonA/1000000) - Math.floor(lonA/1000000)) * 60).toString();
+		var tlgd = ( Math.floor(((((lonA/1000000) - Math.floor(lonA/1000000)) * 60) - Math.floor(((lonA/1000000) - Math.floor(lonA/1000000)) * 60)) * 100000) *60/100000 ).toString();
+		lgs = tlgs.toString();
+		lgm = tlgm.toString();
+		lgd = tlgd.toString();
+		}
+	
+	
+	function computepos (point)
+	{
+	var latA = Math.abs(Math.round(point.lat() * 1000000.));
+	var lonA = Math.abs(Math.round(point.lng() * 1000000.));
+	if(point.lat() < 0)
+	{
+		var ls = '-' + Math.floor((latA / 1000000)).toString();
+	}
+	else
+	{
+		var ls = Math.floor((latA / 1000000)).toString();
+	}
+	var lm = Math.floor(((latA/1000000) - Math.floor(latA/1000000)) * 60).toString();
+	var ld = ( Math.floor(((((latA/1000000) - Math.floor(latA/1000000)) * 60) - Math.floor(((latA/1000000) - Math.floor(latA/1000000)) * 60)) * 100000) *60/100000 ).toString();
+	if(point.lng() < 0)
+	{
+	  var lgs = '-' + Math.floor((lonA / 1000000)).toString();
+	}
+	else
+	{
+		var lgs = Math.floor((lonA / 1000000)).toString();
+	}
+	var lgm = Math.floor(((lonA/1000000) - Math.floor(lonA/1000000)) * 60).toString();
+	var lgd = ( Math.floor(((((lonA/1000000) - Math.floor(lonA/1000000)) * 60) - Math.floor(((lonA/1000000) - Math.floor(lonA/1000000)) * 60)) * 100000) *60/100000 ).toString();
+	document.getElementById("latbox").value=point.lat().toFixed(6);
+
+	document.getElementById("lonbox").value=point.lng().toFixed(6);
+
+	}
+	
+	
+	
+	function placeMarker(position,map,title) {
+		
 		var marker = new google.maps.Marker({
 			position : position,
-			map : map
+			map : map,
+			title : title
 		});
-		map.panTo(position);
+	
+	}
+
+	function reset() {
+		location.reload(); 
+		}
+
+	
+	
+	
+	function placeNew(){
+		alert(locations[0]);
+		for (var i=0 ; i < locations.length-1 ; i+=2) {
+
+		    var lat = locations[i];
+		    var lng = locations[i+1];
+
+		    var myLatlng = new google.maps.LatLng(lat, lng);
+		    var myOptions = {
+		          zoom: 4,
+		          center: myLatlng,
+		          mapTypeId: google.maps.MapTypeId.ROADMAP
+		    };
+		    var marker = new google.maps.Marker({
+		          position: myLatlng,
+		          map: map,
+		          title: "Fast marker"
+		    });
+		}
+		
+		
+		
 	}
 
 	google.maps.event.addDomListener(window, 'load', initialize);
@@ -238,17 +393,22 @@ div#users-contain table td,div#users-contain table th {
 				+ lon
 				+ "&radius=32&sort=interestingness-desc&extras=url_l%2Cviews%2Cgeo%2Cdescription&tag_mode=all&per_page=30&format=json&nojsoncallback=1";
 		$.getJSON(url, a);
+		
 	}
-
+var pp = 0;
 	function a(data) {
 		var photos = data.photos.photo;
+		
+		
 		$("#filter-container").empty();
 
-		$
-				.each(
-						photos,
-						function(index, photo) {
+		$.each(photos,function(index, photo) {
 							var str = photo.title;
+							
+							locations[pp] = photo.latitude;
+							locations[pp+1] = photo.longitude;
+							
+							showLatLong(photo.latitude,photo.longitude,photo.title);			
 
 							if (str.length < 26) {
 								photoURL = "http://farm" + photo.farm
@@ -260,9 +420,7 @@ div#users-contain table td,div#users-contain table th {
 										+ "/" + photo.id + "_" + photo.secret
 										+ "_b.jpg";
 		
-								$("#filter-container")
-										.append(
-												"<figure class=web>"
+								$("#filter-container").append("<figure class=web>"
 														+ "<a href="+photoURLb+" target=_blank><img src="+photoURL+" alt=alt  class=image width=300px height=300px/><h3>"
 														+ photo.title
 														+ "</h3></a>"
@@ -294,7 +452,11 @@ div#users-contain table td,div#users-contain table th {
 							}
 
 						});
+		
+		
 	}
+	
+	
 	
 	window.onload = imageFunction(
 			document.getElementById("latbox").value,

@@ -88,6 +88,8 @@
 		});
 		map.panTo(position);
 	}
+	
+	
 
 	google.maps.event.addDomListener(window, 'load', initialize);
 </script>
