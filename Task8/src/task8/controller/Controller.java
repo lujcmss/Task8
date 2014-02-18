@@ -30,7 +30,6 @@ public class Controller extends HttpServlet {
 		Action.add(new ViewFlickr(model));
 		Action.add(new TwitterCallback(model));
 		Action.add(new CommentHistory(model));
-		Action.add(new WebsiteStatistics(model));
 		
 		UserDAO userDAO = model.getUserDAO();
 		CommentHistoryDAO commentHistoryDAO = model.getCommentHistoryDAO();

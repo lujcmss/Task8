@@ -320,17 +320,6 @@ div#users-contain table td,div#users-contain table th {
 				</li>
 
 				<c:choose>
-					<c:when test="${curPage=='websiteStatistics.do'}">
-						<li class="current-menu-item">
-					</c:when>
-					<c:otherwise>
-						<li>
-					</c:otherwise>
-				</c:choose>
-				<a href="websiteStatistics.do">Statistics</a>
-				</li>
-
-				<c:choose>
 					<c:when test="${accessToken==null}">
 						<li><a href="login.do">Login</a></li>
 					</c:when>

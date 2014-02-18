@@ -17,15 +17,23 @@
 	</div>
 	<!-- ENDS slider content -->
 
+<!-- /.carousel -->
 </div>
-<!-- ENDS SLIDER -->
 <!-- ENDS SLIDER -->
 
 </div>
 </header>
 <!-- ENDS HEADER -->
-
+<br /><br /><br />
+<div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-left:73px;">
+	<div class="carousel-inner" >
+		<div class="item active">
+			<div id="ViewPerDay" style="width: 600px; height: 400px;" ></div>
+		</div>
+	</div>
+</div>
 <jsp:include page="flickrPicsforHome.jsp" />
+<jsp:include page="googleWithWebsite.jsp" />
 <!-- Placed at the end of the document so the pages load faster -->
 </body>
 </html>

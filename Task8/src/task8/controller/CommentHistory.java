@@ -9,6 +9,7 @@ import org.mybeans.form.FormBeanFactory;
 import org.scribe.model.Token;
 
 import task8.databeans.CommentBean;
+import task8.databeans.CommentGraphBean;
 import task8.databeans.DislikeBean;
 import task8.databeans.LikeBean;
 import task8.databeans.UserBean;
@@ -55,7 +56,10 @@ public class CommentHistory extends Action {
 		websiteVisitBean.setPage("Popular Pictures");
 		websiteVisitBean.setDate(new Date(System.currentTimeMillis()));
 		websiteVisitDAO.insert(websiteVisitBean);
-
+		
+		List<CommentGraphBean> commentGraphBeans = commentHistoryDAO.getTopComments(5);
+		request.setAttribute("commentGraph", commentGraphBeans);
+		
 		try {
 			CommentFlickerForm form = formBeanFactory.create(request);
 
