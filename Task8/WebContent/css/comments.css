@@ -207,6 +207,7 @@
 #commentform,
 #contactForm {
   margin-bottom: 70px;
+  margin-left:   139px;
 }
 #commentform .comment-notes,
 #contactForm .comment-notes {
@@ -246,7 +247,7 @@
 #commentform input[type="password"],
 #contactForm input[type="password"] {
   overflow: auto;
-  width: 50%;
+  width: 30%;
   margin-top: 10px;
   margin-bottom: 10px;
   overflow: hidden;

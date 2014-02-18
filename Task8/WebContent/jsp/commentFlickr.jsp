@@ -18,9 +18,9 @@
 	<h3>Search Tag</h3>
 	<input type="text" name="tags" id="tags" value="${ SearchTagReturn }"/>
 
-	<h3>Search It!</h3>
-	<input type="button" id="theButton"
-		onclick="imageFunction(this.form.tags.value)"></input>
+	
+	<button type="button" id="theButton"
+		onclick="imageFunction(this.form.tags.value)"><img src = "img/mono-icons/search32.png"/></button>
 </form>
 
 <!-- MAIN -->

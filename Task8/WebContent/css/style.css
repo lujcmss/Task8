@@ -70,6 +70,7 @@ h2 {
   font-size: 36px;
 }
 h3 {
+font-family:'Voltaire', sans-serif;
   font-size: 24px;
 }
 h4 {
@@ -127,8 +128,8 @@ h6 {
   padding-right: 0px;
 }
 #nav > li > a {
-  font-family: Arial, sans-serif;
-  font-size: 12px;
+  font-family: 'Voltaire', sans-serif;
+  font-size: 16px;
   display: block;
   overflow: hidden;
   line-height: 80px;
@@ -173,6 +174,7 @@ h6 {
 }
 /* HEADER ------------------------------------------------------------*/
 header .wrapper {
+	margin-bottom:30px;
   /* SLIDER ------------------------------------------------------------*/
 
 }
@@ -189,7 +191,7 @@ header .wrapper #home-slider {
   padding-top: 40px;
 }
 body.home #main {
-  padding-top: 120px;
+  padding-top: 20px;
 }
 /* HEADLINE ----------------------------------------------------*/#headline {
   margin-bottom: 20px;

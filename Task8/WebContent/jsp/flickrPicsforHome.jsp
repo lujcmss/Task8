@@ -31,7 +31,7 @@
 
 							$("#image_slider")
 									.append(
-											"<li><img src="+photoURL+" class = image width=940px height=500px /> <h2 color=white><span>WELCOME!&nbsp;<br/>&nbsp;Locate, Explore, and Share!<br /></h2></li>");
+											"<li><img src="+photoURL+" class=image2 width=940px height=500px /> <h2 color=white><span>WELCOME!&nbsp;<br/>&nbsp;Locate, Explore, and Share!<br /></h2></li>");
 
 						});
 		init();
